@@ -1,0 +1,37 @@
+.game-card {
+  margin: 1em;
+  width: 180px;
+  height: 275px;
+}
+
+/* img {
+  height: 200px;
+  object-fit: cover;
+}
+
+.limit {
+  margin-left: 180px;
+}
+
+mat-card-title,
+mat-card-subtitle {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+mat-grid-tile {
+  background-color: #f5f5f5;
+  padding: 10px;
+  box-sizing: border-box;
+} */
+
+/* mat-card-content {
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: space-between;
+} */

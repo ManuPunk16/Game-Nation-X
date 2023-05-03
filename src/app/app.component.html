@@ -1,0 +1,64 @@
+<mat-toolbar color="primary" class="toolbar" fxLayout="row" fxLayoutAlign="center center" fxLayout.xs="column" fxLayoutAlign.xs="center center">
+  <span class="spacer"></span>
+  <span [routerLink]="['/']">GameNationX</span>
+  <span class="spacer spacer-small"></span>
+  <nav fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="16px">
+    <a mat-button routerLink="/about" routerLinkActive="active">About</a>
+    <a mat-button routerLink="/contact" routerLinkActive="active">Contact</a>
+  </nav>
+  <span class="spacer"></span>
+  <div>
+    <a mat-button *ngIf="!authService.isLoggedIn" (click)="authService.loginWithGoogle()">Login</a>
+    <a mat-button *ngIf="authService.isLoggedIn" [routerLink]="['/dashboard']">Dashboard</a>
+    <a mat-button *ngIf="authService.isLoggedIn" (click)="authService.logout()">Logout</a>
+  </div>
+</mat-toolbar>
+<div>
+  <!-- <div fxFlex style="background-color: rgb(83, 224, 128);">Contenido del panel 1</div> -->
+  <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="https://via.placeholder.com/1920x320" class="d-block w-100 img-fluid" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="https://via.placeholder.com/1920x320" class="d-block w-100 img-fluid" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="https://via.placeholder.com/1920x320" class="d-block w-100 img-fluid" alt="...">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>
+
+<div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column">
+  <div fxLayout="column" fxLayout.gt-sm="column" fxFlex="20" class="sidebar">
+    <mat-card>
+      <mat-card-content>
+        <p>Contenido del panel lateral</p>
+
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+  <div fxFlex="80">
+    <mat-card>
+      <mat-card-content>
+        <router-outlet></router-outlet>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+<app-footer></app-footer>

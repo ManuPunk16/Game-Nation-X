@@ -1,0 +1,21 @@
+.toolbar {
+  display: flex;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.spacer-small {
+  flex: 0.5 1 auto; /* Cambia 0.5 al número que desees */
+}
+
+nav {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+a {
+  text-decoration: none;
+  color: #333;
+}
