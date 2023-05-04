@@ -16,7 +16,7 @@ export class PlatformsService {
   }
 
   getAllPlatforms(): AngularFirestoreCollection<Platform> {
-    return this.gamesRef;
+    return this.db.collection(this.dbPath, ref => ref.orderBy('name'));
   }
 
   getPlatformById(id: string): AngularFirestoreDocument<Platform> {
