@@ -1,0 +1,72 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title></mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    categorias de videojuegos
+
+    <app-categories></app-categories>
+  </mat-card-content>
+</mat-card>
+<br>
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title></mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    Plataformas
+
+    <app-platforms></app-platforms>
+  </mat-card-content>
+</mat-card>
+<br>
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title></mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    Ultimos Subidos
+
+    <app-latest-uploads></app-latest-uploads>
+  </mat-card-content>
+</mat-card>
+<br>
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title></mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    Ultimas Actualizaciones
+
+    <app-latest-uploads></app-latest-uploads>
+  </mat-card-content>
+</mat-card>
+<br>
+
+<mat-card>
+  <mat-card-content>
+    <div fxLayout="row wrap">
+      <div
+        [fxFlex]="(100/gridColumns) + '%'"
+        fxFlex.xs="100%"
+        fxFlex.sm="33%"
+        *ngFor="let game of games"
+      >
+        <mat-card class="mat-elevation-z4" (click)="onClicked(game)">
+          <img
+            mat-card-image
+            src="https://via.placeholder.com/300x200"
+          />
+          <mat-card-title> {{ game.name }} </mat-card-title>
+          <mat-card-subtitle> {{ game.release_date.toDate() | date }} </mat-card-subtitle>
+          <!-- <mat-card-content>
+            <p>The Himalayas is a mountain range in Asia.</p>
+          </mat-card-content> -->
+        </mat-card>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
