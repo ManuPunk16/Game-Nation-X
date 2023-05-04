@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ChunkPipe } from './pipes/chunk.pipe';
 
@@ -32,6 +32,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatTableModule } from '@angular/material/table';
 
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
@@ -40,6 +41,10 @@ import { LatestUploadsComponent } from './components/latest-uploads/latest-uploa
 import { PlatformsComponent } from './components/platforms/platforms.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { CategoryComponent } from './components/categories/category/category.component';
+import { CreatePlatformComponent } from './components/add-game/create-platform/create-platform.component';
+import { CreateCategoryComponent } from './components/add-game/create-category/create-category.component';
+import { EditCategoryComponent } from './components/add-game/edit-category/edit-category.component';
+import { EditPlatformComponent } from './components/add-game/edit-platform/edit-platform.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +60,11 @@ import { CategoryComponent } from './components/categories/category/category.com
     PlatformsComponent,
     CategoriesComponent,
     ChunkPipe,
-    CategoryComponent
+    CategoryComponent,
+    CreatePlatformComponent,
+    CreateCategoryComponent,
+    EditCategoryComponent,
+    EditPlatformComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +89,9 @@ import { CategoryComponent } from './components/categories/category/category.com
     CarouselModule,
     MatDialogModule,
     MatSelectModule,
-    MatBadgeModule
+    MatBadgeModule,
+    ReactiveFormsModule,
+    MatTableModule
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'es-MX'}

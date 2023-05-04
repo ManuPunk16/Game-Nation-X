@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { Category } from '../models/games.model';
 
 @Injectable({
@@ -18,15 +18,19 @@ export class CategoriesService {
     return this.categoryRef;
   }
 
-  createGame(categories: Category): any {
+  getCategoryById(id: string): AngularFirestoreDocument<Category> {
+    return this.categoryRef.doc(id);
+  }
+
+  createCategory(categories: Category): any {
     return this.categoryRef.add({ ...categories});
   }
 
-  updateGame(id: string, data: any): Promise<void> {
+  updateCategory(id: string, data: any): Promise<void> {
     return this.categoryRef.doc(id).update(data);
   }
 
-  deleteGame(id: string): Promise<void> {
+  deleteCategory(id: string): Promise<void> {
     return this.categoryRef.doc(id).delete();
   }
 }

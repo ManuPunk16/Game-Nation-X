@@ -2,7 +2,6 @@ export class Games {
   id?: string;
   name?: string;
   image?: string;
-  genders?: string;
   about?: string;
   classification?: string;
   developers?: string;
@@ -10,7 +9,9 @@ export class Games {
   franchise?: string;
   game_modes?: string;
   release_date?: any;
+  publication_date?: any;
   categories?: Category[];
+  platforms?: Platform[];
 
   lang_interface?: string;
   lang_subtitles?: string;
@@ -51,4 +52,9 @@ export class Category {
     this.name = name;
     this.total = total
   }
+}
+
+export class Platform {
+  id?: string;
+  name?: string;
 }
