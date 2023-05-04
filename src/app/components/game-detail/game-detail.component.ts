@@ -24,7 +24,7 @@ export class GameDetailComponent implements OnInit {
       let id = params['id'];
       this._gameService.getGameById(id).valueChanges().subscribe(game => {
         this.games = game;
-        console.log(this.games);
+        // console.log(this.games);
       });
     });
   }

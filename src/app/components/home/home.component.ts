@@ -32,7 +32,6 @@ export class HomeComponent implements OnInit {
       )
     ).subscribe(data => {
       this.games = data;
-      console.log(this.games);
     });
   }
 

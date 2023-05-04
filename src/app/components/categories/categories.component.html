@@ -1,7 +1,7 @@
 <div fxLayout="row wrap" fxLayout.xs="column">
   <div fxFlex.gt-xs="20%" fxFlex="100%" *ngFor="let chunk of categories | chunk:5">
     <mat-list *ngFor="let item of chunk">
-      <mat-list-item>
+      <mat-list-item (click)="onClicked(item)">
         {{ item.name }} ({{ item.total}})
       </mat-list-item>
     </mat-list>
