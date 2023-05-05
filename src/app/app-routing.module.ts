@@ -9,11 +9,13 @@ import { LatestUpdatesComponent } from './components/latest-updates/latest-updat
 import { LatestUploadsComponent } from './components/latest-uploads/latest-uploads.component';
 import { PlatformsComponent } from './components/platforms/platforms.component';
 import { CategoryComponent } from './components/categories/category/category.component';
+import { PlatformComponent } from './components/platforms/platform/platform.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full'},
   { path: 'game-datails/:id', component: GameDetailComponent },
   { path: 'category/:name', component: CategoryComponent },
+  { path: 'platform/:name', component: PlatformComponent },
   { path: 'latest-updates', component: LatestUpdatesComponent },
   { path: 'latest-uploads', component: LatestUploadsComponent },
   { path: 'platforms', component: PlatformsComponent },

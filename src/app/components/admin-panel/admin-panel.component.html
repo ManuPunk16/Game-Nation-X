@@ -1,1 +1,44 @@
 <app-add-game></app-add-game>
+
+<table mat-table [dataSource]="dataSourceGames">
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef > Acciones </th>
+    <td mat-cell *matCellDef="let row" data-label="actions">
+      <!-- <button mat-flat-button color="primary" (click)="onPlatformDialogEdit(row)">
+        <mat-icon> remove_red_eye </mat-icon>
+      </button> -->
+
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="published">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Publicado </th>
+    <td mat-cell *matCellDef="let item" data-label="published">
+      <mat-slide-toggle [checked]="item.published" (change)="updatePublished(item, $event)"></mat-slide-toggle>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Juego </th>
+    <td mat-cell *matCellDef="let item" data-label="name"> {{item.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="createdAt">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Creacion </th>
+    <td mat-cell *matCellDef="let item" data-label="createdAt"> {{item.createdAt.toDate() | date }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="updatedAt">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Actualizacion </th>
+    <td mat-cell *matCellDef="let item" data-label="updatedAt"> {{item.updatedAt.toDate() | date }} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayeColumnGames"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayeColumnGames;" ></tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="[15, 30, 50]"
+                 showFirstLastButtons
+                 aria-label="Select page"
+                 >
+</mat-paginator>

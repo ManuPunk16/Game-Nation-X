@@ -33,6 +33,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatTableModule } from '@angular/material/table';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
@@ -45,6 +47,7 @@ import { CreatePlatformComponent } from './components/add-game/create-platform/c
 import { CreateCategoryComponent } from './components/add-game/create-category/create-category.component';
 import { EditCategoryComponent } from './components/add-game/edit-category/edit-category.component';
 import { EditPlatformComponent } from './components/add-game/edit-platform/edit-platform.component';
+import { PlatformComponent } from './components/platforms/platform/platform.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +67,8 @@ import { EditPlatformComponent } from './components/add-game/edit-platform/edit-
     CreatePlatformComponent,
     CreateCategoryComponent,
     EditCategoryComponent,
-    EditPlatformComponent
+    EditPlatformComponent,
+    PlatformComponent
   ],
   imports: [
     BrowserModule,
@@ -91,7 +95,9 @@ import { EditPlatformComponent } from './components/add-game/edit-platform/edit-
     MatSelectModule,
     MatBadgeModule,
     ReactiveFormsModule,
-    MatTableModule
+    MatTableModule,
+    MatSlideToggleModule,
+    MatPaginatorModule
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'es-MX'}

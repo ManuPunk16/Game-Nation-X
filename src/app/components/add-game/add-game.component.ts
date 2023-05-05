@@ -51,6 +51,7 @@ export class AddGameComponent implements OnInit {
       lang_interface: new FormControl(''),
       lang_subtitles: new FormControl(''),
       lang_voices: new FormControl(''),
+      published: new FormControl(false),
       createdAt: new FormControl(moment().toDate()),
       updatedAt: new FormControl(moment().toDate())
     });

@@ -18,16 +18,46 @@ export class GamesService {
     return this.gamesRef;
   }
 
+  getAllGamesByLatestUpload(): AngularFirestoreCollection<Games> {
+    return this.db.collection('games', ref => ref
+      .where('published', '==', true)
+      .orderBy('createdAt')
+    );
+  }
+
+  getAllGamesByLatestUpdated(): AngularFirestoreCollection<Games> {
+    return this.db.collection('games', ref => ref
+      .where('published', '==', true)
+      .orderBy('updatedAt')
+    );
+  }
+
   getGameById(id: string): AngularFirestoreDocument<Games> {
     return this.gamesRef.doc(id);
   }
 
   getCategoriesByName(name: string): AngularFirestoreCollection<Games> {
-    return this.db.collection('games', ref => ref.where('categories', 'array-contains', name));
+    return this.db.collection('games', ref => ref
+      .where('published', '==', true)
+      .where('categories', 'array-contains', name)
+    );
   }
 
   getCategoriesCountByName(name: string): Observable<number> {
-    const collection = this.db.collection<Games>('games', ref => ref.where('categories', 'array-contains', name));
+    const collection = this.db.collection<Games>('games', ref => ref
+      .where('published', '==', true)
+      .where('categories', 'array-contains', name)
+    );
+    return collection.valueChanges().pipe(
+      map(games => games.length)
+    );
+  }
+
+  getPlatformsCountByName(name: string): Observable<number> {
+    const collection = this.db.collection<Games>('games', ref => ref
+      .where('published', '==', true)
+      .where('platforms', 'array-contains', name)
+    );
     return collection.valueChanges().pipe(
       map(games => games.length)
     );
