@@ -1,158 +1,228 @@
-<div fxLayout="row wrap" fxLayoutGap="16px grid">
-  <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title>
-          Categorias
-        </mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <button mat-raised-button (click)="onCategoryDialogCreate()">Crear</button>
-        <mat-table #table [dataSource]="dataSourceCategories">
-          <ng-container matColumnDef="actions">
-            <mat-header-cell  *matHeaderCellDef class="action"> Acciones </mat-header-cell>
-            <mat-cell *matCellDef="let row" data-label="actions">
-              <button mat-flat-button color="primary" (click)="onCategoryDialogEdit(row)">
-                <mat-icon> remove_red_eye </mat-icon>
-              </button>
-            </mat-cell>
-          </ng-container>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      Crear Nuevo Registro de Juegos
+    </mat-card-title>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <br>
+  <mat-card-content>
+    <div *ngIf="!submitted">
+      <mat-stepper #stepper linear>
+        <mat-step [stepControl]="gameForm" label="Informacion Basica">
+          <form [formGroup]="gameForm" novalidate>
+            <div
+              fxLayout="row"
+              fxLayout.xs="column"
+              fxLayoutWrap
+              fxLayoutAlign="center"
+              layout-margin
+            >
+              <mat-form-field appearance="fill" fxFlex="20%">
+                <mat-label>Nombre</mat-label>
+                <input matInput formControlName="name">
+              </mat-form-field>
 
-          <!-- Categorias -->
-          <ng-container matColumnDef="name">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Categorias </mat-header-cell>
-            <mat-cell *matCellDef="let item" data-label="name"> {{item.name}} </mat-cell>
-          </ng-container>
+              <mat-form-field appearance="fill" fxFlex="20%">
+                <mat-label>Fecha de Creacion</mat-label>
+                <input matInput [matDatepicker]="picker0" formControlName="release_date">
+                <mat-datepicker-toggle matSuffix [for]="picker0"></mat-datepicker-toggle>
+                <mat-datepicker #picker0></mat-datepicker>
+              </mat-form-field>
 
-          <mat-header-row *matHeaderRowDef="displayedColumnCategories"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumnCategories;" ></mat-row>
-        </mat-table>
-      </mat-card-content>
-    </mat-card>
-  </div>
+              <mat-form-field appearance="fill" fxFlex="20%">
+                <mat-label>Fecha de Publicacion</mat-label>
+                <input matInput [matDatepicker]="picker1" formControlName="publication_date">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+              </mat-form-field>
 
-  <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title>
-          Plataformas
-        </mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <button mat-raised-button (click)="onPlatformDialogCreate()">Crear</button>
-        <mat-table #table [dataSource]="dataSourcePlatform">
-          <ng-container matColumnDef="actions">
-            <mat-header-cell  *matHeaderCellDef > Acciones </mat-header-cell>
-            <mat-cell *matCellDef="let row" data-label="actions">
-              <button mat-flat-button color="primary" (click)="onPlatformDialogEdit(row)">
-                <mat-icon> remove_red_eye </mat-icon>
-              </button>
-            </mat-cell>
-          </ng-container>
+              <mat-form-field appearance="fill" fxFlex="20%">
+                <mat-label>Franquicia</mat-label>
+                <input matInput formControlName="franchise">
+              </mat-form-field>
 
-          <!-- Plataformas -->
-          <ng-container matColumnDef="name">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Plataformas </mat-header-cell>
-            <mat-cell *matCellDef="let item" data-label="name"> {{item.name}} </mat-cell>
-          </ng-container>
+              <mat-form-field appearance="fill" fxFlex="20%">
+                <mat-label>Desarrolladores</mat-label>
+                <input matInput formControlName="developers">
+              </mat-form-field>
+            </div>
 
-          <mat-header-row *matHeaderRowDef="displayedColumnPlatforms"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumnPlatforms;" ></mat-row>
-        </mat-table>
-      </mat-card-content>
-    </mat-card>
-  </div>
-</div>
+            <div
+              fxLayout="row"
+              fxLayout.xs="column"
+              fxLayoutWrap
+              fxLayoutAlign="center"
+              layout-margin
+            >
+              <mat-form-field appearance="fill" fxFlex="100%">
+                <mat-label>Sobre el Juego</mat-label>
+                <textarea matInput
+                  formControlName="about"
+                  cdkTextareaAutosize
+                  cdkAutosizeMinRows="1"
+                  cdkAutosizeMaxRows="10"
+                ></textarea>
+              </mat-form-field>
+            </div>
 
-<br>
-<mat-divider></mat-divider>
-<br>
+            <div
+              fxLayout="row"
+              fxLayout.xs="column"
+              fxLayoutWrap
+              fxLayoutAlign="center"
+              layout-margin
+            >
+              <mat-form-field appearance="fill" fxFlex="20%">
+                <mat-label>Categorias</mat-label>
+                <mat-select formControlName="categories" multiple>
+                  <mat-option *ngFor="let cat of categories" [value]="cat.name">{{cat.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
 
-<div *ngIf="!submitted">
-  <form [formGroup]="gameForm" (ngSubmit)="onSubmit()" novalidate>
-    <mat-form-field appearance="fill">
-      <mat-label>Nombre</mat-label>
-      <input matInput formControlName="name">
-    </mat-form-field>
+              <mat-form-field appearance="fill" fxFlex="20%">
+                <mat-label>Plataformas</mat-label>
+                <mat-select formControlName="platforms" multiple>
+                  <mat-option *ngFor="let platform of platforms" [value]="platform.name">{{platform.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Fecha de Creacion</mat-label>
-      <input matInput [matDatepicker]="picker0" formControlName="release_date">
-      <mat-datepicker-toggle matSuffix [for]="picker0"></mat-datepicker-toggle>
-      <mat-datepicker #picker0></mat-datepicker>
-    </mat-form-field>
+              <mat-form-field appearance="fill" fxFlex="20%">
+                <mat-label>Clasificacion</mat-label>
+                <input matInput formControlName="classification">
+              </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Fecha de Publicacion</mat-label>
-      <input matInput [matDatepicker]="picker1" formControlName="publication_date">
-      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-      <mat-datepicker #picker1></mat-datepicker>
-    </mat-form-field>
+              <mat-form-field appearance="fill" fxFlex="20%">
+                <mat-label>Editores</mat-label>
+                <input matInput formControlName="editors">
+              </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Sobre el Juego</mat-label>
-      <input matInput formControlName="about">
-    </mat-form-field>
+              <mat-form-field appearance="fill" fxFlex="20%">
+                <mat-label>Modos de Juego</mat-label>
+                <input matInput formControlName="game_modes">
+              </mat-form-field>
+            </div>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Clasificacion</mat-label>
-      <input matInput formControlName="classification">
-    </mat-form-field>
+            <div
+              fxLayout="row"
+              fxLayout.xs="column"
+              fxLayoutWrap
+              fxLayoutAlign="center"
+              layout-margin
+            >
+              <mat-form-field appearance="fill" fxFlex="33.3%">
+                <mat-label>Idioma de Interface</mat-label>
+                <input matInput formControlName="lang_interface">
+              </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Desarrolladores</mat-label>
-      <input matInput formControlName="developers">
-    </mat-form-field>
+              <mat-form-field appearance="fill" fxFlex="33.3%">
+                <mat-label>Idioma de Subtitulos</mat-label>
+                <input matInput formControlName="lang_subtitles">
+              </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Editores</mat-label>
-      <input matInput formControlName="editors">
-    </mat-form-field>
+              <mat-form-field appearance="fill" fxFlex="33.3%">
+                <mat-label>Idioma de Voces</mat-label>
+                <input matInput formControlName="lang_voices">
+              </mat-form-field>
+            </div>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Franquicia</mat-label>
-      <input matInput formControlName="franchise">
-    </mat-form-field>
+            <div>
+              <button mat-raised-button matStepperNext>Siguiente</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step label="Requisitos">
+          <form [formGroup]="gameForm" (ngSubmit)="onSubmit()" novalidate>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Modos de Juego</mat-label>
-      <input matInput formControlName="game_modes">
-    </mat-form-field>
+            <div
+              fxLayout="row"
+              fxLayout.xs="column"
+              fxLayoutWrap
+              fxLayoutAlign="center"
+              layout-margin
+            >
+              <mat-form-field appearance="fill" fxFlex="20%">
+                <mat-label>Sistema Operativo Minimo</mat-label>
+                <input matInput formControlName="req_min_so">
+              </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Categorias</mat-label>
-      <mat-select formControlName="categories" multiple>
-        <mat-option *ngFor="let cat of categories" [value]="cat.name">{{cat.name}}</mat-option>
-      </mat-select>
-    </mat-form-field>
+              <mat-form-field appearance="fill" fxFlex="20%">
+                <mat-label>DirectX Minimo</mat-label>
+                <input matInput formControlName="req_min_directx">
+              </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Plataformas</mat-label>
-      <mat-select formControlName="platforms" multiple>
-        <mat-option *ngFor="let platform of platforms" [value]="platform.name">{{platform.name}}</mat-option>
-      </mat-select>
-    </mat-form-field>
+              <mat-form-field appearance="fill" fxFlex="20%">
+                <mat-label>Tarjeta Grafica Minima</mat-label>
+                <input matInput formControlName="req_min_graphic_card">
+              </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Idioma de Interface</mat-label>
-      <input matInput formControlName="lang_interface">
-    </mat-form-field>
+              <mat-form-field appearance="fill" fxFlex="20%">
+                <mat-label>Internet Minimo</mat-label>
+                <input matInput formControlName="req_min_network">
+              </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Idioma de Subtitulos</mat-label>
-      <input matInput formControlName="lang_subtitles">
-    </mat-form-field>
+              <mat-form-field appearance="fill" fxFlex="20%">
+                <mat-label>Ram Minima</mat-label>
+                <input matInput formControlName="req_min_ram">
+              </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Idioma de Voces</mat-label>
-      <input matInput formControlName="lang_voices">
-    </mat-form-field>
+              <mat-form-field appearance="fill" fxFlex="20%">
+                <mat-label>Almacenamiento Minima</mat-label>
+                <input matInput formControlName="req_min_storage">
+              </mat-form-field>
+            </div>
 
-    <button mat-button color="primary" type="submit">Submit</button>
-  </form>
-</div>
+            <div
+              fxLayout="row"
+              fxLayout.xs="column"
+              fxLayoutWrap
+              fxLayoutAlign="center"
+              layout-margin
+            >
+              <mat-form-field appearance="fill" fxFlex="20%">
+                <mat-label>Sistema Operativo Recomendado</mat-label>
+                <input matInput formControlName="req_rec_so">
+              </mat-form-field>
 
-<div *ngIf="submitted">
-  <h4>You submitted successfully!</h4>
-  <button class="btn btn-success" (click)="newGame()">Add</button>
-</div>
+              <mat-form-field appearance="fill" fxFlex="20%">
+                <mat-label>DirectX Recomendado</mat-label>
+                <input matInput formControlName="req_rec_directx">
+              </mat-form-field>
+
+              <mat-form-field appearance="fill" fxFlex="20%">
+                <mat-label>Tarjeta Grafica Recomendada</mat-label>
+                <input matInput formControlName="req_rec_graphic_card">
+              </mat-form-field>
+
+              <mat-form-field appearance="fill" fxFlex="20%">
+                <mat-label>Internet Recomendado</mat-label>
+                <input matInput formControlName="req_rec_network">
+              </mat-form-field>
+
+              <mat-form-field appearance="fill" fxFlex="20%">
+                <mat-label>Ram Recomendada</mat-label>
+                <input matInput formControlName="req_rec_ram">
+              </mat-form-field>
+
+              <mat-form-field appearance="fill" fxFlex="20%">
+                <mat-label>Almacenamiento Recomendado</mat-label>
+                <input matInput formControlName="req_rec_storage">
+              </mat-form-field>
+            </div>
+
+            <div>
+              <button mat-button matStepperPrevious>Atrás</button>
+              <button mat-raised-button color="primary" type="submit">Guardar</button>
+            </div>
+          </form>
+        </mat-step>
+      </mat-stepper>
+    </div>
+
+    <div *ngIf="submitted">
+      <h4>You submitted successfully!</h4>
+      <button class="btn btn-success" (click)="newGame()">Crear otro</button>
+    </div>
+
+  </mat-card-content>
+</mat-card>

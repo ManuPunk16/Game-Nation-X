@@ -6,6 +6,11 @@ import { CategoriesService } from 'src/app/services/categories.service';
 import { PlatformsService } from 'src/app/services/platforms.service';
 import { map } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
+import { CreateCategoryComponent } from '../add-game/create-category/create-category.component';
+import { EditCategoryComponent } from '../add-game/edit-category/edit-category.component';
+import { CreatePlatformComponent } from '../add-game/create-platform/create-platform.component';
+import { EditPlatformComponent } from '../add-game/edit-platform/edit-platform.component';
+import { AddGameComponent } from '../add-game/add-game.component';
 
 @Component({
   selector: 'app-admin-panel',
@@ -16,7 +21,14 @@ export class AdminPanelComponent implements OnInit {
 
   public games: Games[] = [];
   public dataSourceGames!: MatTableDataSource<Games>;
-  public displayeColumnGames: string[] = ['actions', 'published', 'name', 'createdAt', 'updatedAt'];
+  public displayeColumnGames: string[] = ['actions', 'published', 'name', 'franchise', 'categories', 'platforms', 'createdAt', 'updatedAt'];
+
+  public categories: Category[] = [];
+  public platforms: Platform[] = [];
+  public dataSourcePlatform!: MatTableDataSource<Platform>;
+  public dataSourceCategories!: MatTableDataSource<Category>;
+  public displayedColumnCategories: string[] = ['actions', 'name'];
+  public displayedColumnPlatforms: string[] = ['actions', 'name'];
 
   constructor (
     private _gamesService: GamesService,
@@ -29,6 +41,8 @@ export class AdminPanelComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllGames();
+    this.getAllCategories();
+    this.getAllPlatforms();
   }
 
   getAllGames() {
@@ -59,4 +73,83 @@ export class AdminPanelComponent implements OnInit {
     }
   }
 
+  getAllCategories(): void {
+    this._categoryService.getAllCategories().snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ id: c.payload.doc.id, ...c.payload.doc.data() })
+        )
+      )
+    ).subscribe(data => {
+      this.categories = data;
+      this.dataSourceCategories = new MatTableDataSource(this.categories);
+      // console.log(this.categories);
+    });
+  }
+
+  getAllPlatforms(): void {
+    this._platformService.getAllPlatforms().snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ id: c.payload.doc.id, ...c.payload.doc.data ()})
+        )
+      )
+    ).subscribe(data => {
+      this.platforms = data;
+      this.dataSourcePlatform = new MatTableDataSource(this.platforms);
+      // console.log(this.platforms);
+    });
+  }
+
+  onCategoryDialogCreate(): void {
+    const categoryDialog = this._dialog.open(CreateCategoryComponent, {
+      width: '50%'
+    });
+
+    categoryDialog.afterClosed().subscribe(res => {
+
+    });
+  }
+
+  onCategoryDialogEdit(row: any): void {
+    const categoryDialog = this._dialog.open(EditCategoryComponent, {
+      width: '50%',
+      data: row
+    });
+
+    categoryDialog.afterClosed().subscribe(res => {
+
+    });
+  }
+
+  onPlatformDialogCreate(): void {
+    const platformDialog = this._dialog.open(CreatePlatformComponent, {
+      width: '50%'
+    });
+
+    platformDialog.afterClosed().subscribe(res => {
+
+    });
+  }
+
+  onPlatformDialogEdit(row: any): void {
+    const platformDialog = this._dialog.open(EditPlatformComponent, {
+      width: '50%',
+      data: row
+    });
+
+    platformDialog.afterClosed().subscribe(res => {
+
+    });
+  }
+
+  newGame() {
+    const newGame = this._dialog.open(AddGameComponent, {
+      width: '85%'
+    });
+
+    newGame.afterClosed().subscribe( res => {
+
+    });
+  }
 }

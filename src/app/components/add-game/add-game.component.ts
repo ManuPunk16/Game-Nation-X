@@ -8,10 +8,6 @@ import { CategoriesService } from 'src/app/services/categories.service';
 import { PlatformsService } from 'src/app/services/platforms.service';
 import { map } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { CreateCategoryComponent } from './create-category/create-category.component';
-import { CreatePlatformComponent } from './create-platform/create-platform.component';
-import { EditCategoryComponent } from './edit-category/edit-category.component';
-import { EditPlatformComponent } from './edit-platform/edit-platform.component';
 
 @Component({
   selector: 'app-add-game',
@@ -53,7 +49,21 @@ export class AddGameComponent implements OnInit {
       lang_voices: new FormControl(''),
       published: new FormControl(false),
       createdAt: new FormControl(moment().toDate()),
-      updatedAt: new FormControl(moment().toDate())
+      updatedAt: new FormControl(moment().toDate()),
+
+      req_min_so: new FormControl(''),
+      req_min_directx: new FormControl(''),
+      req_min_graphic_card: new FormControl(''),
+      req_min_network: new FormControl(''),
+      req_min_ram: new FormControl(''),
+      req_min_storage: new FormControl(''),
+
+      req_rec_so: new FormControl(''),
+      req_rec_directx: new FormControl(''),
+      req_rec_graphic_card: new FormControl(''),
+      req_rec_network: new FormControl(''),
+      req_rec_ram: new FormControl(''),
+      req_rec_storage: new FormControl(''),
     });
   }
 
@@ -103,48 +113,6 @@ export class AddGameComponent implements OnInit {
       this.platforms = data;
       this.dataSourcePlatform = new MatTableDataSource(this.platforms);
       // console.log(this.platforms);
-    });
-  }
-
-  onCategoryDialogCreate(): void {
-    const categoryDialog = this._dialog.open(CreateCategoryComponent, {
-      width: '50%'
-    });
-
-    categoryDialog.afterClosed().subscribe(res => {
-
-    });
-  }
-
-  onCategoryDialogEdit(row: any): void {
-    const categoryDialog = this._dialog.open(EditCategoryComponent, {
-      width: '50%',
-      data: row
-    });
-
-    categoryDialog.afterClosed().subscribe(res => {
-
-    });
-  }
-
-  onPlatformDialogCreate(): void {
-    const platformDialog = this._dialog.open(CreatePlatformComponent, {
-      width: '50%'
-    });
-
-    platformDialog.afterClosed().subscribe(res => {
-
-    });
-  }
-
-  onPlatformDialogEdit(row: any): void {
-    const platformDialog = this._dialog.open(EditPlatformComponent, {
-      width: '50%',
-      data: row
-    });
-
-    platformDialog.afterClosed().subscribe(res => {
-
     });
   }
 }
