@@ -73,33 +73,50 @@
               fxLayoutAlign="center"
               layout-margin
             >
-              <mat-form-field appearance="fill" fxFlex="20%">
+              <mat-form-field appearance="fill" fxFlex="25%">
                 <mat-label>Categorias</mat-label>
                 <mat-select formControlName="categories" multiple>
                   <mat-option *ngFor="let cat of categories" [value]="cat.name">{{cat.name}}</mat-option>
                 </mat-select>
               </mat-form-field>
 
-              <mat-form-field appearance="fill" fxFlex="20%">
+              <mat-form-field appearance="fill" fxFlex="25%">
                 <mat-label>Plataformas</mat-label>
                 <mat-select formControlName="platforms" multiple>
                   <mat-option *ngFor="let platform of platforms" [value]="platform.name">{{platform.name}}</mat-option>
                 </mat-select>
               </mat-form-field>
 
-              <mat-form-field appearance="fill" fxFlex="20%">
-                <mat-label>Clasificacion</mat-label>
-                <input matInput formControlName="classification">
-              </mat-form-field>
-
-              <mat-form-field appearance="fill" fxFlex="20%">
+              <mat-form-field appearance="fill" fxFlex="25%">
                 <mat-label>Editores</mat-label>
                 <input matInput formControlName="editors">
               </mat-form-field>
 
-              <mat-form-field appearance="fill" fxFlex="20%">
+              <mat-form-field appearance="fill" fxFlex="25%">
                 <mat-label>Modos de Juego</mat-label>
                 <input matInput formControlName="game_modes">
+              </mat-form-field>
+            </div>
+
+            <div
+              fxLayout="row"
+              fxLayout.xs="column"
+              fxLayoutWrap
+              fxLayoutAlign="center"
+              layout-margin
+            >
+              <mat-form-field appearance="fill" fxFlex="35%">
+                <mat-label>Clasificacion</mat-label>
+                <mat-select formControlName="classification">
+                  <mat-option *ngFor="let clas of classification" [value]="clas.title"> {{ clas.title }} </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill" fxFlex="65%">
+                <mat-label>Contenido Descriptivo</mat-label>
+                <mat-select formControlName="classification_descriptors" multiple>
+                  <mat-option *ngFor="let description of classificationDescriptors" [value]="description.content"> {{ description.content }} </mat-option>
+                </mat-select>
               </mat-form-field>
             </div>
 
@@ -133,7 +150,6 @@
         </mat-step>
         <mat-step label="Requisitos">
           <form [formGroup]="gameForm" (ngSubmit)="onSubmit()" novalidate>
-
             <div
               fxLayout="row"
               fxLayout.xs="column"
@@ -141,73 +157,297 @@
               fxLayoutAlign="center"
               layout-margin
             >
-              <mat-form-field appearance="fill" fxFlex="20%">
-                <mat-label>Sistema Operativo Minimo</mat-label>
-                <input matInput formControlName="req_min_so">
-              </mat-form-field>
-
-              <mat-form-field appearance="fill" fxFlex="20%">
-                <mat-label>DirectX Minimo</mat-label>
-                <input matInput formControlName="req_min_directx">
-              </mat-form-field>
-
-              <mat-form-field appearance="fill" fxFlex="20%">
-                <mat-label>Tarjeta Grafica Minima</mat-label>
-                <input matInput formControlName="req_min_graphic_card">
-              </mat-form-field>
-
-              <mat-form-field appearance="fill" fxFlex="20%">
-                <mat-label>Internet Minimo</mat-label>
-                <input matInput formControlName="req_min_network">
-              </mat-form-field>
-
-              <mat-form-field appearance="fill" fxFlex="20%">
-                <mat-label>Ram Minima</mat-label>
-                <input matInput formControlName="req_min_ram">
-              </mat-form-field>
-
-              <mat-form-field appearance="fill" fxFlex="20%">
-                <mat-label>Almacenamiento Minima</mat-label>
-                <input matInput formControlName="req_min_storage">
+              <mat-form-field appearance="fill" fxFLex="50%">
+                <mat-label>Sistema Operativo</mat-label>
+                <mat-select formControlName="operative_systems" multiple>
+                  <mat-option *ngFor="let os of operativeSystem" [value]="os.name"> {{ os.name }} </mat-option>
+                </mat-select>
               </mat-form-field>
             </div>
 
-            <div
-              fxLayout="row"
-              fxLayout.xs="column"
-              fxLayoutWrap
-              fxLayoutAlign="center"
-              layout-margin
-            >
-              <mat-form-field appearance="fill" fxFlex="20%">
-                <mat-label>Sistema Operativo Recomendado</mat-label>
-                <input matInput formControlName="req_rec_so">
-              </mat-form-field>
+            <div *ngIf="gameForm.controls['operative_systems'].value?.includes('WINDOWS')">
+              <mat-card>
+                <mat-card-header>
+                  <mat-card-title>WINDOWS</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                  <div
+                    fxLayout="row"
+                    fxLayout.xs="column"
+                    fxLayoutWrap
+                    fxLayoutAlign="center"
+                    layout-margin
+                  >
+                    <mat-form-field appearance="fill" fxFlex="14.2%">
+                      <mat-label>SO Minimo</mat-label>
+                      <input matInput formControlName="windows_req_min_so">
+                    </mat-form-field>
 
-              <mat-form-field appearance="fill" fxFlex="20%">
-                <mat-label>DirectX Recomendado</mat-label>
-                <input matInput formControlName="req_rec_directx">
-              </mat-form-field>
+                    <mat-form-field appearance="fill" fxFlex="14.2%">
+                      <mat-label>Procesador Minimo</mat-label>
+                      <input matInput formControlName="windows_req_min_processor">
+                    </mat-form-field>
 
-              <mat-form-field appearance="fill" fxFlex="20%">
-                <mat-label>Tarjeta Grafica Recomendada</mat-label>
-                <input matInput formControlName="req_rec_graphic_card">
-              </mat-form-field>
+                    <mat-form-field appearance="fill" fxFlex="14.2%">
+                      <mat-label>DirectX Minimo</mat-label>
+                      <input matInput formControlName="windows_req_min_directx">
+                    </mat-form-field>
 
-              <mat-form-field appearance="fill" fxFlex="20%">
-                <mat-label>Internet Recomendado</mat-label>
-                <input matInput formControlName="req_rec_network">
-              </mat-form-field>
+                    <mat-form-field appearance="fill" fxFlex="14.2%">
+                      <mat-label>Tarjeta Grafica Minima</mat-label>
+                      <input matInput formControlName="windows_req_min_graphic_card">
+                    </mat-form-field>
 
-              <mat-form-field appearance="fill" fxFlex="20%">
-                <mat-label>Ram Recomendada</mat-label>
-                <input matInput formControlName="req_rec_ram">
-              </mat-form-field>
+                    <mat-form-field appearance="fill" fxFlex="14.2%">
+                      <mat-label>Internet Minimo</mat-label>
+                      <input matInput formControlName="windows_req_min_network">
+                    </mat-form-field>
 
-              <mat-form-field appearance="fill" fxFlex="20%">
-                <mat-label>Almacenamiento Recomendado</mat-label>
-                <input matInput formControlName="req_rec_storage">
-              </mat-form-field>
+                    <mat-form-field appearance="fill" fxFlex="14.2%">
+                      <mat-label>Ram Minima</mat-label>
+                      <input matInput formControlName="windows_req_min_ram">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" fxFlex="14.2%">
+                      <mat-label>Almacenamiento Minima</mat-label>
+                      <input matInput formControlName="windows_req_min_storage">
+                    </mat-form-field>
+                  </div>
+
+                  <div
+                    fxLayout="row"
+                    fxLayout.xs="column"
+                    fxLayoutWrap
+                    fxLayoutAlign="center"
+                    layout-margin
+                  >
+                    <mat-form-field appearance="fill" fxFlex="20%">
+                      <mat-label>SO Recomendado</mat-label>
+                      <input matInput formControlName="windows_req_rec_so">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" fxFlex="14.2%">
+                      <mat-label>Procesador Recomendado</mat-label>
+                      <input matInput formControlName="windows_req_rec_processor">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" fxFlex="20%">
+                      <mat-label>DirectX Recomendado</mat-label>
+                      <input matInput formControlName="windows_req_rec_directx">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" fxFlex="20%">
+                      <mat-label>Tarjeta Grafica Recomendada</mat-label>
+                      <input matInput formControlName="windows_req_rec_graphic_card">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" fxFlex="20%">
+                      <mat-label>Internet Recomendado</mat-label>
+                      <input matInput formControlName="windows_req_rec_network">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" fxFlex="20%">
+                      <mat-label>Ram Recomendada</mat-label>
+                      <input matInput formControlName="windows_req_rec_ram">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" fxFlex="20%">
+                      <mat-label>Almacenamiento Recomendado</mat-label>
+                      <input matInput formControlName="windows_req_rec_storage">
+                    </mat-form-field>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </div>
+
+            <div *ngIf="gameForm.controls['operative_systems'].value?.includes('MAC')">
+              <mat-card>
+                <mat-card-header>
+                  <mat-card-title>MAC</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                  <div
+                    fxLayout="row"
+                    fxLayout.xs="column"
+                    fxLayoutWrap
+                    fxLayoutAlign="center"
+                    layout-margin
+                  >
+                    <mat-form-field appearance="fill" fxFlex="14.2%">
+                      <mat-label>SO Minimo</mat-label>
+                      <input matInput formControlName="mac_req_min_so">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" fxFlex="14.2%">
+                      <mat-label>Procesador Minimo</mat-label>
+                      <input matInput formControlName="mac_req_min_processor">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" fxFlex="14.2%">
+                      <mat-label>DirectX Minimo</mat-label>
+                      <input matInput formControlName="mac_req_min_directx">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" fxFlex="14.2%">
+                      <mat-label>Tarjeta Grafica Minima</mat-label>
+                      <input matInput formControlName="mac_req_min_graphic_card">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" fxFlex="14.2%">
+                      <mat-label>Internet Minimo</mat-label>
+                      <input matInput formControlName="mac_req_min_network">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" fxFlex="14.2%">
+                      <mat-label>Ram Minima</mat-label>
+                      <input matInput formControlName="mac_req_min_ram">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" fxFlex="14.2%">
+                      <mat-label>Almacenamiento Minima</mat-label>
+                      <input matInput formControlName="mac_req_min_storage">
+                    </mat-form-field>
+                  </div>
+
+                  <div
+                    fxLayout="row"
+                    fxLayout.xs="column"
+                    fxLayoutWrap
+                    fxLayoutAlign="center"
+                    layout-margin
+                  >
+                    <mat-form-field appearance="fill" fxFlex="20%">
+                      <mat-label>SO Recomendado</mat-label>
+                      <input matInput formControlName="mac_req_rec_so">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" fxFlex="14.2%">
+                      <mat-label>Procesador Recomendado</mat-label>
+                      <input matInput formControlName="mac_req_rec_processor">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" fxFlex="20%">
+                      <mat-label>DirectX Recomendado</mat-label>
+                      <input matInput formControlName="mac_req_rec_directx">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" fxFlex="20%">
+                      <mat-label>Tarjeta Grafica Recomendada</mat-label>
+                      <input matInput formControlName="mac_req_rec_graphic_card">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" fxFlex="20%">
+                      <mat-label>Internet Recomendado</mat-label>
+                      <input matInput formControlName="mac_req_rec_network">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" fxFlex="20%">
+                      <mat-label>Ram Recomendada</mat-label>
+                      <input matInput formControlName="mac_req_rec_ram">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" fxFlex="20%">
+                      <mat-label>Almacenamiento Recomendado</mat-label>
+                      <input matInput formControlName="mac_req_rec_storage">
+                    </mat-form-field>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </div>
+
+            <div *ngIf="gameForm.controls['operative_systems'].value?.includes('LINUX')">
+              <mat-card>
+                <mat-card-header>
+                  <mat-card-title>LINUX</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                  <div
+                    fxLayout="row"
+                    fxLayout.xs="column"
+                    fxLayoutWrap
+                    fxLayoutAlign="center"
+                    layout-margin
+                  >
+                    <mat-form-field appearance="fill" fxFlex="14.2%">
+                      <mat-label>SO Minimo</mat-label>
+                      <input matInput formControlName="linux_req_min_so">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" fxFlex="14.2%">
+                      <mat-label>Procesador Minimo</mat-label>
+                      <input matInput formControlName="linux_req_min_processor">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" fxFlex="14.2%">
+                      <mat-label>DirectX Minimo</mat-label>
+                      <input matInput formControlName="linux_req_min_directx">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" fxFlex="14.2%">
+                      <mat-label>Tarjeta Grafica Minima</mat-label>
+                      <input matInput formControlName="linux_req_min_graphic_card">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" fxFlex="14.2%">
+                      <mat-label>Internet Minimo</mat-label>
+                      <input matInput formControlName="linux_req_min_network">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" fxFlex="14.2%">
+                      <mat-label>Ram Minima</mat-label>
+                      <input matInput formControlName="linux_req_min_ram">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" fxFlex="14.2%">
+                      <mat-label>Almacenamiento Minima</mat-label>
+                      <input matInput formControlName="linux_req_min_storage">
+                    </mat-form-field>
+                  </div>
+
+                  <div
+                    fxLayout="row"
+                    fxLayout.xs="column"
+                    fxLayoutWrap
+                    fxLayoutAlign="center"
+                    layout-margin
+                  >
+                    <mat-form-field appearance="fill" fxFlex="20%">
+                      <mat-label>SO Recomendado</mat-label>
+                      <input matInput formControlName="linux_req_rec_so">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" fxFlex="14.2%">
+                      <mat-label>Procesador Recomendado</mat-label>
+                      <input matInput formControlName="linux_req_rec_processor">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" fxFlex="20%">
+                      <mat-label>DirectX Recomendado</mat-label>
+                      <input matInput formControlName="linux_req_rec_directx">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" fxFlex="20%">
+                      <mat-label>Tarjeta Grafica Recomendada</mat-label>
+                      <input matInput formControlName="linux_req_rec_graphic_card">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" fxFlex="20%">
+                      <mat-label>Internet Recomendado</mat-label>
+                      <input matInput formControlName="linux_req_rec_network">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" fxFlex="20%">
+                      <mat-label>Ram Recomendada</mat-label>
+                      <input matInput formControlName="linux_req_rec_ram">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" fxFlex="20%">
+                      <mat-label>Almacenamiento Recomendado</mat-label>
+                      <input matInput formControlName="linux_req_rec_storage">
+                    </mat-form-field>
+                  </div>
+                </mat-card-content>
+              </mat-card>
             </div>
 
             <div>

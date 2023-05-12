@@ -3,7 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import * as moment from 'moment';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { GamesService } from '../../services/games.service';
-import { Games, Category, Platform } from '../../models/games.model';
+import { Games, Category, Platform, OperativeSystem, Classification, ClassificationDescriptors } from '../../models/games.model';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { PlatformsService } from 'src/app/services/platforms.service';
 import { map } from 'rxjs';
@@ -19,6 +19,10 @@ export class AddGameComponent implements OnInit {
   public games: Games = new Games();
   public categories: Category[] = [];
   public platforms: Platform[] = [];
+  public operativeSystem = OperativeSystem.operative_system;
+  public classification = Classification.classification;
+  public classificationDescriptors = ClassificationDescriptors.classification_descriptors;
+
   public dataSourcePlatform!: MatTableDataSource<Platform>;
   public dataSourceCategories!: MatTableDataSource<Category>;
   public displayedColumnCategories: string[] = ['actions', 'name'];
@@ -38,12 +42,14 @@ export class AddGameComponent implements OnInit {
       publication_date: new FormControl('', Validators.required),
       about: new FormControl('', Validators.required),
       classification: new FormControl(''),
+      classification_descriptors: new FormControl(''),
       developers: new FormControl(''),
       editors: new FormControl(''),
       franchise: new FormControl(''),
       game_modes: new FormControl(''),
       categories: new FormControl('', Validators.required),
       platforms: new FormControl('', Validators.required),
+      operative_systems: new FormControl(''),
       lang_interface: new FormControl(''),
       lang_subtitles: new FormControl(''),
       lang_voices: new FormControl(''),
@@ -51,19 +57,53 @@ export class AddGameComponent implements OnInit {
       createdAt: new FormControl(moment().toDate()),
       updatedAt: new FormControl(moment().toDate()),
 
-      req_min_so: new FormControl(''),
-      req_min_directx: new FormControl(''),
-      req_min_graphic_card: new FormControl(''),
-      req_min_network: new FormControl(''),
-      req_min_ram: new FormControl(''),
-      req_min_storage: new FormControl(''),
+      windows_req_min_so: new FormControl(''),
+      windows_req_min_processor: new FormControl(''),
+      windows_req_min_directx: new FormControl(''),
+      windows_req_min_graphic_card: new FormControl(''),
+      windows_req_min_network: new FormControl(''),
+      windows_req_min_ram: new FormControl(''),
+      windows_req_min_storage: new FormControl(''),
 
-      req_rec_so: new FormControl(''),
-      req_rec_directx: new FormControl(''),
-      req_rec_graphic_card: new FormControl(''),
-      req_rec_network: new FormControl(''),
-      req_rec_ram: new FormControl(''),
-      req_rec_storage: new FormControl(''),
+      windows_req_rec_so: new FormControl(''),
+      windows_req_rec_processor: new FormControl(''),
+      windows_req_rec_directx: new FormControl(''),
+      windows_req_rec_graphic_card: new FormControl(''),
+      windows_req_rec_network: new FormControl(''),
+      windows_req_rec_ram: new FormControl(''),
+      windows_req_rec_storage: new FormControl(''),
+
+      mac_req_min_so: new FormControl(''),
+      mac_req_min_processor: new FormControl(''),
+      mac_req_min_directx: new FormControl(''),
+      mac_req_min_graphic_card: new FormControl(''),
+      mac_req_min_network: new FormControl(''),
+      mac_req_min_ram: new FormControl(''),
+      mac_req_min_storage: new FormControl(''),
+
+      mac_req_rec_so: new FormControl(''),
+      mac_req_rec_processor: new FormControl(''),
+      mac_req_rec_directx: new FormControl(''),
+      mac_req_rec_graphic_card: new FormControl(''),
+      mac_req_rec_network: new FormControl(''),
+      mac_req_rec_ram: new FormControl(''),
+      mac_req_rec_storage: new FormControl(''),
+
+      linux_req_min_so: new FormControl(''),
+      linux_req_min_processor: new FormControl(''),
+      linux_req_min_directx: new FormControl(''),
+      linux_req_min_graphic_card: new FormControl(''),
+      linux_req_min_network: new FormControl(''),
+      linux_req_min_ram: new FormControl(''),
+      linux_req_min_storage: new FormControl(''),
+
+      linux_req_rec_so: new FormControl(''),
+      linux_req_rec_processor: new FormControl(''),
+      linux_req_rec_directx: new FormControl(''),
+      linux_req_rec_graphic_card: new FormControl(''),
+      linux_req_rec_network: new FormControl(''),
+      linux_req_rec_ram: new FormControl(''),
+      linux_req_rec_storage: new FormControl(''),
     });
   }
 

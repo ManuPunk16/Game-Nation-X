@@ -43,6 +43,7 @@ export class AdminPanelComponent implements OnInit {
     this.getAllGames();
     this.getAllCategories();
     this.getAllPlatforms();
+    // this.newGame();
   }
 
   getAllGames() {

@@ -21,14 +21,14 @@ export class GamesService {
   getAllGamesByLatestUpload(): AngularFirestoreCollection<Games> {
     return this.db.collection('games', ref => ref
       .where('published', '==', true)
-      .orderBy('createdAt')
+      .orderBy('createdAt', 'desc')
     );
   }
 
   getAllGamesByLatestUpdated(): AngularFirestoreCollection<Games> {
     return this.db.collection('games', ref => ref
       .where('published', '==', true)
-      .orderBy('updatedAt')
+      .orderBy('updatedAt', 'desc')
     );
   }
 

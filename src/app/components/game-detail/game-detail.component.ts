@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GamesService } from 'src/app/services/games.service';
-import { Games } from 'src/app/models/games.model';
+import { Classification, Games } from 'src/app/models/games.model';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -11,6 +11,8 @@ import { ActivatedRoute } from '@angular/router';
 export class GameDetailComponent implements OnInit {
 
   public games?: Games;
+  public esrb = '';
+  fxFlex = { xs: false };
 
   constructor (
     private _gameService: GamesService,
@@ -25,6 +27,11 @@ export class GameDetailComponent implements OnInit {
       this._gameService.getGameById(id).valueChanges().subscribe(game => {
         this.games = game;
         // console.log(this.games);
+
+        const matchingClassification = Classification.classification.find((c) => c.title === this.games?.classification);
+        if (matchingClassification) {
+          this.esrb = matchingClassification.image;
+        }
       });
     });
   }

@@ -1,1 +1,186 @@
-<p>game-detail works!</p>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      {{ games?.name }}
+    </mat-card-title>
+  </mat-card-header>
+  <br>
+  <mat-divider></mat-divider>
+  <br>
+  <mat-card-content>
+    <div fxLayout="row wrap" fxLayout.xs="column">
+      <div
+        fxFlex="65%"
+        fxFlex.xs="100%"
+        fxFlex.sm="100%"
+      >
+        <div [style.margin-right]="'20px'">
+          <mat-card>
+            <mat-card-content>
+              <div>
+                (galeria de imagenes)
+              </div>
+              <div>
+                Categorias: {{ games?.categories }}
+              </div>
+              <div>
+                Plataformas: {{ games?.platforms }}
+              </div>
+              <div>
+                Sobre el juego: {{ games?.about }}
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+        <br>
+        <div [style.margin-right]="'20px'" *ngIf="games?.operative_systems">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-subtitle>
+                Requisitos
+              </mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <mat-tab-group>
+                <ng-container *ngIf="games?.operative_systems?.includes('WINDOWS')">
+                  <mat-tab label="WINDOWS">
+                    <mat-card>
+                      <mat-card-header>
+                        <mat-card-title>Requisitos Minimos</mat-card-title>
+                      </mat-card-header>
+                      <mat-card-content>
+                        {{ games?.windows_req_min_so }}
+                      </mat-card-content>
+                    </mat-card>
+                    <br>
+                    <mat-card>
+                      <mat-card-header>
+                        <mat-card-title>Requisitos Recomendados</mat-card-title>
+                      </mat-card-header>
+                      <mat-card-content>
+                        {{ games?.windows_req_rec_so }}
+                      </mat-card-content>
+                    </mat-card>
+                  </mat-tab>
+                </ng-container>
+
+                <ng-container *ngIf="games?.operative_systems?.includes('MAC')">
+                  <mat-tab label="MAC">
+                    <mat-card>
+                      <mat-card-header>
+                        <mat-card-title>Requisitos Minimos</mat-card-title>
+                      </mat-card-header>
+                      <mat-card-content>
+                        {{ games?.mac_req_min_so }}
+                      </mat-card-content>
+                    </mat-card>
+                    <br>
+                    <mat-card>
+                      <mat-card-header>
+                        <mat-card-title>Requisitos Recomendados</mat-card-title>
+                      </mat-card-header>
+                      <mat-card-content>
+                        {{ games?.mac_req_rec_so }}
+                      </mat-card-content>
+                    </mat-card>
+                  </mat-tab>
+                </ng-container>
+                <ng-container *ngIf="games?.operative_systems?.includes('LINUX')">
+                  <mat-tab label="LINUX">
+                    <mat-card>
+                      <mat-card-header>
+                        <mat-card-title>Requisitos Minimos</mat-card-title>
+                      </mat-card-header>
+                      <mat-card-content>
+                        {{ games?.linux_req_min_so }}
+                      </mat-card-content>
+                    </mat-card>
+                    <br>
+                    <mat-card>
+                      <mat-card-header>
+                        <mat-card-title>Requisitos Recomendados</mat-card-title>
+                      </mat-card-header>
+                      <mat-card-content>
+                        {{ games?.linux_req_rec_so }}
+                      </mat-card-content>
+                    </mat-card>
+                  </mat-tab>
+                </ng-container>
+              </mat-tab-group>
+            </mat-card-content>
+          </mat-card>
+          <br>
+        </div>
+      </div>
+
+      <div
+        fxFlex="35%"
+        fxFlex.xs="100%"
+        fxFlex.sm="100%"
+      >
+        <mat-card>
+          <mat-card-content>
+            {{ games?.classification }}
+            <div class="esrb-container">
+              <div>
+                <img [src]="esrb" decoding="async" alt="a" width="60" height="90">
+              </div>
+              <div>
+                <p>
+                  {{ games?.classification_descriptors }}
+                </p>
+              </div>
+            </div>
+            <div>
+              <p>
+                Clasificación de ESRB
+              </p>
+            </div>
+          </mat-card-content>
+        </mat-card>
+        <br>
+        <mat-card>
+          <mat-card-content>
+            <div>
+              TÍTULO: {{ games?.name }}
+            </div>
+            <div>
+              CATEGORIAS: {{ games?.categories }}
+            </div>
+            <div>
+              PLATAFORMAS: {{ games?.platforms }}
+            </div>
+            <div>
+              DESARROLLADOR: {{ games?.developers }}
+            </div>
+            <div>
+              EDITOR: {{ games?.editors }}
+            </div>
+            <div>
+              FRANQUICIA: {{ games?.franchise }}
+            </div>
+            <div>
+              FECHA DE LANZAMIENTO: {{ games?.publication_date.toDate() | date }}
+            </div>
+          </mat-card-content>
+        </mat-card>
+        <br>
+        <mat-card>
+          <mat-card-content>
+            <div>
+              Modos de Juego: {{ games?.game_modes }}
+            </div>
+          </mat-card-content>
+        </mat-card>
+        <br>
+        <mat-card>
+          <mat-card-content>
+            <div>
+              Idiomas:
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

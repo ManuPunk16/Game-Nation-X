@@ -36,6 +36,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
@@ -99,7 +100,8 @@ import { PlatformComponent } from './components/platforms/platform/platform.comp
     MatTableModule,
     MatSlideToggleModule,
     MatPaginatorModule,
-    MatStepperModule
+    MatStepperModule,
+    MatTabsModule
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'es-MX'}
