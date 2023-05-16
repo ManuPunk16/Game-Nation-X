@@ -129,17 +129,23 @@
             >
               <mat-form-field appearance="fill" fxFlex="33.3%">
                 <mat-label>Idioma de Interface</mat-label>
-                <input matInput formControlName="lang_interface">
+                <mat-select formControlName="lang_interface" multiple>
+                  <mat-option *ngFor="let interface of languages" [value]="interface.language"> {{ interface.language }} </mat-option>
+                </mat-select>
               </mat-form-field>
 
               <mat-form-field appearance="fill" fxFlex="33.3%">
                 <mat-label>Idioma de Subtitulos</mat-label>
-                <input matInput formControlName="lang_subtitles">
+                <mat-select formControlName="lang_subtitles" multiple>
+                  <mat-option *ngFor="let subtitle of languages" [value]="subtitle.language"> {{ subtitle.language }} </mat-option>
+                </mat-select>
               </mat-form-field>
 
               <mat-form-field appearance="fill" fxFlex="33.3%">
                 <mat-label>Idioma de Voces</mat-label>
-                <input matInput formControlName="lang_voices">
+                <mat-select formControlName="lang_voices" multiple>
+                  <mat-option *ngFor="let voice of languages" [value]="voice.language"> {{ voice.language }} </mat-option>
+                </mat-select>
               </mat-form-field>
             </div>
 

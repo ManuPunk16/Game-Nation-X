@@ -8,16 +8,16 @@ export class Games {
   developers?: string;
   editors?: string;
   franchise?: string;
-  game_modes?: string;
+  game_modes?: GameModes[];
   release_date?: any;
   publication_date?: any;
   categories?: Category[];
   platforms?: Platform[];
   operative_systems?: OperativeSystem[];
 
-  lang_interface?: string;
-  lang_subtitles?: string;
-  lang_voices?: string;
+  lang_interface?: Languages[];
+  lang_subtitles?: Languages[];
+  lang_voices?: Languages[];
 
   windows_req_min_so?: string;
   windows_req_min_processor?: string;
@@ -147,5 +147,103 @@ export class OperativeSystem {
     { id: '1', name: 'WINDOWS' },
     { id: '2', name: 'MAC' },
     { id: '3', name: 'LINUX' }
+  ];
+}
+
+export class GameModes {
+  public static game_modes = [
+    {
+      name: 'Un Jugador',
+      image: ''
+    },
+    {
+      name: 'Multijugador',
+      image: ''
+    },
+    {
+      name: 'JcJ',
+      image: ''
+    },
+    {
+      name: 'JcJ en línea',
+      image: ''
+    },
+    {
+      name: 'JcJ en LAN',
+      image: ''
+    },
+    {
+      name: 'JcJ en pantalla compartida',
+      image: ''
+    },
+    {
+      name: 'Cooperativo',
+      image: ''
+    },
+    {
+      name: 'Cooperativo en línea',
+      image: ''
+    },
+    {
+      name: 'Cooperativo en LAN',
+      image: ''
+    },
+    {
+      name: 'Coop. en pantalla compartida',
+      image: ''
+    },
+    {
+      name: 'Pantalla compartida',
+      image: ''
+    },
+    {
+      name: 'Multijugador multiplataforma',
+      image: ''
+    }
+  ];
+}
+
+export class Languages {
+  public static languages = [
+    { language: 'Español de Hispanoamérica' },
+    { language: 'Español de España' },
+    { language: 'Inglés' },
+    { language: 'Francés' },
+    { language: 'Italiano' },
+    { language: 'Alemán' },
+    { language: 'Árabe' },
+    { language: 'Japonés' },
+    { language: 'Coreano' },
+    { language: 'Portugues de Brasil' },
+    { language: 'Ruso' },
+    { language: 'Chino simplificado' },
+    { language: 'Chino tradicional' },
+    { language: 'Tailandés' },
+    { language: 'Polaco' },
+    { language: 'Checo' },
+    { language: 'Húngaro' },
+    { language: 'Turco' },
+    { language: 'Holandés' },
+    { language: 'Sueco' },
+    { language: 'Danés' },
+    { language: 'Noruego' },
+    { language: 'Finlandés' },
+    { language: 'Árabe moderno estándar' },
+    { language: 'Hebreo' },
+    { language: 'Indonesio' },
+    { language: 'Malayo' },
+    { language: 'Vietnamita' },
+    { language: 'Tagalo' },
+    { language: 'Griego' },
+    { language: 'Búlgaro' },
+    { language: 'Croata' },
+    { language: 'Serbio' },
+    { language: 'Eslovaco' },
+    { language: 'Esloveno' },
+    { language: 'Rumano' },
+    { language: 'Ucraniano' },
+    { language: 'Lituano' },
+    { language: 'Letón' },
+    { language: 'Estonio' }
   ];
 }

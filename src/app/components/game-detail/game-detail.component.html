@@ -20,11 +20,11 @@
               <div>
                 (galeria de imagenes)
               </div>
-              <div>
-                Categorias: {{ games?.categories }}
+              <div class="categories-container">
+                <div class="category-badge" *ngFor="let category of games?.categories">{{ category }}</div>
               </div>
-              <div>
-                Plataformas: {{ games?.platforms }}
+              <div class="platforms-container">
+                <div class="platform-badge" *ngFor="let platform of games?.platforms">{{ platform }}</div>
               </div>
               <div>
                 Sobre el juego: {{ games?.about }}
@@ -36,8 +36,11 @@
         <div [style.margin-right]="'20px'" *ngIf="games?.operative_systems">
           <mat-card>
             <mat-card-header>
-              <mat-card-subtitle>
+              <mat-card-title>
                 Requisitos
+              </mat-card-title>
+              <mat-card-subtitle>
+                Este juego funciona en:
               </mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
@@ -46,7 +49,7 @@
                   <mat-tab label="WINDOWS">
                     <mat-card>
                       <mat-card-header>
-                        <mat-card-title>Requisitos Minimos</mat-card-title>
+                        <mat-card-subtitle>Requisitos Minimos</mat-card-subtitle>
                       </mat-card-header>
                       <mat-card-content>
                         {{ games?.windows_req_min_so }}
@@ -55,7 +58,7 @@
                     <br>
                     <mat-card>
                       <mat-card-header>
-                        <mat-card-title>Requisitos Recomendados</mat-card-title>
+                        <mat-card-subtitle>Requisitos Recomendados</mat-card-subtitle>
                       </mat-card-header>
                       <mat-card-content>
                         {{ games?.windows_req_rec_so }}
@@ -118,16 +121,16 @@
         fxFlex.xs="100%"
         fxFlex.sm="100%"
       >
-        <mat-card>
+        <mat-card *ngIf="games?.classification">
           <mat-card-content>
             {{ games?.classification }}
             <div class="esrb-container">
               <div>
-                <img [src]="esrb" decoding="async" alt="a" width="60" height="90">
+                <img [src]="esrb" decoding="async" width="60" height="90">
               </div>
               <div>
                 <p>
-                  {{ games?.classification_descriptors }}
+                  {{ classificationDescriptors }}
                 </p>
               </div>
             </div>
@@ -143,12 +146,6 @@
           <mat-card-content>
             <div>
               TÍTULO: {{ games?.name }}
-            </div>
-            <div>
-              CATEGORIAS: {{ games?.categories }}
-            </div>
-            <div>
-              PLATAFORMAS: {{ games?.platforms }}
             </div>
             <div>
               DESARROLLADOR: {{ games?.developers }}
@@ -175,9 +172,27 @@
         <br>
         <mat-card>
           <mat-card-content>
-            <div>
-              Idiomas:
-            </div>
+
+            <table mat-table [dataSource]="combinedData">
+              <ng-container matColumnDef="lang_interface">
+                <th mat-header-cell *matHeaderCellDef>Idioma de Interface</th>
+                <td mat-cell *matCellDef="let item" data-label="lang_interface">{{ item.lang_interface }}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="lang_subtitles">
+                <th mat-header-cell *matHeaderCellDef>Idioma de Subtitulos</th>
+                <td mat-cell *matCellDef="let item" data-label="lang_subtitles">{{ item.lang_subtitles }}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="lang_voices">
+                <th mat-header-cell *matHeaderCellDef>Idioma de Voces</th>
+                <td mat-cell *matCellDef="let item" data-label="lang_voices">{{ item.lang_voices }}</td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayColumns;"></tr>
+            </table>
+
           </mat-card-content>
         </mat-card>
       </div>

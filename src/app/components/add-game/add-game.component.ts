@@ -3,7 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import * as moment from 'moment';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { GamesService } from '../../services/games.service';
-import { Games, Category, Platform, OperativeSystem, Classification, ClassificationDescriptors } from '../../models/games.model';
+import { Games, Category, Platform, OperativeSystem, Classification, ClassificationDescriptors, Languages } from '../../models/games.model';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { PlatformsService } from 'src/app/services/platforms.service';
 import { map } from 'rxjs';
@@ -19,6 +19,7 @@ export class AddGameComponent implements OnInit {
   public games: Games = new Games();
   public categories: Category[] = [];
   public platforms: Platform[] = [];
+  public languages = Languages.languages;
   public operativeSystem = OperativeSystem.operative_system;
   public classification = Classification.classification;
   public classificationDescriptors = ClassificationDescriptors.classification_descriptors;
@@ -110,6 +111,8 @@ export class AddGameComponent implements OnInit {
   ngOnInit(): void {
     this.getAllCategories();
     this.getAllPlatforms();
+
+    this.languages.sort((a, b) => a.language.localeCompare(b.language));
   }
 
   onSubmit() {
