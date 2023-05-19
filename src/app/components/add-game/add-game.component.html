@@ -94,7 +94,9 @@
 
               <mat-form-field appearance="fill" fxFlex="25%">
                 <mat-label>Modos de Juego</mat-label>
-                <input matInput formControlName="game_modes">
+                <mat-select formControlName="game_modes" multiple>
+                  <mat-option *ngFor="let mode of gameMode" [value]="mode.name">{{mode.name}}</mat-option>
+                </mat-select>
               </mat-form-field>
             </div>
 

@@ -1,19 +1,19 @@
 export class Games {
   id?: string;
-  name?: string;
-  image?: string;
-  about?: string;
-  classification?: Classification;
-  classification_descriptors?: ClassificationDescriptors[];
-  developers?: string;
-  editors?: string;
-  franchise?: string;
-  game_modes?: GameModes[];
-  release_date?: any;
-  publication_date?: any;
-  categories?: Category[];
-  platforms?: Platform[];
-  operative_systems?: OperativeSystem[];
+  name!: string;
+  image!: string;
+  about!: string;
+  classification!: Classification;
+  classification_descriptors!: ClassificationDescriptors[];
+  developers!: string;
+  editors!: string;
+  franchise!: string;
+  game_modes!: GameModes[];
+  release_date!: any;
+  publication_date!: any;
+  categories!: Category[];
+  platforms!: Platform[];
+  operative_systems!: OperativeSystem[];
 
   lang_interface?: Languages[];
   lang_subtitles?: Languages[];
@@ -154,51 +154,51 @@ export class GameModes {
   public static game_modes = [
     {
       name: 'Un Jugador',
-      image: ''
+      image: '../../environments/PNG/007-persona.png'
     },
     {
       name: 'Multijugador',
-      image: ''
+      image: '../../environments/PNG/008-multitud-de-usuarios.png'
     },
     {
       name: 'JcJ',
-      image: ''
+      image: '../../environments/PNG/001-jcj.png'
     },
     {
       name: 'JcJ en línea',
-      image: ''
+      image: '../../environments/PNG/001-jcj.png'
     },
     {
       name: 'JcJ en LAN',
-      image: ''
+      image: '../../environments/PNG/001-jcj.png'
     },
     {
       name: 'JcJ en pantalla compartida',
-      image: ''
+      image: '../../environments/PNG/001-jcj.png'
     },
     {
       name: 'Cooperativo',
-      image: ''
+      image: '../../environments/PNG/002-equipo.png'
     },
     {
       name: 'Cooperativo en línea',
-      image: ''
+      image: '../../environments/PNG/002-equipo.png'
     },
     {
       name: 'Cooperativo en LAN',
-      image: ''
+      image: '../../environments/PNG/002-equipo.png'
     },
     {
       name: 'Coop. en pantalla compartida',
-      image: ''
+      image: '../../environments/PNG/002-equipo.png'
     },
     {
       name: 'Pantalla compartida',
-      image: ''
+      image: '../../environments/PNG/005-jugador-contra-jugador-1.png'
     },
     {
       name: 'Multijugador multiplataforma',
-      image: ''
+      image: '../../environments/PNG/008-multitud-de-usuarios.png'
     }
   ];
 }

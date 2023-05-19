@@ -18,14 +18,46 @@
           <mat-card>
             <mat-card-content>
               <div>
-                (galeria de imagenes)
+                <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
+                  <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                  </div>
+                  <div class="carousel-inner">
+                    <div class="carousel-item active">
+                      <img src="https://via.placeholder.com/1080x540" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                      <img src="https://via.placeholder.com/1080x540" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                      <img src="https://via.placeholder.com/1080x540" class="d-block w-100" alt="...">
+                    </div>
+                  </div>
+                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
+                </div>
               </div>
+
+              <br>
+              <mat-divider></mat-divider>
+              <br>
               <div class="categories-container">
                 <div class="category-badge" *ngFor="let category of games?.categories">{{ category }}</div>
               </div>
               <div class="platforms-container">
                 <div class="platform-badge" *ngFor="let platform of games?.platforms">{{ platform }}</div>
               </div>
+              <br>
+              <mat-divider></mat-divider>
+              <br>
               <div>
                 Sobre el juego: {{ games?.about }}
               </div>
@@ -161,16 +193,25 @@
             </div>
           </mat-card-content>
         </mat-card>
-        <br>
-        <mat-card>
+        <br *ngIf="mode">
+
+        <mat-card *ngIf="mode">
           <mat-card-content>
             <div>
-              Modos de Juego: {{ games?.game_modes }}
+              <div *ngFor="let item of mode" class="esrb-container">
+                <div>
+                  <img [src]="item.image" decoding="async" [alt]="item.name" />
+                </div>
+                <div>
+                  {{ item.name }}
+                </div>
+              </div>
             </div>
           </mat-card-content>
         </mat-card>
-        <br>
-        <mat-card>
+        <br *ngIf="combinedData">
+
+        <mat-card *ngIf="combinedData">
           <mat-card-content>
 
             <table mat-table [dataSource]="combinedData">

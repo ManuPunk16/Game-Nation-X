@@ -3,7 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import * as moment from 'moment';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { GamesService } from '../../services/games.service';
-import { Games, Category, Platform, OperativeSystem, Classification, ClassificationDescriptors, Languages } from '../../models/games.model';
+import { Games, Category, Platform, OperativeSystem, Classification, ClassificationDescriptors, Languages, GameModes } from '../../models/games.model';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { PlatformsService } from 'src/app/services/platforms.service';
 import { map } from 'rxjs';
@@ -23,6 +23,7 @@ export class AddGameComponent implements OnInit {
   public operativeSystem = OperativeSystem.operative_system;
   public classification = Classification.classification;
   public classificationDescriptors = ClassificationDescriptors.classification_descriptors;
+  public gameMode = GameModes.game_modes;
 
   public dataSourcePlatform!: MatTableDataSource<Platform>;
   public dataSourceCategories!: MatTableDataSource<Category>;
