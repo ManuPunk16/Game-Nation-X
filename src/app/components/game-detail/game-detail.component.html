@@ -80,20 +80,65 @@
                   <mat-tab label="WINDOWS">
                     <mat-card>
                       <mat-card-header>
-                        <mat-card-subtitle>Requisitos Minimos</mat-card-subtitle>
+                        <mat-card-subtitle><h3>Requisitos Minimos</h3></mat-card-subtitle>
                       </mat-card-header>
                       <mat-card-content>
-                        {{ games?.windows_req_min_so }}
+                        <div>
+                          <div>
+                            <span style="color: gray;">Sistema Operativo: </span>{{ games?.windows_req_min_so }}
+                          </div>
+                          <div>
+                            <span style="color: gray;">Procesador: </span>{{ games?.windows_req_min_processor }}
+                          </div>
+                          <div>
+                            <span style="color: gray;">DirectX: </span>{{ games?.windows_req_min_directx }}
+                          </div>
+                          <div>
+                            <span style="color: gray;">Ram: </span>{{ games?.windows_req_min_ram }}
+                          </div>
+                          <div>
+                            <span style="color: gray;">Almacenamiento: </span>{{ games?.windows_req_min_storage }}
+                          </div>
+                          <div>
+                            <span style="color: gray;">Tarjeta Grafica: </span>{{ games?.windows_req_min_graphic_card }}
+                          </div>
+                          <div>
+                            <span style="color: gray;">Internet: </span>{{ games?.windows_req_min_network }}
+                          </div>
+                        </div>
                       </mat-card-content>
                     </mat-card>
                     <br>
                     <mat-card>
                       <mat-card-header>
-                        <mat-card-subtitle>Requisitos Recomendados</mat-card-subtitle>
+                        <mat-card-subtitle><h3>Requisitos Recomendados</h3></mat-card-subtitle>
                       </mat-card-header>
                       <mat-card-content>
-                        {{ games?.windows_req_rec_so }}
+                        <div>
+                          <div>
+                            <span style="color: gray;">Sistema Operativo: </span>{{ games?.windows_req_rec_so }}
+                          </div>
+                          <div>
+                            <span style="color: gray;">Procesador: </span>{{ games?.windows_req_rec_processor }}
+                          </div>
+                          <div>
+                            <span style="color: gray;">DirectX: </span>{{ games?.windows_req_rec_directx }}
+                          </div>
+                          <div>
+                            <span style="color: gray;">Ram: </span>{{ games?.windows_req_rec_ram }}
+                          </div>
+                          <div>
+                            <span style="color: gray;">Almacenamiento: </span>{{ games?.windows_req_rec_storage }}
+                          </div>
+                          <div>
+                            <span style="color: gray;">Tarjeta Grafica: </span>{{ games?.windows_req_rec_graphic_card }}
+                          </div>
+                          <div>
+                            <span style="color: gray;">Internet: </span>{{ games?.windows_req_rec_network }}
+                          </div>
+                        </div>
                       </mat-card-content>
+
                     </mat-card>
                   </mat-tab>
                 </ng-container>
@@ -102,20 +147,66 @@
                   <mat-tab label="MAC">
                     <mat-card>
                       <mat-card-header>
-                        <mat-card-title>Requisitos Minimos</mat-card-title>
+                        <mat-card-subtitle><h3>Requisitos Minimos</h3></mat-card-subtitle>
                       </mat-card-header>
                       <mat-card-content>
-                        {{ games?.mac_req_min_so }}
+                        <div>
+                          <div>
+                            <span style="color: gray;">Sistema Operativo: </span>{{ games?.mac_req_min_so }}
+                          </div>
+                          <div>
+                            <span style="color: gray;">Procesador: </span>{{ games?.mac_req_min_processor }}
+                          </div>
+                          <div>
+                            <span style="color: gray;">DirectX: </span>{{ games?.mac_req_min_directx }}
+                          </div>
+                          <div>
+                            <span style="color: gray;">Ram: </span>{{ games?.mac_req_min_ram }}
+                          </div>
+                          <div>
+                            <span style="color: gray;">Almacenamiento: </span>{{ games?.mac_req_min_storage }}
+                          </div>
+                          <div>
+                            <span style="color: gray;">Tarjeta Grafica: </span>{{ games?.mac_req_min_graphic_card }}
+                          </div>
+                          <div>
+                            <span style="color: gray;">Internet: </span>{{ games?.mac_req_min_network }}
+                          </div>
+                        </div>
                       </mat-card-content>
+
                     </mat-card>
                     <br>
                     <mat-card>
                       <mat-card-header>
-                        <mat-card-title>Requisitos Recomendados</mat-card-title>
+                        <mat-card-subtitle><h3>Requisitos Recomendados</h3></mat-card-subtitle>
                       </mat-card-header>
                       <mat-card-content>
-                        {{ games?.mac_req_rec_so }}
+                        <div>
+                          <div>
+                            <span style="color: gray;">Sistema Operativo: </span>{{ games?.mac_req_rec_so }}
+                          </div>
+                          <div>
+                            <span style="color: gray;">Procesador: </span>{{ games?.mac_req_rec_processor }}
+                          </div>
+                          <div>
+                            <span style="color: gray;">DirectX: </span>{{ games?.mac_req_rec_directx }}
+                          </div>
+                          <div>
+                            <span style="color: gray;">Ram: </span>{{ games?.mac_req_rec_ram }}
+                          </div>
+                          <div>
+                            <span style="color: gray;">Almacenamiento: </span>{{ games?.mac_req_rec_storage }}
+                          </div>
+                          <div>
+                            <span style="color: gray;">Tarjeta Grafica: </span>{{ games?.mac_req_rec_graphic_card }}
+                          </div>
+                          <div>
+                            <span style="color: gray;">Internet: </span>{{ games?.mac_req_rec_network }}
+                          </div>
+                        </div>
                       </mat-card-content>
+
                     </mat-card>
                   </mat-tab>
                 </ng-container>
@@ -123,19 +214,64 @@
                   <mat-tab label="LINUX">
                     <mat-card>
                       <mat-card-header>
-                        <mat-card-title>Requisitos Minimos</mat-card-title>
+                        <mat-card-subtitle><h3>Requisitos Minimos</h3></mat-card-subtitle>
                       </mat-card-header>
                       <mat-card-content>
-                        {{ games?.linux_req_min_so }}
+                        <div>
+                          <div>
+                            <span style="color: gray;">Sistema Operativo: </span>{{ games?.linux_req_min_so }}
+                          </div>
+                          <div>
+                            <span style="color: gray;">Procesador: </span>{{ games?.linux_req_min_processor }}
+                          </div>
+                          <div>
+                            <span style="color: gray;">DirectX: </span>{{ games?.linux_req_min_directx }}
+                          </div>
+                          <div>
+                            <span style="color: gray;">Ram: </span>{{ games?.linux_req_min_ram }}
+                          </div>
+                          <div>
+                            <span style="color: gray;">Almacenamiento: </span>{{ games?.linux_req_min_storage }}
+                          </div>
+                          <div>
+                            <span style="color: gray;">Tarjeta Grafica: </span>{{ games?.linux_req_min_graphic_card }}
+                          </div>
+                          <div>
+                            <span style="color: gray;">Internet: </span>{{ games?.linux_req_min_network }}
+                          </div>
+                        </div>
                       </mat-card-content>
+
                     </mat-card>
                     <br>
                     <mat-card>
                       <mat-card-header>
-                        <mat-card-title>Requisitos Recomendados</mat-card-title>
+                        <mat-card-subtitle><h3>Requisitos Recomendados</h3></mat-card-subtitle>
                       </mat-card-header>
                       <mat-card-content>
-                        {{ games?.linux_req_rec_so }}
+                        <div>
+                          <div>
+                            <span style="color: gray;">Sistema Operativo: </span>{{ games?.linux_req_rec_so }}
+                          </div>
+                          <div>
+                            <span style="color: gray;">Procesador: </span>{{ games?.linux_req_rec_processor }}
+                          </div>
+                          <div>
+                            <span style="color: gray;">DirectX: </span>{{ games?.linux_req_rec_directx }}
+                          </div>
+                          <div>
+                            <span style="color: gray;">Ram: </span>{{ games?.linux_req_rec_ram }}
+                          </div>
+                          <div>
+                            <span style="color: gray;">Almacenamiento: </span>{{ games?.linux_req_rec_storage }}
+                          </div>
+                          <div>
+                            <span style="color: gray;">Tarjeta Grafica: </span>{{ games?.linux_req_rec_graphic_card }}
+                          </div>
+                          <div>
+                            <span style="color: gray;">Internet: </span>{{ games?.linux_req_rec_network }}
+                          </div>
+                        </div>
                       </mat-card-content>
                     </mat-card>
                   </mat-tab>
