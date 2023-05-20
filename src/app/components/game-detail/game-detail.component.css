@@ -32,3 +32,8 @@
   border-radius: 20px;
   margin: 4px;
 }
+
+.justified-text {
+  text-align: justify;
+  word-break: break-word;
+}

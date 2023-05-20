@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ChunkPipe } from './pipes/chunk.pipe';
+import { NgxEditorModule } from 'ngx-editor';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from "@angular/fire/compat/auth";
@@ -101,7 +102,8 @@ import { PlatformComponent } from './components/platforms/platform/platform.comp
     MatSlideToggleModule,
     MatPaginatorModule,
     MatStepperModule,
-    MatTabsModule
+    MatTabsModule,
+    NgxEditorModule
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'es-MX'}

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import * as moment from 'moment';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -8,13 +8,17 @@ import { CategoriesService } from 'src/app/services/categories.service';
 import { PlatformsService } from 'src/app/services/platforms.service';
 import { map } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
+import { Editor } from 'ngx-editor';
 
 @Component({
   selector: 'app-add-game',
   templateUrl: './add-game.component.html',
   styleUrls: ['./add-game.component.css']
 })
-export class AddGameComponent implements OnInit {
+export class AddGameComponent implements OnInit, OnDestroy {
+
+  editor!: Editor;
+  html!: string;
 
   public games: Games = new Games();
   public categories: Category[] = [];
@@ -42,7 +46,7 @@ export class AddGameComponent implements OnInit {
       name: new FormControl('', Validators.required),
       release_date: new FormControl(''),
       publication_date: new FormControl('', Validators.required),
-      about: new FormControl('', Validators.required),
+      about: new FormControl(''),
       classification: new FormControl(''),
       classification_descriptors: new FormControl(''),
       developers: new FormControl(''),
@@ -108,8 +112,12 @@ export class AddGameComponent implements OnInit {
       linux_req_rec_storage: new FormControl(''),
     });
   }
+  ngOnDestroy(): void {
+    this.editor.destroy();
+  }
 
   ngOnInit(): void {
+    this.editor = new Editor();
     this.getAllCategories();
     this.getAllPlatforms();
 
@@ -125,6 +133,20 @@ export class AddGameComponent implements OnInit {
     } else {
       console.log("No es valido");
     }
+  }
+
+  onEditorContentChange(content: string | object) {
+    if (typeof content === 'string') {
+      this.html = content;
+    } else {
+      const paragraphs = (content as any).content.filter((block: any) => block.type === 'paragraph');
+      const textContent = paragraphs.map((paragraph: any) => paragraph.content.map((text: any) => text.text).join('')).join('');
+      this.html = textContent;
+    }
+  }
+
+  boton() {
+    console.log("Contenido: ", this.html);
   }
 
   newGame(): void {

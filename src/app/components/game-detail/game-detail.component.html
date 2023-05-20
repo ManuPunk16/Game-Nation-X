@@ -58,8 +58,7 @@
               <br>
               <mat-divider></mat-divider>
               <br>
-              <div>
-                Sobre el juego: {{ games?.about }}
+              <div class="justified-text" [innerHTML]="games?.about">
               </div>
             </mat-card-content>
           </mat-card>

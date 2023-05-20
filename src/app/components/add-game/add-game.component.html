@@ -48,7 +48,7 @@
               </mat-form-field>
             </div>
 
-            <div
+            <!-- <div
               fxLayout="row"
               fxLayout.xs="column"
               fxLayoutWrap
@@ -64,7 +64,7 @@
                   cdkAutosizeMaxRows="10"
                 ></textarea>
               </mat-form-field>
-            </div>
+            </div> -->
 
             <div
               fxLayout="row"
@@ -157,7 +157,7 @@
           </form>
         </mat-step>
         <mat-step label="Requisitos">
-          <form [formGroup]="gameForm" (ngSubmit)="onSubmit()" novalidate>
+          <form [formGroup]="gameForm">
             <div
               fxLayout="row"
               fxLayout.xs="column"
@@ -460,6 +460,29 @@
 
             <div>
               <button mat-button matStepperPrevious>Atrás</button>
+              <button mat-raised-button matStepperNext>Siguiente</button>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step label="Contenido del Juego">
+          <form [formGroup]="gameForm" (ngSubmit)="onSubmit()" novalidate>
+
+            <div class="NgxEditor__Wrapper">
+              <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
+              <ngx-editor [editor]="editor" formControlName="about" [(ngModel)]="html" (ngModelChange)="onEditorContentChange($event)" [placeholder]="'Type here...'"></ngx-editor>
+            </div>
+            <div>
+              <button (click)="boton()">Aver</button>
+            </div>
+
+            <!-- <div>
+              <h3>Vista previa en tiempo real:</h3>
+              <div [innerHTML]="html"></div>
+            </div> -->
+
+            <div>
+              <button mat-button matStepperPrevious>Atrás</button>
               <button mat-raised-button color="primary" type="submit">Guardar</button>
             </div>
           </form>
@@ -474,3 +497,4 @@
 
   </mat-card-content>
 </mat-card>
+

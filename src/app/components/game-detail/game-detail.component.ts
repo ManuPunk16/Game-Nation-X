@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { GamesService } from 'src/app/services/games.service';
 import { Classification, Games, Languages, GameModes } from 'src/app/models/games.model';
 import { ActivatedRoute } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
+import { Editor } from 'ngx-editor';
 
 @Component({
   selector: 'app-game-detail',
   templateUrl: './game-detail.component.html',
   styleUrls: ['./game-detail.component.css']
 })
-export class GameDetailComponent implements OnInit {
+export class GameDetailComponent implements OnInit, OnDestroy {
+
+  editor!: Editor;
+  html!: string;
 
   public games?: Games;
   public languages: Languages[] = [];
@@ -26,8 +30,23 @@ export class GameDetailComponent implements OnInit {
   ) {
 
   }
+  ngOnDestroy(): void {
+    this.editor.destroy();
+  }
+
+  onEditorContentChange(content: string | object) {
+    if (typeof content === 'string') {
+      this.html = content;
+    } else {
+      const paragraphs = (content as any).content.filter((block: any) => block.type === 'paragraph');
+      const textContent = paragraphs.map((paragraph: any) => paragraph.content.map((text: any) => text.text).join('')).join('');
+      this.html = textContent;
+    }
+  }
 
   ngOnInit(): void {
+    this.editor = new Editor();
+
     this._route.params.subscribe(params => {
       let id = params['id'];
       this._gameService.getGameById(id).valueChanges().subscribe(game => {
@@ -37,6 +56,10 @@ export class GameDetailComponent implements OnInit {
         this.matchImageWithNameGameMode();
       });
     });
+  }
+
+  boton() {
+    console.log("Contenido: ", this.html);
   }
 
   combineDataToTable() {
