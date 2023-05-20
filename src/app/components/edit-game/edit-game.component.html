@@ -469,7 +469,7 @@
           <form [formGroup]="gameForm" (ngSubmit)="onSubmit()" novalidate>
 
             <div class="NgxEditor__Wrapper">
-              <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
+              <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
               <ngx-editor [editor]="editor" formControlName="about" [(ngModel)]="html" [placeholder]="'Type here...'"></ngx-editor>
             </div>
             <!-- <div>

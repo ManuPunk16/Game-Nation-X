@@ -7,7 +7,7 @@ import { PlatformsService } from 'src/app/services/platforms.service';
 import { Games, Category, Platform, GameModes, Classification, ClassificationDescriptors, Languages, OperativeSystem } from 'src/app/models/games.model';
 import * as moment from 'moment';
 import { map } from 'rxjs';
-import { Editor } from 'ngx-editor';
+import { Editor, Toolbar } from 'ngx-editor';
 
 @Component({
   selector: 'app-edit-game',
@@ -17,6 +17,16 @@ import { Editor } from 'ngx-editor';
 export class EditGameComponent implements OnInit, OnDestroy {
 
   editor!: Editor;
+  toolbar: Toolbar = [
+    ['bold', 'italic'],
+    ['underline', 'strike'],
+    ['code', 'blockquote'],
+    ['ordered_list', 'bullet_list'],
+    [{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
+    ['link', 'image'],
+    ['text_color', 'background_color'],
+    ['align_left', 'align_center', 'align_right', 'align_justify'],
+  ];
   html!: string;
   message = '';
 

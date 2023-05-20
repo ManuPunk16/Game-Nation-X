@@ -36,12 +36,16 @@
 
       <ng-container matColumnDef="categories">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Categorias </th>
-        <td mat-cell *matCellDef="let item" data-label="categories"> {{item.categories}} </td>
+        <td mat-cell *matCellDef="let item" data-label="categories">
+          {{ item.categories ? item.categories.join(', ') : '' }}
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="platforms">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Plataformas </th>
-        <td mat-cell *matCellDef="let item" data-label="platforms"> {{item.platforms}} </td>
+        <td mat-cell *matCellDef="let item" data-label="platforms">
+          {{ item.platforms ? item.platforms.join(', ') : '' }}
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="createdAt">

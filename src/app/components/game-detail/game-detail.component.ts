@@ -4,6 +4,7 @@ import { Classification, Games, Languages, GameModes } from 'src/app/models/game
 import { ActivatedRoute } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { Editor } from 'ngx-editor';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-game-detail',
@@ -14,6 +15,7 @@ export class GameDetailComponent implements OnInit, OnDestroy {
 
   editor!: Editor;
   html!: string;
+  safeAbout!: SafeHtml;
 
   public games?: Games;
   public languages: Languages[] = [];
@@ -26,7 +28,8 @@ export class GameDetailComponent implements OnInit, OnDestroy {
 
   constructor (
     private _gameService: GamesService,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private sanitizer: DomSanitizer
   ) {
 
   }
@@ -34,15 +37,15 @@ export class GameDetailComponent implements OnInit, OnDestroy {
     this.editor.destroy();
   }
 
-  onEditorContentChange(content: string | object) {
-    if (typeof content === 'string') {
-      this.html = content;
-    } else {
-      const paragraphs = (content as any).content.filter((block: any) => block.type === 'paragraph');
-      const textContent = paragraphs.map((paragraph: any) => paragraph.content.map((text: any) => text.text).join('')).join('');
-      this.html = textContent;
-    }
-  }
+  // onEditorContentChange(content: string | object) {
+  //   if (typeof content === 'string') {
+  //     this.html = content;
+  //   } else {
+  //     const paragraphs = (content as any).content.filter((block: any) => block.type === 'paragraph');
+  //     const textContent = paragraphs.map((paragraph: any) => paragraph.content.map((text: any) => text.text).join('')).join('');
+  //     this.html = textContent;
+  //   }
+  // }
 
   ngOnInit(): void {
     this.editor = new Editor();
@@ -51,6 +54,7 @@ export class GameDetailComponent implements OnInit, OnDestroy {
       let id = params['id'];
       this._gameService.getGameById(id).valueChanges().subscribe(game => {
         this.games = game;
+        this.safeAbout = this.games?.about ? this.sanitizer.bypassSecurityTrustHtml(this.games.about) : '';
         this.combineDataToTable();
         this.clasificationData();
         this.matchImageWithNameGameMode();
