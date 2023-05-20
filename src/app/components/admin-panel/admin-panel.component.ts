@@ -11,6 +11,7 @@ import { EditCategoryComponent } from '../add-game/edit-category/edit-category.c
 import { CreatePlatformComponent } from '../add-game/create-platform/create-platform.component';
 import { EditPlatformComponent } from '../add-game/edit-platform/edit-platform.component';
 import { AddGameComponent } from '../add-game/add-game.component';
+import { EditGameComponent } from '../edit-game/edit-game.component';
 
 @Component({
   selector: 'app-admin-panel',
@@ -150,6 +151,18 @@ export class AdminPanelComponent implements OnInit {
     });
 
     newGame.afterClosed().subscribe( res => {
+
+    });
+  }
+
+  onGameEdit(row: any) {
+    // console.log(row);
+    const editGame = this._dialog.open(EditGameComponent, {
+      width: '85%',
+      data: row.id
+    });
+
+    editGame.afterClosed().subscribe( res => {
 
     });
   }

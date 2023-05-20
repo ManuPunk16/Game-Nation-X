@@ -51,6 +51,7 @@ import { CreateCategoryComponent } from './components/add-game/create-category/c
 import { EditCategoryComponent } from './components/add-game/edit-category/edit-category.component';
 import { EditPlatformComponent } from './components/add-game/edit-platform/edit-platform.component';
 import { PlatformComponent } from './components/platforms/platform/platform.component';
+import { EditGameComponent } from './components/edit-game/edit-game.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { PlatformComponent } from './components/platforms/platform/platform.comp
     CreateCategoryComponent,
     EditCategoryComponent,
     EditPlatformComponent,
-    PlatformComponent
+    PlatformComponent,
+    EditGameComponent
   ],
   imports: [
     BrowserModule,
