@@ -1,7 +1,10 @@
+import { FileUpload } from "./file-upload.model";
+
 export class Games {
   id?: string;
   name!: string;
-  image!: string;
+  images!: string[];
+  youtube_links!: string[];
   about!: string;
   classification!: Classification;
   classification_descriptors!: ClassificationDescriptors[];

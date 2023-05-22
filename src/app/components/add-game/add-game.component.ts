@@ -9,6 +9,8 @@ import { PlatformsService } from 'src/app/services/platforms.service';
 import { map } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { Editor } from 'ngx-editor';
+// import { FileUploadService } from 'src/app/services/file-upload.service';
+// import { FileUpload } from 'src/app/models/file-upload.model';
 
 @Component({
   selector: 'app-add-game',
@@ -35,16 +37,24 @@ export class AddGameComponent implements OnInit, OnDestroy {
   public displayedColumnPlatforms: string[] = ['actions', 'name'];
   gameForm: FormGroup;
   submitted = false;
+  // percentage = 0;
+  // selectedFiles?: FileList;
+  // currentFileUpload?: FileUpload;
+  // urls: FileUpload[] = [];
+  // fileUploads?: any[];
 
   constructor(
     private _gamesService: GamesService,
     private _categoryService: CategoriesService,
     private _platformService: PlatformsService,
-    public _dialog: MatDialog
+    public _dialog: MatDialog,
+    // private uploadService: FileUploadService
   ) {
     this.gameForm = new FormGroup({
       name: new FormControl('', Validators.required),
       release_date: new FormControl(''),
+      images: new FormControl(''),
+      youtube_links: new FormControl(''),
       publication_date: new FormControl('', Validators.required),
       about: new FormControl(''),
       classification: new FormControl(''),
@@ -124,6 +134,44 @@ export class AddGameComponent implements OnInit, OnDestroy {
     this.languages.sort((a, b) => a.language.localeCompare(b.language));
   }
 
+  // onSubmit() {
+  //   // console.log(this.gameForm.value);
+  //   if (this.gameForm.valid) {
+  //     this._gamesService.createGame(this.gameForm.value).then(() => {
+  //       this.submitted = true;
+  //     });
+  //   } else {
+  //     console.log("No es valido");
+  //   }
+  // }
+
+  // selectFile(event: any) {
+  //   this.selectedFiles = event.target.files;
+  // }
+
+  // upload(event: Event) {
+  //   if (this.selectedFiles) {
+  //     const fileUploads: FileUpload[] = [];
+
+  //     for (let i = 0; i < this.selectedFiles.length; i++) {
+  //       const file = this.selectedFiles.item(i);
+  //       if (file) {
+  //         const fileUpload: FileUpload = {
+  //           file: file,
+  //           url: '',
+  //           name: '',
+  //           key: ''
+  //         };
+  //         fileUploads.push(fileUpload);
+  //       }
+  //     }
+  //     this.uploadService.pushFilesToStorage(fileUploads).subscribe((percentage) => {
+  //       this.percentage = Math.round(percentage ? percentage : 0);
+  //       console.log(`Progreso de carga: ${percentage}%`);
+  //     });
+  //   }
+  // }
+
   onSubmit() {
     // console.log(this.gameForm.value);
     if (this.gameForm.valid) {
@@ -131,7 +179,7 @@ export class AddGameComponent implements OnInit, OnDestroy {
         this.submitted = true;
       });
     } else {
-      console.log("No es valido");
+      console.log("Formulario no valido.");
     }
   }
 

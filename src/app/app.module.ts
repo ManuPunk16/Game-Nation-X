@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ChunkPipe } from './pipes/chunk.pipe';
 import { NgxEditorModule } from 'ngx-editor';
+import { MaterialFileInputModule } from 'ngx-material-file-input';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from "@angular/fire/compat/auth";
@@ -52,6 +53,9 @@ import { EditCategoryComponent } from './components/add-game/edit-category/edit-
 import { EditPlatformComponent } from './components/add-game/edit-platform/edit-platform.component';
 import { PlatformComponent } from './components/platforms/platform/platform.component';
 import { EditGameComponent } from './components/edit-game/edit-game.component';
+import { UploadFormComponent } from './components/admin-panel/upload-form/upload-form.component';
+import { UploadListComponent } from './components/admin-panel/upload-list/upload-list.component';
+import { UploadDetailsComponent } from './components/admin-panel/upload-details/upload-details.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +77,10 @@ import { EditGameComponent } from './components/edit-game/edit-game.component';
     EditCategoryComponent,
     EditPlatformComponent,
     PlatformComponent,
-    EditGameComponent
+    EditGameComponent,
+    UploadFormComponent,
+    UploadListComponent,
+    UploadDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -105,7 +112,8 @@ import { EditGameComponent } from './components/edit-game/edit-game.component';
     MatPaginatorModule,
     MatStepperModule,
     MatTabsModule,
-    NgxEditorModule
+    NgxEditorModule,
+    MaterialFileInputModule
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'es-MX'}
