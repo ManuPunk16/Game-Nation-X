@@ -8,7 +8,7 @@ import { CategoriesService } from 'src/app/services/categories.service';
 import { PlatformsService } from 'src/app/services/platforms.service';
 import { map } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { Editor } from 'ngx-editor';
+import { Editor, Toolbar } from 'ngx-editor';
 // import { FileUploadService } from 'src/app/services/file-upload.service';
 // import { FileUpload } from 'src/app/models/file-upload.model';
 
@@ -21,6 +21,16 @@ export class AddGameComponent implements OnInit, OnDestroy {
 
   editor!: Editor;
   html!: string;
+  toolbar: Toolbar = [
+    ['bold', 'italic'],
+    ['underline', 'strike'],
+    ['code', 'blockquote'],
+    ['ordered_list', 'bullet_list'],
+    [{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
+    ['link', 'image'],
+    ['text_color', 'background_color'],
+    ['align_left', 'align_center', 'align_right', 'align_justify'],
+  ];
 
   public games: Games = new Games();
   public categories: Category[] = [];

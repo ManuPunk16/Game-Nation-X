@@ -46,8 +46,43 @@
 <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column">
   <div fxLayout="column" fxLayout.gt-sm="column" fxFlex="20" class="sidebar">
     <mat-card>
+      <mat-card-header>
+        <mat-card-title>Buscador</mat-card-title>
+      </mat-card-header>
       <mat-card-content>
-        <p>Contenido del panel lateral</p>
+
+        <div
+          fxLayout="row"
+          fxLayout.xs="column"
+          fxLayoutWrap
+          fxLayoutAlign="center"
+          layout-margin>
+          <mat-form-field appearance="fill" fxFlex="100%">
+            <mat-label>Nombre del juego</mat-label>
+            <input matInput type="text" [(ngModel)]="keyword" (input)="search()">
+          </mat-form-field>
+        </div>
+
+        <div
+          fxLayout="row"
+          fxLayout.xs="column"
+          fxLayoutWrap
+          fxLayoutAlign="center"
+          layout-margin>
+          <mat-list *ngIf="searchResults" fxFlex="100%">
+            <mat-list-item *ngFor="let result of searchResults | async">* {{ result.name }}</mat-list-item>
+          </mat-list>
+        </div>
+        <div fxLayout="row"
+        fxLayout.xs="column"
+        fxLayoutWrap
+        fxLayoutAlign="center"
+        layout-margin *ngIf="searchResults && (searchResults | async)?.length === 0">
+          No se encontraron resultados en la búsqueda.
+        </div>
+        <!-- <ul *ngIf="searchResults">
+          <li *ngFor="let result of searchResults | async">{{ result.name }}</li>
+        </ul> -->
 
       </mat-card-content>
     </mat-card>

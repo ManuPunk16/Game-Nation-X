@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { Games, Category } from '../models/games.model';
 import { Observable, map } from 'rxjs';
+import * as _ from 'lodash';
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +10,11 @@ import { Observable, map } from 'rxjs';
 export class GamesService {
   private dbPath = '/games';
   gamesRef: AngularFirestoreCollection<Games>;
+  items: Observable<any[]>;
 
   constructor(private db: AngularFirestore) {
     this.gamesRef = db.collection(this.dbPath);
+    this.items = this.gamesRef.valueChanges();
   }
 
   getAllGames(): AngularFirestoreCollection<Games> {
@@ -73,5 +76,15 @@ export class GamesService {
 
   deleteGame(id: string): Promise<void> {
     return this.gamesRef.doc(id).delete();
+  }
+
+  searchItems(keyword: string): Observable<any[]> {
+    return this.items.pipe(
+      map(items => {
+        return items.filter(item =>
+          _.deburr(item.name.toLowerCase()).includes(_.deburr(keyword.toLowerCase()))
+        );
+      })
+    );
   }
 }
