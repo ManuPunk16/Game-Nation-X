@@ -1,0 +1,28 @@
+<br>
+<button mat-raised-button (click)="onCategoryDialogCreate()">Crear</button>
+<div>
+  <mat-table [dataSource]="dataSourceCategories">
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef class="action"> Acciones </mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="actions">
+        <button mat-flat-button color="primary" (click)="onCategoryDialogEdit(row)">
+          <mat-icon> remove_red_eye </mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Categorias -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Categorias </mat-header-cell>
+      <mat-cell *matCellDef="let item" data-label="name"> {{item.name}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumnCategories"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumnCategories;" ></mat-row>
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[5, 15, 30]"
+                showFirstLastButtons
+                aria-label="Select page"
+                >
+  </mat-paginator>
+</div>

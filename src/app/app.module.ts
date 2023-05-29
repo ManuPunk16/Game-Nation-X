@@ -56,6 +56,17 @@ import { EditGameComponent } from './components/edit-game/edit-game.component';
 import { UploadFormComponent } from './components/admin-panel/upload-form/upload-form.component';
 import { UploadListComponent } from './components/admin-panel/upload-list/upload-list.component';
 import { UploadDetailsComponent } from './components/admin-panel/upload-details/upload-details.component';
+import { CategoriesTableComponent } from './components/admin-panel/categories-table/categories-table.component';
+import { PlatformsTableComponent } from './components/admin-panel/platforms-table/platforms-table.component';
+import { DevelopersTableComponent } from './components/admin-panel/developers-table/developers-table.component';
+import { EditorsTableComponent } from './components/admin-panel/editors-table/editors-table.component';
+import { FranchisesTableComponent } from './components/admin-panel/franchises-table/franchises-table.component';
+import { EditFranchiseComponent } from './components/admin-panel/franchises-table/edit-franchise/edit-franchise.component';
+import { CreateFranchiseComponent } from './components/admin-panel/franchises-table/create-franchise/create-franchise.component';
+import { EditEditorsComponent } from './components/admin-panel/editors-table/edit-editors/edit-editors.component';
+import { CreateEditorsComponent } from './components/admin-panel/editors-table/create-editors/create-editors.component';
+import { EditDevelopersComponent } from './components/admin-panel/developers-table/edit-developers/edit-developers.component';
+import { CreateDevelopersComponent } from './components/admin-panel/developers-table/create-developers/create-developers.component';
 
 @NgModule({
   declarations: [
@@ -80,7 +91,18 @@ import { UploadDetailsComponent } from './components/admin-panel/upload-details/
     EditGameComponent,
     UploadFormComponent,
     UploadListComponent,
-    UploadDetailsComponent
+    UploadDetailsComponent,
+    CategoriesTableComponent,
+    PlatformsTableComponent,
+    DevelopersTableComponent,
+    EditorsTableComponent,
+    FranchisesTableComponent,
+    EditFranchiseComponent,
+    CreateFranchiseComponent,
+    EditEditorsComponent,
+    CreateEditorsComponent,
+    EditDevelopersComponent,
+    CreateDevelopersComponent
   ],
   imports: [
     BrowserModule,

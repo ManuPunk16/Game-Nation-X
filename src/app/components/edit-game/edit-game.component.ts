@@ -369,7 +369,7 @@ export class EditGameComponent implements OnInit, OnDestroy {
     let id = this.data;
     this.gameForm.value.updatedAt = moment().toDate();
     let data = this.gameForm.value;
-    console.log(data);
+    // console.log(data);
     this._gameService.updateGame(id, data)
       .then(() => {
         this.message = 'El juego ha sido actualizado!';

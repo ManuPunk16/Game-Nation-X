@@ -28,7 +28,7 @@ export class CreatePlatformComponent implements OnInit{
   }
 
   submitForm(){
-    console.log(this.platformForm.value);
+    // console.log(this.platformForm.value);
     if (this.platformForm.valid) {
       this._platformService.createPlatform(this.platformForm.value).then(() => {
         this.submitted = true;

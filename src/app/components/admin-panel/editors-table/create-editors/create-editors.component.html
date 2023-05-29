@@ -1,0 +1,31 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Crea al editor</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div *ngIf="!submitted">
+      <form [formGroup]="editorsForm" (ngSubmit)="submitForm()" novalidate>
+        <div
+          fxLayout="row"
+          fxLayout.xs="column"
+          fxLayoutWrap
+          fxLayoutGap="3.5%"
+          fxLayoutAlign="left"
+        >
+          <mat-form-field appearance="fill" fxFlex="100%">
+            <mat-label>Desarrollador</mat-label>
+            <input matInput formControlName="name">
+          </mat-form-field>
+        </div>
+        <section>
+          <button mat-raised-button>Crear</button>
+        </section>
+      </form>
+    </div>
+
+    <div *ngIf="submitted">
+      <h4>You submitted successfully!</h4>
+      <button class="btn btn-success" (click)="newDev()">Crear otro</button>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,28 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Edita al desarrollador
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div>
+      <form>
+        <div
+          fxLayout="row"
+          fxLayout.xs="column"
+          fxLayoutWrap
+          fxLayoutGap="3.5%"
+          fxLayoutAlign="left"
+        >
+          <mat-form-field appearance="fill" fxFlex="100%">
+            <mat-label>Plataforma</mat-label>
+            <input matInput [(ngModel)]="developers.name" name="name">
+          </mat-form-field>
+        </div>
+        <section>
+          <button mat-raised-button (click)="onDeveloperEdit()">Guardar</button>
+        </section>
+        <p>{{ message }}</p>
+      </form>
+    </div>
+  </mat-card-content>
+</mat-card>
