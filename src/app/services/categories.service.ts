@@ -15,7 +15,7 @@ export class CategoriesService {
   }
 
   getAllCategories(): AngularFirestoreCollection<Category> {
-    return this.db.collection(this.dbPath, ref => ref.orderBy('name'));
+    return this.db.collection(this.dbPath, ref => ref.orderBy('name', 'asc'));
   }
 
   getCategoryById(id: string): AngularFirestoreDocument<Category> {

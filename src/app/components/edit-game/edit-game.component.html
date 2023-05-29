@@ -18,33 +18,51 @@
               fxLayoutAlign="center"
               layout-margin
             >
-              <mat-form-field appearance="fill" fxFlex="20%">
+              <mat-form-field appearance="fill" fxFlex="33.3%">
                 <mat-label>Nombre</mat-label>
                 <input matInput formControlName="name">
               </mat-form-field>
 
-              <mat-form-field appearance="fill" fxFlex="20%">
+              <mat-form-field appearance="fill" fxFlex="33.3%">
                 <mat-label>Fecha de Creacion</mat-label>
                 <input matInput [matDatepicker]="picker0" formControlName="release_date">
                 <mat-datepicker-toggle matSuffix [for]="picker0"></mat-datepicker-toggle>
                 <mat-datepicker #picker0></mat-datepicker>
               </mat-form-field>
 
-              <mat-form-field appearance="fill" fxFlex="20%">
+              <mat-form-field appearance="fill" fxFlex="33.3%">
                 <mat-label>Fecha de Publicacion</mat-label>
                 <input matInput [matDatepicker]="picker1" formControlName="publication_date">
                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                 <mat-datepicker #picker1></mat-datepicker>
               </mat-form-field>
+            </div>
 
-              <mat-form-field appearance="fill" fxFlex="20%">
+            <div
+              fxLayout="row"
+              fxLayout.xs="column"
+              fxLayoutWrap
+              fxLayoutAlign="center"
+              layout-margin>
+              <mat-form-field appearance="fill" fxFlex="33.3%">
                 <mat-label>Franquicia</mat-label>
-                <input matInput formControlName="franchise">
+                <mat-select formControlName="franchise" multiple>
+                  <mat-option *ngFor="let fran of franchises" [value]="fran.name">{{fran.name}}</mat-option>
+                </mat-select>
               </mat-form-field>
 
-              <mat-form-field appearance="fill" fxFlex="20%">
+              <mat-form-field appearance="fill" fxFlex="33.3%">
                 <mat-label>Desarrolladores</mat-label>
-                <input matInput formControlName="developers">
+                <mat-select formControlName="developers" multiple>
+                  <mat-option *ngFor="let dev of developers" [value]="dev.name">{{dev.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill" fxFlex="33.3%">
+                <mat-label>Editores</mat-label>
+                <mat-select formControlName="editors" multiple>
+                  <mat-option *ngFor="let edit of editors" [value]="edit.name">{{edit.name}}</mat-option>
+                </mat-select>
               </mat-form-field>
             </div>
 
@@ -73,26 +91,21 @@
               fxLayoutAlign="center"
               layout-margin
             >
-              <mat-form-field appearance="fill" fxFlex="25%">
+              <mat-form-field appearance="fill" fxFlex="33.3%">
                 <mat-label>Categorias</mat-label>
                 <mat-select formControlName="categories" multiple>
                   <mat-option *ngFor="let cat of categories" [value]="cat.name">{{cat.name}}</mat-option>
                 </mat-select>
               </mat-form-field>
 
-              <mat-form-field appearance="fill" fxFlex="25%">
+              <mat-form-field appearance="fill" fxFlex="33.3%">
                 <mat-label>Plataformas</mat-label>
                 <mat-select formControlName="platforms" multiple>
                   <mat-option *ngFor="let platform of platforms" [value]="platform.name">{{platform.name}}</mat-option>
                 </mat-select>
               </mat-form-field>
 
-              <mat-form-field appearance="fill" fxFlex="25%">
-                <mat-label>Editores</mat-label>
-                <input matInput formControlName="editors">
-              </mat-form-field>
-
-              <mat-form-field appearance="fill" fxFlex="25%">
+              <mat-form-field appearance="fill" fxFlex="33.3%">
                 <mat-label>Modos de Juego</mat-label>
                 <mat-select formControlName="game_modes" multiple>
                   <mat-option *ngFor="let mode of gameMode" [value]="mode.name">{{mode.name}}</mat-option>

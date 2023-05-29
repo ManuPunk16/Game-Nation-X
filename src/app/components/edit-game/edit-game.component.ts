@@ -4,7 +4,17 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { GamesService } from 'src/app/services/games.service';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { PlatformsService } from 'src/app/services/platforms.service';
-import { Games, Category, Platform, GameModes, Classification, ClassificationDescriptors, Languages, OperativeSystem } from 'src/app/models/games.model';
+import { DevelopersEditorsService } from 'src/app/services/developers-editors.service';
+import {
+  Games,
+  Category,
+  Platform,
+  GameModes,
+  Classification,
+  ClassificationDescriptors,
+  Languages,
+  OperativeSystem,
+  Developers, Editors, Franchise } from 'src/app/models/games.model';
 import * as moment from 'moment';
 import { map } from 'rxjs';
 import { Editor, Toolbar } from 'ngx-editor';
@@ -35,6 +45,9 @@ export class EditGameComponent implements OnInit, OnDestroy {
   public game?: Games;
   public categories: Category[] = [];
   public platforms: Platform[] = [];
+  public developers: Developers[] = [];
+  public editors: Editors[] = [];
+  public franchises: Franchise[] = [];
   public gameMode = GameModes.game_modes;
   public classification = Classification.classification;
   public classificationDescriptors = ClassificationDescriptors.classification_descriptors;
@@ -45,7 +58,8 @@ export class EditGameComponent implements OnInit, OnDestroy {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private _gameService: GamesService,
     private _categoryService: CategoriesService,
-    private _platformService: PlatformsService
+    private _platformService: PlatformsService,
+    private _devs: DevelopersEditorsService
   ) {
     this.gameForm = new FormGroup({
       name: new FormControl('', Validators.required),
@@ -126,6 +140,9 @@ export class EditGameComponent implements OnInit, OnDestroy {
     this.message = '';
     this.getAllCategories();
     this.getAllPlatforms();
+    this.getAllDevelopers();
+    this.getAllEditors();
+    this.getAllFranchises();
   }
 
   ngOnChanges(): void {
@@ -306,6 +323,45 @@ export class EditGameComponent implements OnInit, OnDestroy {
     ).subscribe(data => {
       this.platforms = data;
       // console.log(this.platforms);
+    });
+  }
+
+  getAllDevelopers(): void {
+    this._devs.getAllDevelopers().snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ dev: c.payload.doc.id, ...c.payload.doc.data ()})
+        )
+      )
+    ).subscribe(data => {
+      this.developers = data;
+      // console.log(this.developers);
+    });
+  }
+
+  getAllEditors(): void {
+    this._devs.getAllEditors().snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ edit: c.payload.doc.id, ...c.payload.doc.data ()})
+        )
+      )
+    ).subscribe(data => {
+      this.editors = data;
+      // console.log(this.editors);
+    });
+  }
+
+  getAllFranchises(): void {
+    this._devs.getAllFranchises().snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ fran: c.payload.doc.id, ...c.payload.doc.data ()})
+        )
+      )
+    ).subscribe(data => {
+      this.franchises = data;
+      // console.log(this.franchises);
     });
   }
 

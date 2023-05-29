@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { GamesService } from '../../services/games.service';
 import { Games, Category, Platform } from '../../models/games.model';
 import { CategoriesService } from 'src/app/services/categories.service';
@@ -12,13 +12,22 @@ import { CreatePlatformComponent } from '../add-game/create-platform/create-plat
 import { EditPlatformComponent } from '../add-game/edit-platform/edit-platform.component';
 import { AddGameComponent } from '../add-game/add-game.component';
 import { EditGameComponent } from '../edit-game/edit-game.component';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort, Sort } from '@angular/material/sort';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 @Component({
   selector: 'app-admin-panel',
   templateUrl: './admin-panel.component.html',
-  styleUrls: ['./admin-panel.component.css']
+  styleUrls: ['./admin-panel.component.css'],
 })
 export class AdminPanelComponent implements OnInit {
+
+  @ViewChild(MatPaginator)
+  paginatorGames!: MatPaginator;
+
+  @ViewChild(MatSort)
+  sortGames!: MatSort;
 
   public games: Games[] = [];
   public dataSourceGames!: MatTableDataSource<Games>;
@@ -35,7 +44,8 @@ export class AdminPanelComponent implements OnInit {
     private _gamesService: GamesService,
     private _categoryService: CategoriesService,
     private _platformService: PlatformsService,
-    public _dialog: MatDialog
+    public _dialog: MatDialog,
+    private _liveAnnouncer: LiveAnnouncer
   ) {
 
   }
@@ -61,7 +71,17 @@ export class AdminPanelComponent implements OnInit {
     ).subscribe(data => {
       this.games = data;
       this.dataSourceGames = new MatTableDataSource(this.games);
+      this.dataSourceGames.paginator = this.paginatorGames;
+      this.dataSourceGames.sort = this.sortGames;
     });
+  }
+
+  announceSortChange(sortState: Sort) {
+    if (sortState.direction) {
+      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+    } else {
+      this._liveAnnouncer.announce('Sorting cleared');
+    }
   }
 
   updatePublished(item: any, event: any): void {

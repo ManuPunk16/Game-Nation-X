@@ -8,9 +8,9 @@ export class Games {
   about!: string;
   classification!: Classification;
   classification_descriptors!: ClassificationDescriptors[];
-  developers!: string;
-  editors!: string;
-  franchise!: string;
+  developers!: Developers[];
+  editors!: Editors[];
+  franchise!: Franchise;
   game_modes!: GameModes[];
   release_date!: any;
   publication_date!: any;
@@ -249,4 +249,19 @@ export class Languages {
     { language: 'Letón' },
     { language: 'Estonio' }
   ];
+}
+
+export class Developers {
+  id!: string;
+  name!: string;
+}
+
+export class Editors {
+  id!: string;
+  name!: string;
+}
+
+export class Franchise {
+  id!: string;
+  name!: string;
 }

@@ -3,12 +3,22 @@ import { MatTableDataSource } from '@angular/material/table';
 import * as moment from 'moment';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { GamesService } from '../../services/games.service';
-import { Games, Category, Platform, OperativeSystem, Classification, ClassificationDescriptors, Languages, GameModes } from '../../models/games.model';
+import {
+  Games,
+  Category,
+  Platform,
+  GameModes,
+  Classification,
+  ClassificationDescriptors,
+  Languages,
+  OperativeSystem,
+  Developers, Editors, Franchise } from 'src/app/models/games.model';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { PlatformsService } from 'src/app/services/platforms.service';
 import { map } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { Editor, Toolbar } from 'ngx-editor';
+import { DevelopersEditorsService } from 'src/app/services/developers-editors.service';
 // import { FileUploadService } from 'src/app/services/file-upload.service';
 // import { FileUpload } from 'src/app/models/file-upload.model';
 
@@ -35,6 +45,9 @@ export class AddGameComponent implements OnInit, OnDestroy {
   public games: Games = new Games();
   public categories: Category[] = [];
   public platforms: Platform[] = [];
+  public developers: Developers[] = [];
+  public editors: Editors[] = [];
+  public franchises: Franchise[] = [];
   public languages = Languages.languages;
   public operativeSystem = OperativeSystem.operative_system;
   public classification = Classification.classification;
@@ -59,6 +72,7 @@ export class AddGameComponent implements OnInit, OnDestroy {
     private _platformService: PlatformsService,
     public _dialog: MatDialog,
     // private uploadService: FileUploadService
+    private _devs: DevelopersEditorsService
   ) {
     this.gameForm = new FormGroup({
       name: new FormControl('', Validators.required),
@@ -142,6 +156,9 @@ export class AddGameComponent implements OnInit, OnDestroy {
     this.getAllPlatforms();
 
     this.languages.sort((a, b) => a.language.localeCompare(b.language));
+    this.getAllDevelopers();
+    this.getAllEditors();
+    this.getAllFranchises();
   }
 
   // onSubmit() {
@@ -237,6 +254,45 @@ export class AddGameComponent implements OnInit, OnDestroy {
       this.platforms = data;
       this.dataSourcePlatform = new MatTableDataSource(this.platforms);
       // console.log(this.platforms);
+    });
+  }
+
+  getAllDevelopers(): void {
+    this._devs.getAllDevelopers().snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ dev: c.payload.doc.id, ...c.payload.doc.data ()})
+        )
+      )
+    ).subscribe(data => {
+      this.developers = data;
+      // console.log(this.developers);
+    });
+  }
+
+  getAllEditors(): void {
+    this._devs.getAllEditors().snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ edit: c.payload.doc.id, ...c.payload.doc.data ()})
+        )
+      )
+    ).subscribe(data => {
+      this.editors = data;
+      // console.log(this.editors);
+    });
+  }
+
+  getAllFranchises(): void {
+    this._devs.getAllFranchises().snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ fran: c.payload.doc.id, ...c.payload.doc.data ()})
+        )
+      )
+    ).subscribe(data => {
+      this.franchises = data;
+      // console.log(this.franchises);
     });
   }
 }
