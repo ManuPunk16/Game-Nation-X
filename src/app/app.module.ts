@@ -39,6 +39,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
@@ -135,7 +136,8 @@ import { CreateDevelopersComponent } from './components/admin-panel/developers-t
     MatStepperModule,
     MatTabsModule,
     NgxEditorModule,
-    MaterialFileInputModule
+    MaterialFileInputModule,
+    MatAutocompleteModule
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'es-MX'}

@@ -78,13 +78,22 @@ export class GamesService {
     return this.gamesRef.doc(id).delete();
   }
 
-  searchItems(keyword: string): Observable<any[]> {
-    return this.items.pipe(
-      map(items => {
-        return items.filter(item =>
-          _.deburr(item.name.toLowerCase()).includes(_.deburr(keyword.toLowerCase()))
-        );
+  searchItems(keyword: string): Observable<Games[]> {
+    return this.gamesRef.snapshotChanges().pipe(
+      map(actions => {
+        return actions
+          .map(action => {
+            const data = action.payload.doc.data();
+            const id = action.payload.doc.id;
+            return { id, ...data };
+          })
+          .filter(item => item.published === true)
+          .filter(item => this.normalizeString(item.name).includes(this.normalizeString(keyword)));
       })
     );
+  }
+
+  normalizeString(str: string): string {
+    return str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   }
 }

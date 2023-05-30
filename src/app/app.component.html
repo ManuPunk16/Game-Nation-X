@@ -59,11 +59,19 @@
           layout-margin>
           <mat-form-field appearance="fill" fxFlex="100%">
             <mat-label>Nombre del juego</mat-label>
-            <input matInput type="text" [(ngModel)]="keyword" (input)="search()">
+            <input matInput type="text" [(ngModel)]="keyword" (input)="search()" [matAutocomplete]="auto">
+            <button matSuffix mat-icon-button *ngIf="keyword" (click)="clearSearch()">
+              <mat-icon>close</mat-icon>
+            </button>
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let result of searchResults | async" [value]="result.name" [routerLink]="['/game-datails/', result.id]">
+                {{ result.name }}
+              </mat-option>
+            </mat-autocomplete>
           </mat-form-field>
         </div>
 
-        <div
+        <!-- <div
           fxLayout="row"
           fxLayout.xs="column"
           fxLayoutWrap
@@ -72,18 +80,14 @@
           <mat-list *ngIf="searchResults" fxFlex="100%">
             <mat-list-item *ngFor="let result of searchResults | async">* {{ result.name }}</mat-list-item>
           </mat-list>
-        </div>
+        </div> -->
         <div fxLayout="row"
-        fxLayout.xs="column"
-        fxLayoutWrap
-        fxLayoutAlign="center"
-        layout-margin *ngIf="searchResults && (searchResults | async)?.length === 0">
-          No se encontraron resultados en la búsqueda.
+          fxLayout.xs="column"
+          fxLayoutWrap
+          fxLayoutAlign="center"
+          layout-margin *ngIf="searchResults && (searchResults | async)?.length === 0">
+          No hay relaciones con tu búsqueda.
         </div>
-        <!-- <ul *ngIf="searchResults">
-          <li *ngFor="let result of searchResults | async">{{ result.name }}</li>
-        </ul> -->
-
       </mat-card-content>
     </mat-card>
 

@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AuthServiceTsService } from './services/auth.service.ts.service';
 import { GamesService } from './services/games.service';
 import { Observable } from 'rxjs';
+import { Games } from './models/games.model';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,7 @@ export class AppComponent implements OnInit{
   title = 'game-nation-x';
   keyword!: string;
   searchResults!: Observable<any[]> | null;
+  public games: Games[] = [];
 
   constructor (
     public _loginDialog: MatDialog,
@@ -33,5 +35,10 @@ export class AppComponent implements OnInit{
     } else {
       this.searchResults = null;
     }
+  }
+
+  clearSearch(): void {
+    this.keyword = '';
+    this.searchResults = null;
   }
 }
