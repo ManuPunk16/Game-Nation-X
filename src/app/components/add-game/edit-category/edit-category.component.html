@@ -12,13 +12,13 @@
           fxLayoutGap="3.5%"
           fxLayoutAlign="left"
         >
-          <mat-form-field appearance="fill" fxFlex="100%">
+          <mat-form-field appearance="fill" color="accent" fxFlex="100%">
             <mat-label>Categoria</mat-label>
             <input matInput [(ngModel)]="categories.name" name="name">
           </mat-form-field>
         </div>
         <section>
-          <button mat-raised-button (click)="onCategoryEdit()">Guardar</button>
+          <button mat-raised-button color="primary" (click)="onCategoryEdit()">Guardar</button>
         </section>
         <p>{{ message }}</p>
       </form>

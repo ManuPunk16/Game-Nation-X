@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { Editor } from 'ngx-editor';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { ThemeService } from 'src/app/services/theme.service';
 
 @Component({
   selector: 'app-game-detail',
@@ -25,11 +26,13 @@ export class GameDetailComponent implements OnInit, OnDestroy {
   public esrb = '';
   public mode: any[] = [];
   displayColumns: string[] = ['lang_interface', 'lang_subtitles', 'lang_voices'];
+  isDarkTheme!: boolean;
 
   constructor (
     private _gameService: GamesService,
     private _route: ActivatedRoute,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private themeService: ThemeService
   ) {
 
   }
@@ -61,6 +64,12 @@ export class GameDetailComponent implements OnInit, OnDestroy {
         this.matchImageWithNameGameMode();
       });
     });
+
+    this.themeService.isDarkTheme$.subscribe(isDarkTheme => {
+      this.isDarkTheme = isDarkTheme;
+      this.matchImageWithNameGameMode();
+    });
+
   }
 
   boton() {
@@ -101,7 +110,8 @@ export class GameDetailComponent implements OnInit, OnDestroy {
     for (const gameMode of this.games?.game_modes || []) {
       const matchingMode = GameModes.game_modes.find(mode => mode.name === gameMode);
       if (matchingMode) {
-        this.mode.push(matchingMode);
+        const image = this.isDarkTheme ? matchingMode.white_image : matchingMode.image;
+        this.mode.push({ ...matchingMode, image });
       }
     }
   }

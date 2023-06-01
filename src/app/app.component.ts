@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthServiceTsService } from './services/auth.service.ts.service';
 import { GamesService } from './services/games.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Games } from './models/games.model';
+import { ThemeService } from './services/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -16,17 +17,22 @@ export class AppComponent implements OnInit{
   keyword!: string;
   searchResults!: Observable<any[]> | null;
   public games: Games[] = [];
+  isDarkTheme = false;
+  private themeSubscription!: Subscription;
 
   constructor (
     public _loginDialog: MatDialog,
     public authService: AuthServiceTsService,
-    private _gameService: GamesService
+    private _gameService: GamesService,
+    private themeService: ThemeService
   ){
 
   }
 
   ngOnInit(): void {
-
+    this.themeSubscription = this.themeService.isDarkTheme$.subscribe(isDarkTheme => {
+      this.isDarkTheme = isDarkTheme;
+    });
   }
 
   search(): void {
@@ -40,5 +46,20 @@ export class AppComponent implements OnInit{
   clearSearch(): void {
     this.keyword = '';
     this.searchResults = null;
+  }
+
+  toggleTheme() {
+    // console.log(event.checked);
+    // if(event.checked == true) {
+    //   this._document.body.classList.add('dark-mode');
+    // } else {
+    //   this._document.body.classList.remove('dark-mode');
+    // }
+    this.isDarkTheme = !this.isDarkTheme;
+    this.themeService.setDarkTheme(this.isDarkTheme);
+  }
+
+  ngOnDestroy() {
+    this.themeSubscription.unsubscribe();
   }
 }

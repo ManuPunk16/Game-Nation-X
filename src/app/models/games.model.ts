@@ -1,5 +1,3 @@
-import { FileUpload } from "./file-upload.model";
-
 export class Games {
   id?: string;
   name!: string;
@@ -157,51 +155,63 @@ export class GameModes {
   public static game_modes = [
     {
       name: 'Un Jugador',
-      image: '../../environments/PNG/007-persona.png'
+      image: '../../environments/PNG/007-persona.png',
+      white_image: '../../environments/PNG/007-persona-white.png'
     },
     {
       name: 'Multijugador',
-      image: '../../environments/PNG/008-multitud-de-usuarios.png'
+      image: '../../environments/PNG/008-multitud-de-usuarios.png',
+      white_image: '../../environments/PNG/008-multitud-de-usuarios-white.png'
     },
     {
       name: 'JcJ',
-      image: '../../environments/PNG/001-jcj.png'
+      image: '../../environments/PNG/001-jcj.png',
+      white_image: '../../environments/PNG/001-jcj-white.png'
     },
     {
       name: 'JcJ en línea',
-      image: '../../environments/PNG/001-jcj.png'
+      image: '../../environments/PNG/001-jcj.png',
+      white_image: '../../environments/PNG/001-jcj-white.png'
     },
     {
       name: 'JcJ en LAN',
-      image: '../../environments/PNG/001-jcj.png'
+      image: '../../environments/PNG/001-jcj.png',
+      white_image: '../../environments/PNG/001-jcj-white.png'
     },
     {
       name: 'JcJ en pantalla compartida',
-      image: '../../environments/PNG/001-jcj.png'
+      image: '../../environments/PNG/001-jcj.png',
+      white_image: '../../environments/PNG/001-jcj-white.png'
     },
     {
       name: 'Cooperativo',
-      image: '../../environments/PNG/002-equipo.png'
+      image: '../../environments/PNG/002-equipo.png',
+      white_image: '../../environments/PNG/002-equipo-white.png'
     },
     {
       name: 'Cooperativo en línea',
-      image: '../../environments/PNG/002-equipo.png'
+      image: '../../environments/PNG/002-equipo.png',
+      white_image: '../../environments/PNG/002-equipo-white.png'
     },
     {
       name: 'Cooperativo en LAN',
-      image: '../../environments/PNG/002-equipo.png'
+      image: '../../environments/PNG/002-equipo.png',
+      white_image: '../../environments/PNG/002-equipo-white.png'
     },
     {
       name: 'Coop. en pantalla compartida',
-      image: '../../environments/PNG/002-equipo.png'
+      image: '../../environments/PNG/002-equipo.png',
+      white_image: '../../environments/PNG/002-equipo-white.png'
     },
     {
       name: 'Pantalla compartida',
-      image: '../../environments/PNG/005-jugador-contra-jugador-1.png'
+      image: '../../environments/PNG/005-jugador-contra-jugador-1.png',
+      white_image: '../../environments/PNG/005-jugador-contra-jugador-1-white.png'
     },
     {
       name: 'Multijugador multiplataforma',
-      image: '../../environments/PNG/008-multitud-de-usuarios.png'
+      image: '../../environments/PNG/008-multitud-de-usuarios.png',
+      white_image: '../../environments/PNG/008-multitud-de-usuarios-white.png'
     }
   ];
 }

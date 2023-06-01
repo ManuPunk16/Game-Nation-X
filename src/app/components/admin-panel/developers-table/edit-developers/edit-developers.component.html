@@ -13,13 +13,13 @@
           fxLayoutGap="3.5%"
           fxLayoutAlign="left"
         >
-          <mat-form-field appearance="fill" fxFlex="100%">
+          <mat-form-field appearance="fill" color="accent" fxFlex="100%">
             <mat-label>Plataforma</mat-label>
             <input matInput [(ngModel)]="developers.name" name="name">
           </mat-form-field>
         </div>
         <section>
-          <button mat-raised-button (click)="onDeveloperEdit()">Guardar</button>
+          <button mat-raised-button color="primary" (click)="onDeveloperEdit()">Guardar</button>
         </section>
         <p>{{ message }}</p>
       </form>

@@ -12,20 +12,20 @@
           fxLayoutGap="3.5%"
           fxLayoutAlign="left"
         >
-          <mat-form-field appearance="fill" fxFlex="100%">
+          <mat-form-field appearance="fill" color="accent" fxFlex="100%">
             <mat-label>Franquicia</mat-label>
             <input matInput formControlName="name">
           </mat-form-field>
         </div>
         <section>
-          <button mat-raised-button>Crear</button>
+          <button mat-raised-button color="primary">Crear</button>
         </section>
       </form>
     </div>
 
     <div *ngIf="submitted">
       <h4>You submitted successfully!</h4>
-      <button class="btn btn-success" (click)="newDev()">Crear otro</button>
+      <button mat-raised-button color="accent" (click)="newDev()">Crear otro</button>
     </div>
   </mat-card-content>
 </mat-card>
