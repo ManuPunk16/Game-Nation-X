@@ -56,6 +56,13 @@ export class GamesService {
     );
   }
 
+  getPlatformsByName(name: string): AngularFirestoreCollection<Games> {
+    return this.db.collection('games', ref => ref
+      .where('published', '==', true)
+      .where('platforms', 'array-contains', name)
+    );
+  }
+
   getPlatformsCountByName(name: string): Observable<number> {
     const collection = this.db.collection<Games>('games', ref => ref
       .where('published', '==', true)

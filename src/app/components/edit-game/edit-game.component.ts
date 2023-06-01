@@ -18,6 +18,7 @@ import {
 import * as moment from 'moment';
 import { map } from 'rxjs';
 import { Editor, Toolbar } from 'ngx-editor';
+import { FileUploadService } from 'src/app/services/file-upload.service';
 
 @Component({
   selector: 'app-edit-game',
@@ -54,16 +55,21 @@ export class EditGameComponent implements OnInit, OnDestroy {
   public languages = Languages.languages;
   public operativeSystem = OperativeSystem.operative_system;
 
+  public selectedFiles!: File;
+  imageUrl!: string;
+
   constructor (
     @Inject(MAT_DIALOG_DATA) public data: any,
     private _gameService: GamesService,
     private _categoryService: CategoriesService,
     private _platformService: PlatformsService,
-    private _devs: DevelopersEditorsService
+    private _devs: DevelopersEditorsService,
+    private imageUploadService: FileUploadService
   ) {
     this.gameForm = new FormGroup({
       name: new FormControl('', Validators.required),
       release_date: new FormControl(''),
+      profile_image: new FormControl(''),
       publication_date: new FormControl('', Validators.required),
       about: new FormControl(''),
       classification: new FormControl(''),
@@ -365,17 +371,58 @@ export class EditGameComponent implements OnInit, OnDestroy {
     });
   }
 
+  selectFile(event: any): void {
+    this.selectedFiles = event.target.files[0];
+  }
+
   onSubmit() {
     let id = this.data;
     this.gameForm.value.updatedAt = moment().toDate();
     let data = this.gameForm.value;
-    // console.log(data);
+    // console.log(data.profile_image);
+
     this._gameService.updateGame(id, data)
       .then(() => {
         this.message = 'El juego ha sido actualizado!';
         this.submitted = true;
       })
       .catch(err => console.log(err));
+  }
+
+  async upload() {
+    if (this.selectedFiles) {
+      try {
+        const imageUrl = await this.imageUploadService.uploadImage(
+          this.selectedFiles
+        );
+        this.imageUrl = this.extractFileName(imageUrl);
+        this.gameForm.patchValue({ profile_image: this.imageUrl });
+
+        let id = this.data;
+        this.gameForm.value.updatedAt = moment().toDate();
+        let data = this.gameForm.value;
+        // console.log(data.profile_image);
+
+        this._gameService.updateGame(id, data)
+          .then(() => {
+            this.message = 'El juego ha sido actualizado!';
+            this.submitted = true;
+          })
+          .catch(err => console.log(err));
+
+        // console.log(this.gameForm.value.profile_image);
+      } catch (error) {
+        console.error('Error uploading image:', error);
+      }
+    }
+  }
+
+  private extractFileName(path: string): string {
+    if (path) {
+      const startIndex = path.lastIndexOf('\\') + 1;
+      return path.substr(startIndex);
+    }
+    return '';
   }
 
 }

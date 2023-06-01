@@ -57,7 +57,7 @@ export class GameDetailComponent implements OnInit, OnDestroy {
       let id = params['id'];
       this._gameService.getGameById(id).valueChanges().subscribe(game => {
         this.games = game;
-        // console.log(this.games);
+        console.log(this.games?.profile_image);
         this.safeAbout = this.games?.about ? this.sanitizer.bypassSecurityTrustHtml(this.games.about) : '';
         this.combineDataToTable();
         this.clasificationData();

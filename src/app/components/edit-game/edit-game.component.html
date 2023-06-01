@@ -496,6 +496,31 @@
             </div> -->
 
             <div>
+              <div class="row">
+                <div class="col-8">
+                  <label>
+                    <input
+                      type="file"
+                      class="text-nowrap text-truncate"
+                      formControlName="profile_image"
+                      (change)="selectFile($event)"
+                    />
+                  </label>
+                </div>
+
+                <div class="col-4">
+                  <button
+                    class="btn btn-success btn-sm"
+                    [disabled]="!selectedFiles"
+                    (click)="upload()"
+                  >
+                    Upload
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div>
               <button mat-raised-button color="accent" matStepperPrevious>Atrás</button>
               <button mat-raised-button color="accent" color="primary" type="submit">Guardar</button>
             </div>

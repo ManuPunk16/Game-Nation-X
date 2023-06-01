@@ -2,6 +2,7 @@ export class Games {
   id?: string;
   name!: string;
   images!: string[];
+  profile_image!: string;
   youtube_links!: string[];
   about!: string;
   classification!: Classification;

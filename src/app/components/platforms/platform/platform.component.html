@@ -1,1 +1,37 @@
-<p>platform works!</p>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      {{pubTitle}}
+    </mat-card-title>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <br>
+  <mat-card-content>
+    <div fxLayout="row wrap">
+      <div
+        [fxFlex]="(100/gridColumns) + '%'"
+        fxFlex.xs="100%"
+        fxFlex.sm="33%"
+        *ngFor="let game of games"
+      >
+        <mat-card class="mat-elevation-z4" (click)="onClicked(game)">
+          <img
+            *ngIf="!game.profile_image"
+            mat-card-image
+            src="https://via.placeholder.com/1080x1420"
+          />
+          <img
+            *ngIf="game.profile_image"
+            mat-card-image
+            [src]="game.profile_image"
+          />
+          <mat-card-title> {{ game.name }} </mat-card-title>
+          <mat-card-subtitle> {{ game.publication_date.toDate() | date }} </mat-card-subtitle>
+          <!-- <mat-card-content>
+            <p>The Himalayas is a mountain range in Asia.</p>
+          </mat-card-content> -->
+        </mat-card>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

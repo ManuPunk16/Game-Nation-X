@@ -8,7 +8,7 @@ import { FileUpload } from 'src/app/models/file-upload.model';
   styleUrls: ['./upload-form.component.css']
 })
 export class UploadFormComponent implements OnInit {
-  selectedFiles!: FileList;
+  selectedFiles?: FileList;
   currentFileUpload!: FileUpload;
   percentage = 0;
 
@@ -18,28 +18,26 @@ export class UploadFormComponent implements OnInit {
   }
 
   selectFile(event: any): void {
-    this.selectedFiles = event.target.files;
+    this.selectedFiles = event.target.files[0];
+    console.log(this.selectedFiles);
   }
 
   upload(): void {
-    if (this.selectedFiles) {
-      for (let i = 0; i < this.selectedFiles.length; i++) {
-        const file: File | null = this.selectedFiles.item(i);
+    // if (this.selectedFiles) {
+    //   const file: File | null = this.selectedFiles.item(0);
+    //   this.selectedFiles = undefined;
 
-        if (file) {
-          this.currentFileUpload = new FileUpload(file);
-          // console.log(this.currentFileUpload);
-          this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(
-            percentage => {
-              this.percentage = Math.round(percentage ? percentage : 0);
-            },
-            error => {
-              console.log(error);
-            }
-          );
-        }
-      }
-    }
+    //   if (file) {
+    //     this.currentFileUpload = new FileUpload(file);
+    //     this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(
+    //       percentage => {
+    //         this.percentage = Math.round(percentage ? percentage : 0);
+    //       },
+    //       error => {
+    //         console.log(error);
+    //       }
+    //     );
+    //   }
+    // }
   }
-
 }
