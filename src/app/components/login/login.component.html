@@ -1,0 +1,3 @@
+<a mat-button *ngIf="!authService.isLoggedIn" (click)="authService.loginWithGoogle()">Login</a>
+<a mat-button *ngIf="authService.isLoggedIn" [routerLink]="['/dashboard']">Dashboard</a>
+<a mat-button *ngIf="authService.isLoggedIn" (click)="authService.logout()">Logout</a>

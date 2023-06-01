@@ -68,6 +68,7 @@ import { EditEditorsComponent } from './components/admin-panel/editors-table/edi
 import { CreateEditorsComponent } from './components/admin-panel/editors-table/create-editors/create-editors.component';
 import { EditDevelopersComponent } from './components/admin-panel/developers-table/edit-developers/edit-developers.component';
 import { CreateDevelopersComponent } from './components/admin-panel/developers-table/create-developers/create-developers.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -103,7 +104,8 @@ import { CreateDevelopersComponent } from './components/admin-panel/developers-t
     EditEditorsComponent,
     CreateEditorsComponent,
     EditDevelopersComponent,
-    CreateDevelopersComponent
+    CreateDevelopersComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

@@ -22,10 +22,10 @@ export class AuthServiceTsService {
 
     // Verificar si el usuario autenticado tiene el correo electrónico permitido
     if (userCredential.user?.email === 'luisadrianhdzsoto@gmail.com') {
-      console.log(userCredential.user);
+      // console.log(userCredential.user);
       this.isLoggedIn = true;
-      // Guardar sesión en cache con vencimiento en una hora
-      const expirationDate = new Date().getTime() + (60 * 60 * 1000);
+      // Guardar sesión en cache con vencimiento en tres horas
+      const expirationDate = new Date().getTime() + (3 * 60 * 60 * 1000);
       localStorage.setItem('user', JSON.stringify(userCredential.user));
       localStorage.setItem('expiration', expirationDate.toString());
     } else {

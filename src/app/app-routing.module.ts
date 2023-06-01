@@ -10,6 +10,8 @@ import { LatestUploadsComponent } from './components/latest-uploads/latest-uploa
 import { PlatformsComponent } from './components/platforms/platforms.component';
 import { CategoryComponent } from './components/categories/category/category.component';
 import { PlatformComponent } from './components/platforms/platform/platform.component';
+import { AuthGuard } from './auth.guard';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full'},
@@ -19,8 +21,9 @@ const routes: Routes = [
   { path: 'latest-updates', component: LatestUpdatesComponent },
   { path: 'latest-uploads', component: LatestUploadsComponent },
   { path: 'platforms', component: PlatformsComponent },
-  { path: 'dashboard', component: AdminPanelComponent }, //protect
-  { path: 'dashboard/add-game', component: AddGameComponent }, //protect
+  { path: 'login', component: LoginComponent},
+  { path: 'dashboard', component: AdminPanelComponent, canActivate: [AuthGuard] }, //protect
+  { path: 'dashboard/add-game', component: AddGameComponent, canActivate: [AuthGuard] }, //protect
   { path: '**', component: ErrorComponent }
 ];
 
