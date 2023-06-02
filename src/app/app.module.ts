@@ -71,6 +71,8 @@ import { EditDevelopersComponent } from './components/admin-panel/developers-tab
 import { CreateDevelopersComponent } from './components/admin-panel/developers-table/create-developers/create-developers.component';
 import { LoginComponent } from './components/login/login.component';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+import { AboutComponent } from './components/about/about.component';
+import { ContactComponent } from './components/contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -108,7 +110,9 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
     EditDevelopersComponent,
     CreateDevelopersComponent,
     LoginComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    AboutComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,

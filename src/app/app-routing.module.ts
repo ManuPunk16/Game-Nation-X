@@ -12,9 +12,13 @@ import { CategoryComponent } from './components/categories/category/category.com
 import { PlatformComponent } from './components/platforms/platform/platform.component';
 import { AuthGuard } from './auth.guard';
 import { LoginComponent } from './components/login/login.component';
+import { AboutComponent } from './components/about/about.component';
+import { ContactComponent } from './components/contact/contact.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full'},
+  { path: 'about', component: AboutComponent},
+  { path: 'contact', component: ContactComponent },
   { path: 'game-datails/:id', component: GameDetailComponent },
   { path: 'category/:name', component: CategoryComponent },
   { path: 'platform/:name', component: PlatformComponent },
