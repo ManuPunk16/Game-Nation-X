@@ -40,6 +40,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
@@ -139,7 +140,8 @@ import { LoginComponent } from './components/login/login.component';
     MatTabsModule,
     NgxEditorModule,
     MaterialFileInputModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatSidenavModule
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'es-MX'}
