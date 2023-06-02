@@ -70,6 +70,7 @@ import { CreateEditorsComponent } from './components/admin-panel/editors-table/c
 import { EditDevelopersComponent } from './components/admin-panel/developers-table/edit-developers/edit-developers.component';
 import { CreateDevelopersComponent } from './components/admin-panel/developers-table/create-developers/create-developers.component';
 import { LoginComponent } from './components/login/login.component';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -106,7 +107,8 @@ import { LoginComponent } from './components/login/login.component';
     CreateEditorsComponent,
     EditDevelopersComponent,
     CreateDevelopersComponent,
-    LoginComponent
+    LoginComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,

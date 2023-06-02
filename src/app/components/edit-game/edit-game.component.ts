@@ -19,6 +19,8 @@ import * as moment from 'moment';
 import { map } from 'rxjs';
 import { Editor, Toolbar } from 'ngx-editor';
 import { FileUploadService } from 'src/app/services/file-upload.service';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-edit-game',
@@ -57,6 +59,7 @@ export class EditGameComponent implements OnInit, OnDestroy {
 
   public selectedFiles!: File;
   imageUrl!: string;
+  deleted = false;
 
   constructor (
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -64,7 +67,8 @@ export class EditGameComponent implements OnInit, OnDestroy {
     private _categoryService: CategoriesService,
     private _platformService: PlatformsService,
     private _devs: DevelopersEditorsService,
-    private imageUploadService: FileUploadService
+    private imageUploadService: FileUploadService,
+    private dialog: MatDialog
   ) {
     this.gameForm = new FormGroup({
       name: new FormControl('', Validators.required),
@@ -425,4 +429,24 @@ export class EditGameComponent implements OnInit, OnDestroy {
     return '';
   }
 
+  deleteGame(): void {
+    let id = this.data;
+    if (id) {
+      const dialogRef: MatDialogRef<any> = this.dialog.open(ConfirmationDialogComponent, {
+        width: '250px',
+        data: '¿Estás seguro de que deseas eliminar el registro?'
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this._gameService.deleteGame(id)
+            .then(() => {
+              this.deleted = true;
+              this.message = '¡Eliminado correctamente!';
+            })
+            .catch(err => console.log(err));
+        }
+      });
+    }
+  }
 }

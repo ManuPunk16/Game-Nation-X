@@ -166,6 +166,9 @@
             </div>
 
             <div>
+              <button mat-raised-button color="warn" (click)="deleteGame()">
+                <mat-icon>delete</mat-icon>
+              </button>
               <button mat-raised-button color="accent" matStepperNext>Siguiente</button>
             </div>
           </form>
@@ -529,7 +532,7 @@
       </mat-stepper>
     </div>
 
-    <div *ngIf="submitted">
+    <div *ngIf="submitted || deleted">
       <h4>{{ message }}</h4>
       <!-- <button class="btn btn-success" (click)="newGame()">Crear otro</button> -->
     </div>
