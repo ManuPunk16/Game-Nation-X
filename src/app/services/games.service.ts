@@ -43,6 +43,7 @@ export class GamesService {
     return this.db.collection('games', ref => ref
       .where('published', '==', true)
       .where('categories', 'array-contains', name)
+      .orderBy('publication_date', 'desc')
     );
   }
 
@@ -60,6 +61,7 @@ export class GamesService {
     return this.db.collection('games', ref => ref
       .where('published', '==', true)
       .where('platforms', 'array-contains', name)
+      .orderBy('publication_date', 'desc')
     );
   }
 
