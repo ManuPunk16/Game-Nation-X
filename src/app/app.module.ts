@@ -6,6 +6,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ChunkPipe } from './pipes/chunk.pipe';
 import { NgxEditorModule } from 'ngx-editor';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from "@angular/fire/compat/auth";
@@ -147,7 +148,8 @@ import { ContactComponent } from './components/contact/contact.component';
     NgxEditorModule,
     MaterialFileInputModule,
     MatAutocompleteModule,
-    MatSidenavModule
+    MatSidenavModule,
+    HttpClientModule
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'es-MX'}

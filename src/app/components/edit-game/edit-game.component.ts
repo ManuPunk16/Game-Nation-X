@@ -16,11 +16,12 @@ import {
   OperativeSystem,
   Developers, Editors, Franchise } from 'src/app/models/games.model';
 import * as moment from 'moment';
-import { map } from 'rxjs';
+import { map, take } from 'rxjs';
 import { Editor, Toolbar } from 'ngx-editor';
 import { FileUploadService } from 'src/app/services/file-upload.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+import { ImageCompressionService } from 'src/app/services/image-compression.service';
 
 @Component({
   selector: 'app-edit-game',
@@ -68,7 +69,8 @@ export class EditGameComponent implements OnInit, OnDestroy {
     private _platformService: PlatformsService,
     private _devs: DevelopersEditorsService,
     private imageUploadService: FileUploadService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private imageCompressionService: ImageCompressionService
   ) {
     this.gameForm = new FormGroup({
       name: new FormControl('', Validators.required),
@@ -383,21 +385,46 @@ export class EditGameComponent implements OnInit, OnDestroy {
     let id = this.data;
     this.gameForm.value.updatedAt = moment().toDate();
     let data = this.gameForm.value;
-    // console.log(data.profile_image);
 
-    this._gameService.updateGame(id, data)
+    if (!data.profile_image) {
+      this._gameService.getGameById(id).valueChanges().pipe(
+        take(1)
+      ).subscribe(
+        game => {
+          const image = game?.profile_image;
+          data.profile_image = image;
+
+          this._gameService.updateGame(id, data)
+          .then(() => {
+            this.message = 'El juego ha sido actualizado!';
+            this.submitted = true;
+          })
+          .catch(err => console.log(err));
+            }
+      );
+
+    } else {
+      this._gameService.updateGame(id, data)
       .then(() => {
         this.message = 'El juego ha sido actualizado!';
         this.submitted = true;
       })
       .catch(err => console.log(err));
+    }
   }
 
   async upload() {
     if (this.selectedFiles) {
       try {
-        const imageUrl = await this.imageUploadService.uploadImage(
+        const compressedImage = await this.imageCompressionService.compressImage(
           this.selectedFiles
+        );
+        const compressedFile = new File([compressedImage], this.gameForm.value.name, {
+          type: 'image/jpeg'
+        });
+
+        const imageUrl = await this.imageUploadService.uploadImage(
+          compressedFile
         );
         this.imageUrl = this.extractFileName(imageUrl);
         this.gameForm.patchValue({ profile_image: this.imageUrl });
