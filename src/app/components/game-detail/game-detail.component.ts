@@ -27,6 +27,7 @@ export class GameDetailComponent implements OnInit, OnDestroy {
   public mode: any[] = [];
   displayColumns: string[] = ['lang_interface', 'lang_subtitles', 'lang_voices'];
   isDarkTheme!: boolean;
+  public dataLanguage = false;
 
   constructor (
     private _gameService: GamesService,
@@ -59,9 +60,9 @@ export class GameDetailComponent implements OnInit, OnDestroy {
         this.games = game;
         // console.log(this.games?.profile_image);
         this.safeAbout = this.games?.about ? this.sanitizer.bypassSecurityTrustHtml(this.games.about) : '';
-        this.combineDataToTable();
         this.clasificationData();
         this.matchImageWithNameGameMode();
+        this.combineDataToTable();
       });
     });
 
@@ -84,17 +85,22 @@ export class GameDetailComponent implements OnInit, OnDestroy {
       this.games?.lang_subtitles?.length || 0,
       this.games?.lang_voices?.length || 0
     );
-    for (let i = 0; i < maxLength; i++) {
-      combinedData.push({
-        lang_interface: this.games?.lang_interface?.[i],
-        lang_subtitles: this.games?.lang_subtitles?.[i],
-        lang_voices: this.games?.lang_voices?.[i]
-      });
-    }
-    this.combinedData = new MatTableDataSource(combinedData);
+    if (maxLength) {
+      for (let i = 0; i < maxLength; i++) {
+        combinedData.push({
+          lang_interface: this.games?.lang_interface?.[i],
+          lang_subtitles: this.games?.lang_subtitles?.[i],
+          lang_voices: this.games?.lang_voices?.[i]
+        });
+      }
+      this.combinedData = new MatTableDataSource(combinedData);
 
-    // Define the display columns based on the combinedData array
-    this.displayColumns = Object.keys(combinedData[0]);
+      // Define the display columns based on the combinedData array
+      this.displayColumns = Object.keys(combinedData[0]);
+      this.dataLanguage = true;
+    } else {
+      this.dataLanguage = false;
+    }
   }
 
   clasificationData() {

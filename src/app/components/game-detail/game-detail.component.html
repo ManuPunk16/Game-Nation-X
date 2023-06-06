@@ -307,7 +307,7 @@
             </div>
           </mat-card-content>
         </mat-card>
-        <br>
+        <br *ngIf="games?.classification">
         <mat-card>
           <mat-card-content>
             <div *ngIf="games?.name">
@@ -343,9 +343,9 @@
             </div>
           </mat-card-content>
         </mat-card>
-        <br *ngIf="combinedData">
+        <br>
 
-        <mat-card *ngIf="combinedData">
+        <mat-card *ngIf="dataLanguage">
           <mat-card-content>
 
             <table mat-table [dataSource]="combinedData">
