@@ -41,10 +41,11 @@ export class PlatformsComponent implements OnInit {
         if (plat?.name) {
           this._gamesService.getPlatformsCountByName(plat.name).subscribe(data => {
             plat.total = data;
-          })
+            this.platforms.sort((a, b) => (b.total || 0) - (a.total || 0)).filter(plat => plat?.total !== undefined && plat.total <= 0);
+          });
         }
-      })
-    })
+      });
+    });
   }
 
   onClicked(item: any) {

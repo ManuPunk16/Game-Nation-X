@@ -46,6 +46,7 @@ export class CategoriesComponent implements OnInit{
         if (cat?.name) {
           this._gamesService.getCategoriesCountByName(cat.name).subscribe(data => {
             cat.total = data;
+            this.categories.sort((a, b) => b.total - a.total).filter(cat => cat?.total <= 0);
           });
         }
       });
