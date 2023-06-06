@@ -1,10 +1,9 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title>
-      {{ games?.name }}
+      <h2>{{ games?.name }}</h2>
     </mat-card-title>
   </mat-card-header>
-  <br>
   <mat-divider></mat-divider>
   <br>
   <mat-card-content>
@@ -16,7 +15,7 @@
       >
         <div [style.margin-right]="'20px'">
           <mat-card>
-            <img mat-card-image [src]="games?.profile_image" [alt]="games?.name" style="max-width: 240px; max-height: 320px;">
+            <img mat-card-image *ngIf="games?.profile_image" [src]="games?.profile_image" [alt]="games?.name" style="max-width: 240px; max-height: 320px;">
             <mat-card-content>
               <!-- <div>
                 <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
@@ -50,16 +49,16 @@
               <br>
               <mat-divider></mat-divider>
               <br> -->
-              <div class="categories-container">
+              <div class="categories-container" *ngIf="games?.categories">
                 <div class="category-badge" *ngFor="let category of games?.categories">{{ category }}</div>
               </div>
-              <div class="platforms-container">
+              <div class="platforms-container" *ngIf="games?.platforms">
                 <div class="platform-badge" *ngFor="let platform of games?.platforms">{{ platform }}</div>
               </div>
               <br>
               <mat-divider></mat-divider>
               <br>
-              <div class="justified-text" [innerHTML]="safeAbout">
+              <div class="justified-text" *ngIf="safeAbout" [innerHTML]="safeAbout">
               </div>
               <!-- {{games?.about}} -->
             </mat-card-content>
@@ -80,197 +79,194 @@
               <mat-tab-group color="accent">
                 <ng-container *ngIf="games?.operative_systems?.includes('WINDOWS')">
                   <mat-tab label="WINDOWS">
-                    <mat-card>
+                    <mat-card *ngIf="games?.windows_req_min_so">
                       <mat-card-header>
-                        <mat-card-subtitle><h3>Requisitos Minimos</h3></mat-card-subtitle>
+                        <mat-card-subtitle><h3>Requisitos Mínimos</h3></mat-card-subtitle>
                       </mat-card-header>
                       <mat-card-content>
                         <div>
-                          <div>
+                          <div *ngIf="games?.windows_req_min_so">
                             <span style="color: gray;">Sistema Operativo: </span>{{ games?.windows_req_min_so }}
                           </div>
-                          <div>
+                          <div *ngIf="games?.windows_req_min_processor">
                             <span style="color: gray;">Procesador: </span>{{ games?.windows_req_min_processor }}
                           </div>
-                          <div>
+                          <div *ngIf="games?.windows_req_min_directx">
                             <span style="color: gray;">DirectX: </span>{{ games?.windows_req_min_directx }}
                           </div>
-                          <div>
+                          <div *ngIf="games?.windows_req_min_ram">
                             <span style="color: gray;">Ram: </span>{{ games?.windows_req_min_ram }}
                           </div>
-                          <div>
+                          <div *ngIf="games?.windows_req_min_storage">
                             <span style="color: gray;">Almacenamiento: </span>{{ games?.windows_req_min_storage }}
                           </div>
-                          <div>
-                            <span style="color: gray;">Tarjeta Grafica: </span>{{ games?.windows_req_min_graphic_card }}
+                          <div *ngIf="games?.windows_req_min_graphic_card">
+                            <span style="color: gray;">Tarjeta Gráfica: </span>{{ games?.windows_req_min_graphic_card }}
                           </div>
-                          <div>
+                          <div *ngIf="games?.windows_req_min_network">
                             <span style="color: gray;">Internet: </span>{{ games?.windows_req_min_network }}
                           </div>
                         </div>
                       </mat-card-content>
                     </mat-card>
                     <br>
-                    <mat-card>
+                    <mat-card *ngIf="games?.windows_req_rec_so">
                       <mat-card-header>
                         <mat-card-subtitle><h3>Requisitos Recomendados</h3></mat-card-subtitle>
                       </mat-card-header>
                       <mat-card-content>
                         <div>
-                          <div>
+                          <div *ngIf="games?.windows_req_rec_so">
                             <span style="color: gray;">Sistema Operativo: </span>{{ games?.windows_req_rec_so }}
                           </div>
-                          <div>
+                          <div *ngIf="games?.windows_req_rec_processor">
                             <span style="color: gray;">Procesador: </span>{{ games?.windows_req_rec_processor }}
                           </div>
-                          <div>
+                          <div *ngIf="games?.windows_req_rec_directx">
                             <span style="color: gray;">DirectX: </span>{{ games?.windows_req_rec_directx }}
                           </div>
-                          <div>
+                          <div *ngIf="games?.windows_req_rec_ram">
                             <span style="color: gray;">Ram: </span>{{ games?.windows_req_rec_ram }}
                           </div>
-                          <div>
+                          <div *ngIf="games?.windows_req_rec_storage">
                             <span style="color: gray;">Almacenamiento: </span>{{ games?.windows_req_rec_storage }}
                           </div>
-                          <div>
-                            <span style="color: gray;">Tarjeta Grafica: </span>{{ games?.windows_req_rec_graphic_card }}
+                          <div *ngIf="games?.windows_req_rec_graphic_card">
+                            <span style="color: gray;">Tarjeta Gráfica: </span>{{ games?.windows_req_rec_graphic_card }}
                           </div>
-                          <div>
+                          <div *ngIf="games?.windows_req_rec_network">
                             <span style="color: gray;">Internet: </span>{{ games?.windows_req_rec_network }}
                           </div>
                         </div>
                       </mat-card-content>
-
                     </mat-card>
                   </mat-tab>
                 </ng-container>
 
                 <ng-container *ngIf="games?.operative_systems?.includes('MAC')">
                   <mat-tab label="MAC">
-                    <mat-card>
+                    <mat-card *ngIf="games?.mac_req_min_so">
                       <mat-card-header>
-                        <mat-card-subtitle><h3>Requisitos Minimos</h3></mat-card-subtitle>
+                        <mat-card-subtitle><h3>Requisitos Mínimos</h3></mat-card-subtitle>
                       </mat-card-header>
                       <mat-card-content>
                         <div>
-                          <div>
+                          <div *ngIf="games?.mac_req_min_so">
                             <span style="color: gray;">Sistema Operativo: </span>{{ games?.mac_req_min_so }}
                           </div>
-                          <div>
+                          <div *ngIf="games?.mac_req_min_processor">
                             <span style="color: gray;">Procesador: </span>{{ games?.mac_req_min_processor }}
                           </div>
-                          <div>
+                          <div *ngIf="games?.mac_req_min_directx">
                             <span style="color: gray;">DirectX: </span>{{ games?.mac_req_min_directx }}
                           </div>
-                          <div>
+                          <div *ngIf="games?.mac_req_min_ram">
                             <span style="color: gray;">Ram: </span>{{ games?.mac_req_min_ram }}
                           </div>
-                          <div>
+                          <div *ngIf="games?.mac_req_min_storage">
                             <span style="color: gray;">Almacenamiento: </span>{{ games?.mac_req_min_storage }}
                           </div>
-                          <div>
-                            <span style="color: gray;">Tarjeta Grafica: </span>{{ games?.mac_req_min_graphic_card }}
+                          <div *ngIf="games?.mac_req_min_graphic_card">
+                            <span style="color: gray;">Tarjeta Gráfica: </span>{{ games?.mac_req_min_graphic_card }}
                           </div>
-                          <div>
+                          <div *ngIf="games?.mac_req_min_network">
                             <span style="color: gray;">Internet: </span>{{ games?.mac_req_min_network }}
                           </div>
                         </div>
                       </mat-card-content>
-
                     </mat-card>
                     <br>
-                    <mat-card>
+                    <mat-card *ngIf="games?.mac_req_rec_so">
                       <mat-card-header>
                         <mat-card-subtitle><h3>Requisitos Recomendados</h3></mat-card-subtitle>
                       </mat-card-header>
                       <mat-card-content>
                         <div>
-                          <div>
+                          <div *ngIf="games?.mac_req_rec_so">
                             <span style="color: gray;">Sistema Operativo: </span>{{ games?.mac_req_rec_so }}
                           </div>
-                          <div>
+                          <div *ngIf="games?.mac_req_rec_processor">
                             <span style="color: gray;">Procesador: </span>{{ games?.mac_req_rec_processor }}
                           </div>
-                          <div>
+                          <div *ngIf="games?.mac_req_rec_directx">
                             <span style="color: gray;">DirectX: </span>{{ games?.mac_req_rec_directx }}
                           </div>
-                          <div>
+                          <div *ngIf="games?.mac_req_rec_ram">
                             <span style="color: gray;">Ram: </span>{{ games?.mac_req_rec_ram }}
                           </div>
-                          <div>
+                          <div *ngIf="games?.mac_req_rec_storage">
                             <span style="color: gray;">Almacenamiento: </span>{{ games?.mac_req_rec_storage }}
                           </div>
-                          <div>
-                            <span style="color: gray;">Tarjeta Grafica: </span>{{ games?.mac_req_rec_graphic_card }}
+                          <div *ngIf="games?.mac_req_rec_graphic_card">
+                            <span style="color: gray;">Tarjeta Gráfica: </span>{{ games?.mac_req_rec_graphic_card }}
                           </div>
-                          <div>
+                          <div *ngIf="games?.mac_req_rec_network">
                             <span style="color: gray;">Internet: </span>{{ games?.mac_req_rec_network }}
                           </div>
                         </div>
                       </mat-card-content>
-
                     </mat-card>
                   </mat-tab>
                 </ng-container>
+
                 <ng-container *ngIf="games?.operative_systems?.includes('LINUX')">
                   <mat-tab label="LINUX">
-                    <mat-card>
+                    <mat-card *ngIf="games?.linux_req_min_so">
                       <mat-card-header>
-                        <mat-card-subtitle><h3>Requisitos Minimos</h3></mat-card-subtitle>
+                        <mat-card-subtitle><h3>Requisitos Mínimos</h3></mat-card-subtitle>
                       </mat-card-header>
                       <mat-card-content>
                         <div>
-                          <div>
+                          <div *ngIf="games?.linux_req_min_so">
                             <span style="color: gray;">Sistema Operativo: </span>{{ games?.linux_req_min_so }}
                           </div>
-                          <div>
+                          <div *ngIf="games?.linux_req_min_processor">
                             <span style="color: gray;">Procesador: </span>{{ games?.linux_req_min_processor }}
                           </div>
-                          <div>
+                          <div *ngIf="games?.linux_req_min_directx">
                             <span style="color: gray;">DirectX: </span>{{ games?.linux_req_min_directx }}
                           </div>
-                          <div>
+                          <div *ngIf="games?.linux_req_min_ram">
                             <span style="color: gray;">Ram: </span>{{ games?.linux_req_min_ram }}
                           </div>
-                          <div>
+                          <div *ngIf="games?.linux_req_min_storage">
                             <span style="color: gray;">Almacenamiento: </span>{{ games?.linux_req_min_storage }}
                           </div>
-                          <div>
-                            <span style="color: gray;">Tarjeta Grafica: </span>{{ games?.linux_req_min_graphic_card }}
+                          <div *ngIf="games?.linux_req_min_graphic_card">
+                            <span style="color: gray;">Tarjeta Gráfica: </span>{{ games?.linux_req_min_graphic_card }}
                           </div>
-                          <div>
+                          <div *ngIf="games?.linux_req_min_network">
                             <span style="color: gray;">Internet: </span>{{ games?.linux_req_min_network }}
                           </div>
                         </div>
                       </mat-card-content>
-
                     </mat-card>
                     <br>
-                    <mat-card>
+                    <mat-card *ngIf="games?.linux_req_rec_so">
                       <mat-card-header>
                         <mat-card-subtitle><h3>Requisitos Recomendados</h3></mat-card-subtitle>
                       </mat-card-header>
                       <mat-card-content>
                         <div>
-                          <div>
+                          <div *ngIf="games?.linux_req_rec_so">
                             <span style="color: gray;">Sistema Operativo: </span>{{ games?.linux_req_rec_so }}
                           </div>
-                          <div>
+                          <div *ngIf="games?.linux_req_rec_processor">
                             <span style="color: gray;">Procesador: </span>{{ games?.linux_req_rec_processor }}
                           </div>
-                          <div>
+                          <div *ngIf="games?.linux_req_rec_directx">
                             <span style="color: gray;">DirectX: </span>{{ games?.linux_req_rec_directx }}
                           </div>
-                          <div>
+                          <div *ngIf="games?.linux_req_rec_ram">
                             <span style="color: gray;">Ram: </span>{{ games?.linux_req_rec_ram }}
                           </div>
-                          <div>
+                          <div *ngIf="games?.linux_req_rec_storage">
                             <span style="color: gray;">Almacenamiento: </span>{{ games?.linux_req_rec_storage }}
                           </div>
-                          <div>
-                            <span style="color: gray;">Tarjeta Grafica: </span>{{ games?.linux_req_rec_graphic_card }}
+                          <div *ngIf="games?.linux_req_rec_graphic_card">
+                            <span style="color: gray;">Tarjeta Gráfica: </span>{{ games?.linux_req_rec_graphic_card }}
                           </div>
-                          <div>
+                          <div *ngIf="games?.linux_req_rec_network">
                             <span style="color: gray;">Internet: </span>{{ games?.linux_req_rec_network }}
                           </div>
                         </div>
@@ -279,6 +275,7 @@
                   </mat-tab>
                 </ng-container>
               </mat-tab-group>
+
             </mat-card-content>
           </mat-card>
           <br>
@@ -313,19 +310,19 @@
         <br>
         <mat-card>
           <mat-card-content>
-            <div>
+            <div *ngIf="games?.name">
               TÍTULO: {{ games?.name }}
             </div>
-            <div>
+            <div *ngIf="games?.developers">
               DESARROLLADOR: {{ games?.developers }}
             </div>
-            <div>
+            <div *ngIf="games?.editors">
               EDITOR: {{ games?.editors }}
             </div>
-            <div>
+            <div *ngIf="games?.franchise">
               FRANQUICIA: {{ games?.franchise }}
             </div>
-            <div>
+            <div *ngIf="games?.publication_date">
               FECHA DE LANZAMIENTO: {{ games?.publication_date.toDate() | date }}
             </div>
           </mat-card-content>
