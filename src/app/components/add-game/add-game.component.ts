@@ -19,6 +19,11 @@ import { map } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { Editor, Toolbar } from 'ngx-editor';
 import { DevelopersEditorsService } from 'src/app/services/developers-editors.service';
+import { CreateCategoryComponent } from './create-category/create-category.component';
+import { CreatePlatformComponent } from './create-platform/create-platform.component';
+import { CreateEditorsComponent } from '../admin-panel/editors-table/create-editors/create-editors.component';
+import { CreateDevelopersComponent } from '../admin-panel/developers-table/create-developers/create-developers.component';
+import { CreateFranchiseComponent } from '../admin-panel/franchises-table/create-franchise/create-franchise.component';
 // import { FileUploadService } from 'src/app/services/file-upload.service';
 // import { FileUpload } from 'src/app/models/file-upload.model';
 
@@ -293,6 +298,56 @@ export class AddGameComponent implements OnInit, OnDestroy {
     ).subscribe(data => {
       this.franchises = data;
       // console.log(this.franchises);
+    });
+  }
+
+  onCategoryDialogCreate(): void {
+    const categoryDialog = this._dialog.open(CreateCategoryComponent, {
+      width: '50%'
+    });
+
+    categoryDialog.afterClosed().subscribe(res => {
+
+    });
+  }
+
+  onPlatformDialogCreate(): void {
+    const platformDialog = this._dialog.open(CreatePlatformComponent, {
+      width: '50%'
+    });
+
+    platformDialog.afterClosed().subscribe(res => {
+
+    });
+  }
+
+  onEditorsformDialogCreate(): void {
+    const platformDialog = this._dialog.open(CreateEditorsComponent, {
+      width: '50%'
+    });
+
+    platformDialog.afterClosed().subscribe(res => {
+
+    });
+  }
+
+  onDeveloperDialogCreate(): void {
+    const platformDialog = this._dialog.open(CreateDevelopersComponent, {
+      width: '50%'
+    });
+
+    platformDialog.afterClosed().subscribe(res => {
+
+    });
+  }
+
+  onFranchiseDialogCreate(): void {
+    const platformDialog = this._dialog.open(CreateFranchiseComponent, {
+      width: '50%'
+    });
+
+    platformDialog.afterClosed().subscribe(res => {
+
     });
   }
 }

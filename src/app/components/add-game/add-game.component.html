@@ -47,6 +47,9 @@
               <mat-form-field appearance="fill" color="accent" fxFlex="33.3%">
                 <mat-label>Franquicia</mat-label>
                 <mat-select formControlName="franchise" multiple>
+                  <button matSuffix mat-icon-button (click)="onFranchiseDialogCreate()">
+                    <mat-icon>backup</mat-icon>
+                  </button>
                   <mat-option *ngFor="let fran of franchises" [value]="fran.name">{{fran.name}}</mat-option>
                 </mat-select>
               </mat-form-field>
@@ -54,6 +57,9 @@
               <mat-form-field appearance="fill" color="accent" fxFlex="33.3%">
                 <mat-label>Desarrolladores</mat-label>
                 <mat-select formControlName="developers" multiple>
+                  <button matSuffix mat-icon-button (click)="onDeveloperDialogCreate()">
+                    <mat-icon>backup</mat-icon>
+                  </button>
                   <mat-option *ngFor="let dev of developers" [value]="dev.name">{{dev.name}}</mat-option>
                 </mat-select>
               </mat-form-field>
@@ -61,6 +67,9 @@
               <mat-form-field appearance="fill" color="accent" fxFlex="33.3%">
                 <mat-label>Editores</mat-label>
                 <mat-select formControlName="editors" multiple>
+                  <button matSuffix mat-icon-button (click)="onEditorsformDialogCreate()">
+                    <mat-icon>backup</mat-icon>
+                  </button>
                   <mat-option *ngFor="let edit of editors" [value]="edit.name">{{edit.name}}</mat-option>
                 </mat-select>
               </mat-form-field>
@@ -94,6 +103,9 @@
               <mat-form-field appearance="fill" color="accent" fxFlex="33.3%">
                 <mat-label>Categorias</mat-label>
                 <mat-select formControlName="categories" multiple>
+                  <button matSuffix mat-icon-button (click)="onCategoryDialogCreate()">
+                    <mat-icon>backup</mat-icon>
+                  </button>
                   <mat-option *ngFor="let cat of categories" [value]="cat.name">{{cat.name}}</mat-option>
                 </mat-select>
               </mat-form-field>
@@ -101,6 +113,9 @@
               <mat-form-field appearance="fill" color="accent" fxFlex="33.3%">
                 <mat-label>Plataformas</mat-label>
                 <mat-select formControlName="platforms" multiple>
+                  <button matSuffix mat-icon-button (click)="onPlatformDialogCreate()">
+                    <mat-icon>backup</mat-icon>
+                  </button>
                   <mat-option *ngFor="let platform of platforms" [value]="platform.name">{{platform.name}}</mat-option>
                 </mat-select>
               </mat-form-field>
