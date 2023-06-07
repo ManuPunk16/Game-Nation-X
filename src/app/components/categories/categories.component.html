@@ -11,9 +11,10 @@
 <div style="display: flex; flex-wrap: wrap;">
   <ng-container *ngFor="let item of categories;">
     <div style="flex-basis: 20%; flex-grow: 1; padding: 10px;" *ngIf="item.total !== 0 && item.name">
-      <div (click)="onClicked(item)">
+      <!-- <div (click)="onClicked(item)">
         {{ item.name }}<br>({{ item.total }})
-      </div>
+      </div> -->
+      <a [routerLink]="['category/', item.name]">{{ item.name }}<br>({{ item.total }})</a>
     </div>
   </ng-container>
 </div>

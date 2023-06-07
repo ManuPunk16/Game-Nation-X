@@ -25,7 +25,29 @@ $dark-theme: mat.define-dark-theme(
 );
 
 @include mat.all-component-themes($light-theme);
+a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.white-text {
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.zoom-image {
+  transition: transform 0.4s ease;
+}
+
+.zoom-image:hover {
+  transform: scale(1.05);
+}
+
 
 .dark-mode {
   @include mat.all-component-colors($dark-theme);
+  a {
+    color: #FFFFFF;
+    text-decoration: none;
+  }
 }

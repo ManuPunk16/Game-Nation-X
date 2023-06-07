@@ -11,11 +11,15 @@
         *ngIf="!game.profile_image"
         mat-card-image
         src="https://via.placeholder.com/1080x1420"
+        style="cursor: pointer;"
+        class="zoom-image"
       />
       <img
         *ngIf="game.profile_image"
         mat-card-image
         [src]="game.profile_image"
+        style="cursor: pointer;"
+        class="zoom-image"
       />
       <mat-card-title> {{ game.name }} </mat-card-title>
       <mat-card-subtitle> {{ game.publication_date.toDate() | date }} </mat-card-subtitle>

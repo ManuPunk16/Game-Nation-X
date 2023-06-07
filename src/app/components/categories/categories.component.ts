@@ -54,7 +54,7 @@ export class CategoriesComponent implements OnInit{
     });
   }
 
-  onClicked(item: any) {
-    this._router.navigate(['category/', item.name]);
-  }
+  // onClicked(item: any) {
+  //   this._router.navigate(['category/', item.name]);
+  // }
 }

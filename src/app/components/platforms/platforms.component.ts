@@ -48,8 +48,8 @@ export class PlatformsComponent implements OnInit {
     });
   }
 
-  onClicked(item: any) {
-    this._router.navigate(['platform/', item.name]);
-  }
+  // onClicked(item: any) {
+  //   this._router.navigate(['platform/', item.name]);
+  // }
 
 }
