@@ -6,6 +6,17 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Editor } from 'ngx-editor';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ThemeService } from 'src/app/services/theme.service';
+import { RatingService } from 'src/app/services/rating.service';
+import { Rating } from 'src/app/models/rating.model';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import * as moment from 'moment';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+import { User } from 'src/app/services/user';
+import { AuthServiceTsService } from 'src/app/services/auth.service.ts.service';
+import { map } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { EditReviewComponent } from './edit-review/edit-review.component';
 
 @Component({
   selector: 'app-game-detail',
@@ -17,6 +28,13 @@ export class GameDetailComponent implements OnInit, OnDestroy {
   editor!: Editor;
   html!: string;
   safeAbout!: SafeHtml;
+
+  public ratings: Rating[] = [];
+  ratingForm!: FormGroup;
+  rating: number = 0;
+  userData: any;
+  valueColor!: number;
+  numComments!: number;
 
   public games?: Games;
   public languages: Languages[] = [];
@@ -33,9 +51,35 @@ export class GameDetailComponent implements OnInit, OnDestroy {
     private _gameService: GamesService,
     private _route: ActivatedRoute,
     private sanitizer: DomSanitizer,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private ratingService: RatingService,
+    private afAuth: AngularFireAuth,
+    private firestore: AngularFirestore,
+    public authService: AuthServiceTsService,
+    public _dialog: MatDialog
   ) {
-
+    this.ratingForm = new FormGroup({
+      comment: new FormControl('')
+    });
+    this.afAuth.authState.subscribe((user) => {
+      if (user) {
+        this.userData = user;
+        this.ratingForm = new FormGroup({
+          gameId: new FormControl('', Validators.required),
+          username: new FormControl(this.userData.displayName, Validators.required),
+          email: new FormControl(this.userData.email, Validators.required),
+          photoURL: new FormControl(this.userData.photoURL, Validators.required),
+          rating: new FormControl('', Validators.required),
+          comment: new FormControl(''),
+          updatedAt: new FormControl(moment().toDate())
+        });
+        localStorage.setItem('user', JSON.stringify(this.userData));
+        JSON.parse(localStorage.getItem('user')!);
+      } else {
+        localStorage.setItem('user', 'null');
+        JSON.parse(localStorage.getItem('user')!);
+      }
+    });
   }
   ngOnDestroy(): void {
     this.editor.destroy();
@@ -63,6 +107,15 @@ export class GameDetailComponent implements OnInit, OnDestroy {
         this.clasificationData();
         this.matchImageWithNameGameMode();
         this.combineDataToTable();
+
+        this.loadRatings(id);
+        this.loadRating(id);
+        if (this.userData) {
+          const gameIdRef = this.firestore.doc('/games/' + id).ref;
+          this.ratingForm.patchValue({
+            gameId: gameIdRef
+          });
+        }
       });
     });
 
@@ -73,9 +126,9 @@ export class GameDetailComponent implements OnInit, OnDestroy {
 
   }
 
-  boton() {
-    console.log("Contenido: ", this.html);
-  }
+  // boton() {
+  //   console.log("Contenido: ", this.html);
+  // }
 
   combineDataToTable() {
     // Combine the language arrays into a single array of objects
@@ -121,4 +174,101 @@ export class GameDetailComponent implements OnInit, OnDestroy {
       }
     }
   }
+
+  SetUserData(user: any) {
+    const userRef: AngularFirestoreDocument<any> = this.firestore.doc(
+      `users/${user.uid}`
+    );
+    const userData: User = {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+      emailVerified: user.emailVerified,
+      role: ''
+    };
+    return userRef.set(userData, {
+      merge: true,
+    });
+  }
+
+  setRating(value: number): void {
+    if (this.userData) {
+      this.rating = value || 0;
+      this.ratingForm.patchValue({
+        rating: this.rating
+      });
+    }
+  }
+
+  onSubmit(): void {
+    const id = this.ratingForm.value.gameId;
+    const email = this.ratingForm.value.email;
+    this.ratingService.checkEmailExists(id, email)
+    .then((emailExists) => {
+      if (emailExists) {
+        console.log('No puedes crear otra reseña, correo duplicado.');
+        this.ratingForm.disable();
+      } else {
+        if (this.ratingForm.value.rating == '') {
+          this.rating = 0;
+          this.ratingForm.patchValue({
+            rating: this.rating
+          });
+        }
+        const rating: Rating = this.ratingForm.value;
+        this.ratingService.addRating(rating)
+          .then(() => {
+            console.log('Rating added successfully');
+            this.ratingForm.reset();
+          })
+          .catch(error => {
+            console.error('Error adding rating:', error);
+          });
+      }
+    })
+    .catch((error) => {
+      console.error('Error al verificar el correo electrónico:', error);
+    });
+  }
+
+  loadRatings(id: string): void {
+    const gameId = 'games/' + id;
+    this.ratingService.getCommentsByGameId(gameId).subscribe(ratings => {
+      this.ratings = ratings;
+      // console.log(this.ratings);
+      this.numComments = ratings.length;
+    });
+  }
+
+  loadRating(id: string): void {
+    const gameId = 'games/' + id;
+    this.ratingService.getAverageRating(gameId).subscribe(ratings => {
+      const value = isNaN(ratings) ? 0 : ratings;
+      this.valueColor = value;
+    });
+  }
+
+  update(id: any): void {
+    // console.log(id);
+    const editRatingDialog = this._dialog.open(EditReviewComponent, {
+      width: "50%",
+      data: id
+    });
+
+    editRatingDialog.afterClosed().subscribe(res => {
+
+    });
+  }
+
+  // updateComment(ratingId: string, comment: string): Promise<void> {
+  //   return this.ratingService.updateComment(ratingId, comment)
+  //     .then(() => {
+  //       console.log('Comment updated successfully');
+  //       // Realiza las acciones necesarias después de actualizar el comentario (redireccionar, mostrar mensaje, etc.)
+  //     })
+  //     .catch(error => {
+  //       console.error('Error updating comment:', error);
+  //     });
+  // }
 }

@@ -287,6 +287,23 @@
         fxFlex.xs="100%"
         fxFlex.sm="100%"
       >
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            Valoracion de usuarios
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div [ngClass]="valueColor <= 1.6 ? 'square square-red' :
+                          valueColor <= 3.3 ? 'square square-yellow' : 'square square-green'">
+            <span>{{valueColor}}</span>
+          </div>
+          <p *ngIf="valueColor == 0" style="font-size: 12px;">
+            No hay reseñas o el juego es MUY malo
+          </p>
+        </mat-card-content>
+      </mat-card>
+      <br>
         <mat-card *ngIf="games?.classification">
           <mat-card-content>
             {{ games?.classification }}
@@ -370,6 +387,75 @@
 
           </mat-card-content>
         </mat-card>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+<!-- RESEÑAS O COMENTARIOS -->
+<br>
+<app-login *ngIf="!userData && !authService.isLoggedIn"></app-login>
+<mat-card *ngIf="userData && authService.isLoggedIn">
+  <form [formGroup]="ratingForm" novalidate >
+    <div class="alert alert-warning" role="alert" *ngIf="ratingForm.disabled">
+      No puedes crear otra reseña, correo duplicado.
+    </div>
+    <mat-card-content>
+      <div class="image-textarea-container">
+        <img class="align-self-start mr-5 img-thumbnail rounded-circle" *ngIf="userData"
+          src="{{(userData.photoURL) ? userData.photoURL : '/assets/dummy-user.png'}}"
+          alt="{{userData.displayName}}">
+        <mat-form-field class="textarea-field">
+          <mat-label>Escribe tu reseña</mat-label>
+          <div class="textarea-container">
+            <textarea matInput rows="7" class="textarea" formControlName="comment"></textarea>
+          </div>
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <div class="rating"><!--
+      --><input name="stars" (click)="setRating(5)" id="e5" type="radio"><label for="e5">★</label><!--
+        --><input name="stars" (click)="setRating(4)" id="e4" type="radio"><label for="e4">★</label><!--
+        --><input name="stars" (click)="setRating(3)" id="e3" type="radio"><label for="e3">★</label><!--
+        --><input name="stars" (click)="setRating(2)" id="e2" type="radio"><label for="e2">★</label><!--
+        --><input name="stars" (click)="setRating(1)" id="e1" type="radio"><label for="e1">★</label>
+      </div>
+      <span class="flex-spacer"></span>
+      <button mat-raised-button type="submit" (click)="onSubmit()" [disabled]="ratingForm.disabled">
+        Publicar reseña
+      </button>
+      <button mat-raised-button color="primary" *ngIf="authService.isLoggedIn" (click)="authService.logout()">
+        Cerrar sesion
+      </button>
+    </mat-card-actions>
+  </form>
+</mat-card>
+<br>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      Existen {{numComments}} reseñas de usuarios
+    </mat-card-title>
+  </mat-card-header>
+  <br>
+  <mat-divider></mat-divider>
+  <br>
+  <mat-card-content *ngIf="ratings">
+    <div>
+      <div *ngFor="let item of ratings">
+        <div fxFlex="25%">
+          <h6>{{item.username}}</h6>
+          <img src="{{(item.photoURL) ? item.photoURL : '/assets/dummy-user.png'}}" alt="{{item.username}}">
+        </div>
+        <div fxFlex="75%">
+          <div>Puntuacion: <strong>{{item.rating}} de 5</strong></div>
+          <mat-divider></mat-divider>
+          <div style="font-size: 12px;">Publicado el: {{item.updatedAt.toDate() | date: 'fullDate':'+0200':'es' }}</div>
+          <div style="padding: 10px;">{{item.comment}}</div>
+        </div>
+        <div *ngIf="userData && userData.email == item.email">
+          <button mat-raised-button (click)="update(item.id)">Editar</button>
+        </div>
       </div>
     </div>
   </mat-card-content>

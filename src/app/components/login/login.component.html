@@ -1,3 +1,21 @@
-<a mat-button *ngIf="!authService.isLoggedIn" (click)="authService.loginWithGoogle()">Login</a>
-<a mat-button *ngIf="authService.isLoggedIn" [routerLink]="['/dashboard']">Dashboard</a>
-<a mat-button *ngIf="authService.isLoggedIn" (click)="authService.logout()">Logout</a>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      Iniciar Sesión
+    </mat-card-title>
+    <mat-card-subtitle>
+      Quieres publciar una reseña? tienes que loguearte primero
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    GameNationX no almacena informacion de los usuarios, el inicio de sesion solamente es para calificar los juegos.
+    <br>
+    <p *ngIf="authService.isLoggedIn">Bienvenido, ya puedes registrar tu votacion y comentarios en los juegos de tu preferencia :)</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" *ngIf="!authService.isLoggedIn" (click)="authService.loginWithGoogle()">Login with Google</button>
+    <button mat-raised-button color="primary" *ngIf="authService.isLoggedIn" (click)="authService.logout()">Logout</button>
+    <!-- <a mat-raised-button *ngIf="!authService.isLoggedIn" (click)="authService.loginWithGoogle()">Login with Google</a>
+    <a mat-raised-button *ngIf="authService.isLoggedIn" (click)="authService.logout()">Logout</a> -->
+  </mat-card-actions>
+</mat-card>

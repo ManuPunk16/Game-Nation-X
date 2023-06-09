@@ -7,6 +7,7 @@ import { ChunkPipe } from './pipes/chunk.pipe';
 import { NgxEditorModule } from 'ngx-editor';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthServiceTsService } from './services/auth.service.ts.service';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from "@angular/fire/compat/auth";
@@ -43,6 +44,11 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSidenavModule } from '@angular/material/sidenav';
 
+import localePy from '@angular/common/locales/es';
+// import { LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localePy, 'es');
+
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
 import { LatestUpdatesComponent } from './components/latest-updates/latest-updates.component';
@@ -74,6 +80,7 @@ import { LoginComponent } from './components/login/login.component';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
+import { EditReviewComponent } from './components/game-detail/edit-review/edit-review.component';
 
 @NgModule({
   declarations: [
@@ -113,7 +120,8 @@ import { ContactComponent } from './components/contact/contact.component';
     LoginComponent,
     ConfirmationDialogComponent,
     AboutComponent,
-    ContactComponent
+    ContactComponent,
+    EditReviewComponent
   ],
   imports: [
     BrowserModule,
@@ -152,7 +160,8 @@ import { ContactComponent } from './components/contact/contact.component';
     HttpClientModule
   ],
   providers: [
-    {provide: MAT_DATE_LOCALE, useValue: 'es-MX'}
+    AuthServiceTsService,
+    {provide: MAT_DATE_LOCALE, useValue: 'es-MX'},
   ],
   bootstrap: [AppComponent]
 })
