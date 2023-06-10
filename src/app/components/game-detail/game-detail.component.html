@@ -401,7 +401,7 @@
     </div>
     <mat-card-content>
       <div class="image-textarea-container">
-        <img class="align-self-start mr-5 img-thumbnail rounded-circle" *ngIf="userData"
+        <img style="max-width: 50px; max-height: 50px;" class="align-self-start mr-5 img-thumbnail rounded-circle" *ngIf="userData"
           src="{{(userData.photoURL) ? userData.photoURL : '/assets/dummy-user.png'}}"
           alt="{{userData.displayName}}">
         <mat-form-field class="textarea-field">
@@ -445,7 +445,7 @@
       <div *ngFor="let item of ratings">
         <div fxFlex="25%">
           <h6>{{item.username}}</h6>
-          <img src="{{(item.photoURL) ? item.photoURL : '/assets/dummy-user.png'}}" alt="{{item.username}}">
+          <img style="max-width: 50px; max-height: 50px;" src="{{(item.photoURL) ? item.photoURL : '/assets/dummy-user.png'}}" alt="{{item.username}}">
         </div>
         <div fxFlex="75%">
           <div>Puntuacion: <strong>{{item.rating}} de 5</strong></div>
