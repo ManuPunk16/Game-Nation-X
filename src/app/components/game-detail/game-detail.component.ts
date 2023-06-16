@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Title, Meta } from '@angular/platform-browser';
 import { GamesService } from 'src/app/services/games.service';
 import { Classification, Games, Languages, GameModes } from 'src/app/models/games.model';
 import { ActivatedRoute } from '@angular/router';
@@ -14,7 +15,6 @@ import * as moment from 'moment';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { User } from 'src/app/services/user';
 import { AuthServiceTsService } from 'src/app/services/auth.service.ts.service';
-import { map } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { EditReviewComponent } from './edit-review/edit-review.component';
 
@@ -56,7 +56,9 @@ export class GameDetailComponent implements OnInit, OnDestroy {
     private afAuth: AngularFireAuth,
     private firestore: AngularFirestore,
     public authService: AuthServiceTsService,
-    public _dialog: MatDialog
+    public _dialog: MatDialog,
+    private _titleService: Title,
+    private _metaService: Meta
   ) {
     this.ratingForm = new FormGroup({
       comment: new FormControl('')
@@ -85,23 +87,18 @@ export class GameDetailComponent implements OnInit, OnDestroy {
     this.editor.destroy();
   }
 
-  // onEditorContentChange(content: string | object) {
-  //   if (typeof content === 'string') {
-  //     this.html = content;
-  //   } else {
-  //     const paragraphs = (content as any).content.filter((block: any) => block.type === 'paragraph');
-  //     const textContent = paragraphs.map((paragraph: any) => paragraph.content.map((text: any) => text.text).join('')).join('');
-  //     this.html = textContent;
-  //   }
-  // }
-
   ngOnInit(): void {
     this.editor = new Editor();
+    this.getAndValidData();
+    this.darkTheme();
+  }
 
+  getAndValidData(): void {
     this._route.params.subscribe(params => {
       let id = params['id'];
       this._gameService.getGameById(id).valueChanges().subscribe(game => {
         this.games = game;
+        this.setPageMetadata();
         // console.log(this.games?.profile_image);
         this.safeAbout = this.games?.about ? this.sanitizer.bypassSecurityTrustHtml(this.games.about) : '';
         this.clasificationData();
@@ -118,17 +115,24 @@ export class GameDetailComponent implements OnInit, OnDestroy {
         }
       });
     });
+  }
 
+  setPageMetadata() {
+    if (this.games) {
+      const title = this.games.name; // Título del juego
+      const description = this.games.about || ''; // Descripción o reseña del juego
+
+      this._titleService.setTitle(title); // Establece el título de la página
+      this._metaService.updateTag({ name: 'description', content: description }); // Actualiza la etiqueta de descripción
+    }
+  }
+
+  darkTheme(): void {
     this.themeService.isDarkTheme$.subscribe(isDarkTheme => {
       this.isDarkTheme = isDarkTheme;
       this.matchImageWithNameGameMode();
     });
-
   }
-
-  // boton() {
-  //   console.log("Contenido: ", this.html);
-  // }
 
   combineDataToTable() {
     // Combine the language arrays into a single array of objects
@@ -260,15 +264,4 @@ export class GameDetailComponent implements OnInit, OnDestroy {
 
     });
   }
-
-  // updateComment(ratingId: string, comment: string): Promise<void> {
-  //   return this.ratingService.updateComment(ratingId, comment)
-  //     .then(() => {
-  //       console.log('Comment updated successfully');
-  //       // Realiza las acciones necesarias después de actualizar el comentario (redireccionar, mostrar mensaje, etc.)
-  //     })
-  //     .catch(error => {
-  //       console.error('Error updating comment:', error);
-  //     });
-  // }
 }

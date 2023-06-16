@@ -24,7 +24,8 @@
               "src/favicon.ico",
               "src/assets",
               "src/environments/ESRB svg",
-              "src/environments/PNG"
+              "src/environments/PNG",
+              "src/robots.txt"
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
@@ -98,6 +99,59 @@
             ],
             "scripts": []
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/game-nation-x/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media"
+            },
+            "development": {
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false,
+              "vendorChunk": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "game-nation-x:build:development",
+              "serverTarget": "game-nation-x:server:development"
+            },
+            "production": {
+              "browserTarget": "game-nation-x:build:production",
+              "serverTarget": "game-nation-x:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "game-nation-x:build:production",
+              "serverTarget": "game-nation-x:server:production"
+            },
+            "development": {
+              "browserTarget": "game-nation-x:build:development",
+              "serverTarget": "game-nation-x:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }

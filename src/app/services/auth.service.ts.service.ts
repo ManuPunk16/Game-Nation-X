@@ -88,6 +88,10 @@ export class AuthServiceTsService {
   }
 
   isSessionExpired(): boolean {
+    if (typeof window === 'undefined') {
+      return false; // No estamos en el contexto del navegador, no hay sesión expirada
+    }
+
     const expiration = localStorage.getItem('expiration');
     if (!expiration) {
       return true;

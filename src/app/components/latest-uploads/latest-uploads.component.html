@@ -21,11 +21,10 @@
         style="cursor: pointer;"
         class="zoom-image"
       />
-      <mat-card-title> {{ game.name }} </mat-card-title>
-      <mat-card-subtitle> {{ game.publication_date.toDate() | date }} </mat-card-subtitle>
-      <!-- <mat-card-content>
-        <p>The Himalayas is a mountain range in Asia.</p>
-      </mat-card-content> -->
+      <div style="padding: 5px;">
+        <mat-card-title> {{ game.name }} </mat-card-title>
+        <mat-card-subtitle> {{ game.publication_date.toDate() | date }} </mat-card-subtitle>
+      </div>
     </mat-card>
   </div>
 </div>

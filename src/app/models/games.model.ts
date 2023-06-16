@@ -15,7 +15,7 @@ export class Games {
   publication_date!: any;
   categories!: Category[];
   platforms!: Platform[];
-  operative_systems!: OperativeSystem[];
+  operative_systems!: string[];
 
   lang_interface?: Languages[];
   lang_subtitles?: Languages[];

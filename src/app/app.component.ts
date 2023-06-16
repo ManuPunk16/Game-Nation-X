@@ -27,7 +27,7 @@ export class AppComponent implements OnInit{
   public games: Games[] = [];
   isDarkTheme = false;
   private themeSubscription!: Subscription;
-  public image_banner = '../../environments/PNG/Proyecto nuevo (1).png';
+  public image_banner = '../../environments/PNG/Banner.png';
 
   constructor (
     public _loginDialog: MatDialog,

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 declare var window: any;
 
@@ -9,16 +10,18 @@ declare var window: any;
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
 
   ngOnInit(): void {
-    const script = document.createElement('script');
-    script.src = 'https://www.paypalobjects.com/donate/sdk/donate-sdk.js';
-    script.charset = 'UTF-8';
-    script.onload = () => {
-      this.renderPayPalButton();
-    };
-    document.body.appendChild(script);
+    if (isPlatformBrowser(this.platformId)) {
+      const script = document.createElement('script');
+      script.src = 'https://www.paypalobjects.com/donate/sdk/donate-sdk.js';
+      script.charset = 'UTF-8';
+      script.onload = () => {
+        this.renderPayPalButton();
+      };
+      document.body.appendChild(script);
+    }
   }
 
   renderPayPalButton(): void {

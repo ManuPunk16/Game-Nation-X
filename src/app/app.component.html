@@ -5,12 +5,6 @@
     </button>
     <span class="spacer"></span>
     <span><a class="white-text" [routerLink]="['/']">GameNationX</a></span>
-    <!-- <span [routerLink]="['/']">GameNationX</span> -->
-    <!-- <span class="spacer spacer-small"></span> -->
-    <!-- <nav fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="16px">
-      <a mat-button routerLink="/about" routerLinkActive="active">About</a>
-      <a mat-button routerLink="/contact" routerLinkActive="active">Contact</a>
-    </nav> -->
     <span class="spacer"></span>
     <div>
       <mat-slide-toggle (change)="toggleTheme()">
@@ -22,38 +16,20 @@
     <mat-sidenav #sidenav mode="over" style="width: 300px;">
       <mat-nav-list>
         <a mat-list-item [routerLink]="['/']">Inicio</a>
-        <a mat-list-item [routerLink]="['about']">Información</a>
-        <a mat-list-item [routerLink]="['contact']">Contactame</a>
+        <a mat-list-item [routerLink]="['about']">Sobre la página</a>
+        <a mat-list-item [routerLink]="['contact']">Contacto</a>
+        <a mat-list-item [routerLink]="['terms-conditions']">Terminos y Condiciones</a>
+        <a mat-list-item [routerLink]="['desclimer']">Descargo de Responsabilidad</a>
+        <a mat-list-item [routerLink]="['privacy-policy']">Politicas de Privacidad</a>
+        <a mat-list-item disabled>Mapa del Sitio</a>
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
-      <div>
-        <!-- <div fxFlex style="background-color: rgb(83, 224, 128);">Contenido del panel 1</div> -->
-        <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-          <!-- <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="2" aria-label="Slide 3"></button>
-          </div> -->
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img [src]="image_banner" class="d-block w-100 img-fluid" alt="...">
-            </div>
-            <!-- <div class="carousel-item">
-              <img src="https://via.placeholder.com/1920x320" class="d-block w-100 img-fluid" alt="...">
-            </div>
-            <div class="carousel-item">
-              <img src="https://via.placeholder.com/1920x320" class="d-block w-100 img-fluid" alt="...">
-            </div> -->
+      <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img [src]="image_banner" class="d-block w-100 img-fluid" alt="...">
           </div>
-          <!-- <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button> -->
         </div>
       </div>
 
@@ -64,13 +40,7 @@
               <mat-card-title>Buscador</mat-card-title>
             </mat-card-header>
             <mat-card-content>
-
-              <div
-                fxLayout="row"
-                fxLayout.xs="column"
-                fxLayoutWrap
-                fxLayoutAlign="center"
-                layout-margin>
+              <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutAlign="center" layout-margin>
                 <mat-form-field appearance="fill" color="accent" fxFlex="100%">
                   <mat-label>Nombre del juego</mat-label>
                   <input matInput type="text" [(ngModel)]="keyword" (input)="search()" [matAutocomplete]="auto">
@@ -84,27 +54,11 @@
                   </mat-autocomplete>
                 </mat-form-field>
               </div>
-
-              <!-- <div
-                fxLayout="row"
-                fxLayout.xs="column"
-                fxLayoutWrap
-                fxLayoutAlign="center"
-                layout-margin>
-                <mat-list *ngIf="searchResults" fxFlex="100%">
-                  <mat-list-item *ngFor="let result of searchResults | async">* {{ result.name }}</mat-list-item>
-                </mat-list>
-              </div> -->
-              <div fxLayout="row"
-                fxLayout.xs="column"
-                fxLayoutWrap
-                fxLayoutAlign="center"
-                layout-margin *ngIf="searchResults && (searchResults | async)?.length === 0">
+              <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutAlign="center" layout-margin *ngIf="searchResults && (searchResults | async)?.length === 0">
                 No hay relaciones con tu búsqueda.
               </div>
             </mat-card-content>
           </mat-card>
-
         </div>
         <div fxFlex="80">
           <mat-card>

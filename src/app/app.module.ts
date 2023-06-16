@@ -8,6 +8,7 @@ import { NgxEditorModule } from 'ngx-editor';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthServiceTsService } from './services/auth.service.ts.service';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from "@angular/fire/compat/auth";
@@ -78,9 +79,13 @@ import { EditDevelopersComponent } from './components/admin-panel/developers-tab
 import { CreateDevelopersComponent } from './components/admin-panel/developers-table/create-developers/create-developers.component';
 import { LoginComponent } from './components/login/login.component';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
-import { AboutComponent } from './components/about/about.component';
-import { ContactComponent } from './components/contact/contact.component';
+import { AboutComponent } from './components/info-panel/about/about.component';
+import { ContactComponent } from './components/info-panel/contact/contact.component';
 import { EditReviewComponent } from './components/game-detail/edit-review/edit-review.component';
+import { TermsConditionsComponent } from './components/info-panel/terms-conditions/terms-conditions.component';
+import { DesclimerComponent } from './components/info-panel/desclimer/desclimer.component';
+import { PrivacyPolicyComponent } from './components/info-panel/privacy-policy/privacy-policy.component';
+import { SiteMapComponent } from './components/info-panel/site-map/site-map.component';
 
 @NgModule({
   declarations: [
@@ -121,7 +126,11 @@ import { EditReviewComponent } from './components/game-detail/edit-review/edit-r
     ConfirmationDialogComponent,
     AboutComponent,
     ContactComponent,
-    EditReviewComponent
+    EditReviewComponent,
+    TermsConditionsComponent,
+    DesclimerComponent,
+    PrivacyPolicyComponent,
+    SiteMapComponent
   ],
   imports: [
     BrowserModule,
@@ -157,7 +166,8 @@ import { EditReviewComponent } from './components/game-detail/edit-review/edit-r
     MaterialFileInputModule,
     MatAutocompleteModule,
     MatSidenavModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPaginationModule
   ],
   providers: [
     AuthServiceTsService,

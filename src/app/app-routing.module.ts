@@ -12,13 +12,21 @@ import { CategoryComponent } from './components/categories/category/category.com
 import { PlatformComponent } from './components/platforms/platform/platform.component';
 import { AuthGuard } from './auth.guard';
 import { LoginComponent } from './components/login/login.component';
-import { AboutComponent } from './components/about/about.component';
-import { ContactComponent } from './components/contact/contact.component';
+import { AboutComponent } from './components/info-panel/about/about.component';
+import { ContactComponent } from './components/info-panel/contact/contact.component';
+import { TermsConditionsComponent } from './components/info-panel/terms-conditions/terms-conditions.component';
+import { DesclimerComponent } from './components/info-panel/desclimer/desclimer.component';
+import { PrivacyPolicyComponent } from './components/info-panel/privacy-policy/privacy-policy.component';
+import { SiteMapComponent } from './components/info-panel/site-map/site-map.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full'},
   { path: 'about', component: AboutComponent},
   { path: 'contact', component: ContactComponent },
+  { path: 'terms-conditions', component: TermsConditionsComponent },
+  { path: 'desclimer', component: DesclimerComponent },
+  { path: 'privacy-policy', component: PrivacyPolicyComponent },
+  { path: 'site-map', component: SiteMapComponent },
   { path: 'game-datails/:id', component: GameDetailComponent },
   { path: 'category/:name', component: CategoryComponent },
   { path: 'platform/:name', component: PlatformComponent },
@@ -32,7 +40,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    initialNavigation: 'enabledBlocking'
+})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

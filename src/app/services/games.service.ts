@@ -25,6 +25,7 @@ export class GamesService {
     return this.db.collection('games', ref => ref
       .where('published', '==', true)
       .orderBy('createdAt', 'desc')
+      .limit(10)
     );
   }
 
@@ -32,6 +33,7 @@ export class GamesService {
     return this.db.collection('games', ref => ref
       .where('published', '==', true)
       .orderBy('updatedAt', 'desc')
+      .limit(10)
     );
   }
 
@@ -48,11 +50,10 @@ export class GamesService {
   }
 
   getCategoriesCountByName(name: string): Observable<number> {
-    const collection = this.db.collection<Games>('games', ref => ref
+    return this.db.collection<Games>('games', ref => ref
       .where('published', '==', true)
       .where('categories', 'array-contains', name)
-    );
-    return collection.valueChanges().pipe(
+    ).valueChanges().pipe(
       map(games => games.length)
     );
   }
@@ -66,11 +67,10 @@ export class GamesService {
   }
 
   getPlatformsCountByName(name: string): Observable<number> {
-    const collection = this.db.collection<Games>('games', ref => ref
+    return this.db.collection<Games>('games', ref => ref
       .where('published', '==', true)
       .where('platforms', 'array-contains', name)
-    );
-    return collection.valueChanges().pipe(
+    ).valueChanges().pipe(
       map(games => games.length)
     );
   }
