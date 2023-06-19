@@ -1,7 +1,23 @@
+<!-- <mat-card>
+  <mat-card-header>
+    <mat-card-title>Ultimas Actualizaciones</mat-card-title>
+  </mat-card-header>
+  <br>
+  <mat-divider></mat-divider>
+  <br>
+  <mat-card-content>
+    <app-latest-updates></app-latest-updates>
+  </mat-card-content>
+</mat-card>
+<br>
+
 <mat-card>
   <mat-card-header>
-    <mat-card-title>Categorias</mat-card-title>
+    <mat-card-title>Juegos por Categorias</mat-card-title>
   </mat-card-header>
+  <br>
+  <mat-divider></mat-divider>
+  <br>
   <mat-card-content>
     <app-categories></app-categories>
   </mat-card-content>
@@ -10,8 +26,11 @@
 
 <mat-card>
   <mat-card-header>
-    <mat-card-title>Plataformas</mat-card-title>
+    <mat-card-title>Juegos por Plataformas</mat-card-title>
   </mat-card-header>
+  <br>
+  <mat-divider></mat-divider>
+  <br>
   <mat-card-content>
     <app-platforms></app-platforms>
   </mat-card-content>
@@ -22,17 +41,53 @@
   <mat-card-header>
     <mat-card-title>Ultimos Subidos</mat-card-title>
   </mat-card-header>
+  <br>
+  <mat-divider></mat-divider>
+  <br>
   <mat-card-content>
     <app-latest-uploads></app-latest-uploads>
+  </mat-card-content>
+</mat-card> -->
+
+<mat-card class="game-card">
+  <mat-card-header class="game-card-header">
+    <mat-card-title class="game-card-title">Últimas Actualizaciones</mat-card-title>
+  </mat-card-header>
+  <mat-divider class="game-card-divider"></mat-divider>
+  <mat-card-content class="game-card-content">
+    <app-latest-updates></app-latest-updates>
   </mat-card-content>
 </mat-card>
 <br>
 
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>Ultimas Actualizaciones</mat-card-title>
+<mat-card class="game-card">
+  <mat-card-header class="game-card-header">
+    <mat-card-title class="game-card-title">Juegos por Categorías</mat-card-title>
   </mat-card-header>
-  <mat-card-content>
-    <app-latest-updates></app-latest-updates>
+  <mat-divider class="game-card-divider"></mat-divider>
+  <mat-card-content class="game-card-content">
+    <app-categories></app-categories>
+  </mat-card-content>
+</mat-card>
+<br>
+
+<mat-card class="game-card">
+  <mat-card-header class="game-card-header">
+    <mat-card-title class="game-card-title">Juegos por Plataformas</mat-card-title>
+  </mat-card-header>
+  <mat-divider class="game-card-divider"></mat-divider>
+  <mat-card-content class="game-card-content">
+    <app-platforms></app-platforms>
+  </mat-card-content>
+</mat-card>
+<br>
+
+<mat-card class="game-card">
+  <mat-card-header class="game-card-header">
+    <mat-card-title class="game-card-title">Últimos Subidos</mat-card-title>
+  </mat-card-header>
+  <mat-divider class="game-card-divider"></mat-divider>
+  <mat-card-content class="game-card-content">
+    <app-latest-uploads></app-latest-uploads>
   </mat-card-content>
 </mat-card>

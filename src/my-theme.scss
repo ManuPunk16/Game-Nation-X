@@ -2,10 +2,11 @@
 
 @include mat.core();
 
+// Tema claro
 $light-theme: mat.define-light-theme(
   (
     color: (
-      primary: mat.define-palette(mat.$indigo-palette, 400),
+      primary: mat.define-palette(mat.$blue-palette, 800),
       accent: mat.define-palette(mat.$blue-palette, 700),
     ),
     typography: mat.define-typography-config(),
@@ -13,10 +14,11 @@ $light-theme: mat.define-light-theme(
   )
 );
 
+// Tema oscuro
 $dark-theme: mat.define-dark-theme(
   (
     color: (
-      primary: mat.define-palette(mat.$indigo-palette, 700),
+      primary: mat.define-palette(mat.$blue-palette, 800),
       accent: mat.define-palette(mat.$blue-palette, 50),
     ),
     typography: mat.define-typography-config(),
@@ -24,7 +26,10 @@ $dark-theme: mat.define-dark-theme(
   )
 );
 
+// Aplicar el tema a todos los componentes
 @include mat.all-component-themes($light-theme);
+
+// Estilos personalizados
 a {
   color: #000000;
   text-decoration: none;
@@ -43,11 +48,61 @@ a {
   transform: scale(1.05);
 }
 
+// Estilos para mat-card
+.game-card {
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.24);
 
+  .game-card-header {
+    background-color: #90CAF9;
+    padding: 12px;
+    border-radius: 10px 10px 0 0;
+
+    .game-card-title {
+      font-size: 20px;
+    }
+  }
+
+  .game-card-content {
+    padding: 12px;
+  }
+
+  .game-card-divider {
+    background-color: #363636;
+  }
+}
+
+// Modo oscuro
 .dark-mode {
   @include mat.all-component-colors($dark-theme);
+
   a {
     color: #FFFFFF;
     text-decoration: none;
   }
+
+  // Estilos para mat-card
+  .game-card {
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.24);
+
+    .game-card-header {
+      background-color: #1565C0;
+      padding: 12px;
+      border-radius: 10px 10px 0 0;
+
+      .game-card-title {
+        font-size: 20px;
+      }
+    }
+
+    .game-card-content {
+      padding: 12px;
+    }
+
+    .game-card-divider {
+      background-color: #363636;
+    }
+  }
 }
+
