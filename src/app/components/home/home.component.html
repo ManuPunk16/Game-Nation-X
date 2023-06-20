@@ -1,93 +1,42 @@
-<!-- <mat-card>
-  <mat-card-header>
-    <mat-card-title>Ultimas Actualizaciones</mat-card-title>
-  </mat-card-header>
-  <br>
-  <mat-divider></mat-divider>
-  <br>
-  <mat-card-content>
-    <app-latest-updates></app-latest-updates>
-  </mat-card-content>
-</mat-card>
-<br>
-
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>Juegos por Categorias</mat-card-title>
-  </mat-card-header>
-  <br>
-  <mat-divider></mat-divider>
-  <br>
-  <mat-card-content>
-    <app-categories></app-categories>
-  </mat-card-content>
-</mat-card>
-<br>
-
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>Juegos por Plataformas</mat-card-title>
-  </mat-card-header>
-  <br>
-  <mat-divider></mat-divider>
-  <br>
-  <mat-card-content>
-    <app-platforms></app-platforms>
-  </mat-card-content>
-</mat-card>
-<br>
-
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>Ultimos Subidos</mat-card-title>
-  </mat-card-header>
-  <br>
-  <mat-divider></mat-divider>
-  <br>
-  <mat-card-content>
-    <app-latest-uploads></app-latest-uploads>
-  </mat-card-content>
-</mat-card> -->
-
-<mat-card class="game-card">
+<mat-card class="game-card" #latestUpdates>
   <mat-card-header class="game-card-header">
     <mat-card-title class="game-card-title">Últimas Actualizaciones</mat-card-title>
   </mat-card-header>
   <mat-divider class="game-card-divider"></mat-divider>
   <mat-card-content class="game-card-content">
-    <app-latest-updates></app-latest-updates>
+    <app-latest-updates *ngIf="isLatestUpdatesVisible"></app-latest-updates>
   </mat-card-content>
 </mat-card>
 <br>
 
-<mat-card class="game-card">
+<mat-card class="game-card" #categories>
   <mat-card-header class="game-card-header">
     <mat-card-title class="game-card-title">Juegos por Categorías</mat-card-title>
   </mat-card-header>
   <mat-divider class="game-card-divider"></mat-divider>
   <mat-card-content class="game-card-content">
-    <app-categories></app-categories>
+    <app-categories *ngIf="isCategoriesVisible"></app-categories>
   </mat-card-content>
 </mat-card>
 <br>
 
-<mat-card class="game-card">
+<mat-card class="game-card" #platforms>
   <mat-card-header class="game-card-header">
     <mat-card-title class="game-card-title">Juegos por Plataformas</mat-card-title>
   </mat-card-header>
   <mat-divider class="game-card-divider"></mat-divider>
   <mat-card-content class="game-card-content">
-    <app-platforms></app-platforms>
+    <app-platforms *ngIf="isPlatformsVisible"></app-platforms>
   </mat-card-content>
 </mat-card>
 <br>
 
-<mat-card class="game-card">
+<mat-card class="game-card" #latestUploads>
   <mat-card-header class="game-card-header">
     <mat-card-title class="game-card-title">Últimos Subidos</mat-card-title>
   </mat-card-header>
   <mat-divider class="game-card-divider"></mat-divider>
   <mat-card-content class="game-card-content">
-    <app-latest-uploads></app-latest-uploads>
+    <app-latest-uploads *ngIf="isLatestUploadsVisible"></app-latest-uploads>
   </mat-card-content>
 </mat-card>

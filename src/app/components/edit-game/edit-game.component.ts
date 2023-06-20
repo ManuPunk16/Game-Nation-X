@@ -420,7 +420,7 @@ export class EditGameComponent implements OnInit, OnDestroy {
           this.selectedFiles
         );
         const compressedFile = new File([compressedImage], this.gameForm.value.name, {
-          type: 'image/jpeg'
+          type: 'image/webp'
         });
 
         const imageUrl = await this.imageUploadService.uploadImage(

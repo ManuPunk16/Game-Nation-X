@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthServiceTsService } from './services/auth.service.ts.service';
 import { GamesService } from './services/games.service';
@@ -27,7 +27,7 @@ export class AppComponent implements OnInit{
   public games: Games[] = [];
   isDarkTheme = false;
   private themeSubscription!: Subscription;
-  public image_banner = '../../environments/PNG/Banner.png';
+  public image_banner = '../../environments/PNG/banner.webp';
 
   constructor (
     public _loginDialog: MatDialog,
@@ -59,12 +59,6 @@ export class AppComponent implements OnInit{
   }
 
   toggleTheme() {
-    // console.log(event.checked);
-    // if(event.checked == true) {
-    //   this._document.body.classList.add('dark-mode');
-    // } else {
-    //   this._document.body.classList.remove('dark-mode');
-    // }
     this.isDarkTheme = !this.isDarkTheme;
     this.themeService.setDarkTheme(this.isDarkTheme);
   }

@@ -1,12 +1,11 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>
+<mat-card class="game-card">
+  <mat-card-header class="game-card-header">
+    <mat-card-title class="game-card-title">
       {{ pubTitle }}
     </mat-card-title>
   </mat-card-header>
-  <mat-divider></mat-divider>
-  <br>
-  <mat-card-content>
+  <mat-divider class="game-card-divider"></mat-divider>
+  <mat-card-content class="game-card-content">
     <div fxLayout="row wrap">
       <div
         [fxFlex]="(100 / gridColumns) + '%'"
@@ -38,6 +37,7 @@
       </div>
     </div>
     <br>
+    <mat-divider class="game-card-divider"></mat-divider>
     <div style="align-items: center; padding: 10px;">
       <pagination-controls  (pageChange)="currentPage = $event"
                           previousLabel="Previous"

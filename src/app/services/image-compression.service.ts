@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -46,7 +45,7 @@ export class ImageCompressionService {
               } else {
                 reject(new Error('No se pudo generar el blob comprimido.'));
               }
-            }, 'image/jpeg', 0.7); // Ajusta el valor de calidad según tus necesidades (0.7 en este ejemplo)
+            }, 'image/webp', 0.7); // Ajusta el valor de calidad según tus necesidades (0.7 en este ejemplo)
           } else {
             reject(new Error('No se pudo obtener el contexto 2D del lienzo.'));
           }
