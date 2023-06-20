@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Title, Meta } from '@angular/platform-browser';
+import { Meta } from '@angular/platform-browser';
 import { GamesService } from 'src/app/services/games.service';
 import { Classification, Games, Languages, GameModes } from 'src/app/models/games.model';
 import { ActivatedRoute } from '@angular/router';
@@ -57,8 +57,7 @@ export class GameDetailComponent implements OnInit, OnDestroy {
     private firestore: AngularFirestore,
     public authService: AuthServiceTsService,
     public _dialog: MatDialog,
-    private _titleService: Title,
-    private _metaService: Meta
+    private meta: Meta
   ) {
     this.ratingForm = new FormGroup({
       comment: new FormControl('')
@@ -98,9 +97,16 @@ export class GameDetailComponent implements OnInit, OnDestroy {
       let id = params['id'];
       this._gameService.getGameById(id).valueChanges().subscribe(game => {
         this.games = game;
-        this.setPageMetadata();
+
+        if (this.games) {
+          this.safeAbout = this.games?.about ? this.sanitizer.bypassSecurityTrustHtml(this.games.about) : '';
+
+          this.meta.addTags([
+            { name: 'description', content: this.games.about },
+            { property: 'og:title', content: this.games.name }
+          ]);
+        }
         // console.log(this.games?.profile_image);
-        this.safeAbout = this.games?.about ? this.sanitizer.bypassSecurityTrustHtml(this.games.about) : '';
         this.clasificationData();
         this.matchImageWithNameGameMode();
         this.combineDataToTable();
@@ -115,16 +121,6 @@ export class GameDetailComponent implements OnInit, OnDestroy {
         }
       });
     });
-  }
-
-  setPageMetadata() {
-    if (this.games) {
-      const title = this.games.name; // Título del juego
-      const description = this.games.about || ''; // Descripción o reseña del juego
-
-      this._titleService.setTitle(title); // Establece el título de la página
-      this._metaService.updateTag({ name: 'description', content: description }); // Actualiza la etiqueta de descripción
-    }
   }
 
   darkTheme(): void {

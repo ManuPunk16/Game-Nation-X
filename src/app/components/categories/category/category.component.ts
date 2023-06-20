@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
 import { GamesService } from 'src/app/services/games.service';
 import { Games } from 'src/app/models/games.model';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs';
 
 @Component({
@@ -25,7 +25,6 @@ export class CategoryComponent implements OnInit{
   constructor (
     private _gamesService: GamesService,
     private _route: ActivatedRoute,
-    private _router: Router,
     private _titleService: Title,
     private _metaService: Meta
   ) {
@@ -48,10 +47,6 @@ export class CategoryComponent implements OnInit{
         this.setPageMetadata(name);
       });
     });
-  }
-
-  onClicked(game: any) {
-    this._router.navigate(['game-datails/', game.id]);
   }
 
   updatePubTitle(name: string) {

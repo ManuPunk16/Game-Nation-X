@@ -1,13 +1,13 @@
 <div class="mat-app-background">
   <mat-toolbar color="primary">
-    <button mat-icon-button (click)="sidenav.toggle()">
+    <button mat-icon-button (click)="sidenav.toggle()" aria-label="Menu">
       <mat-icon>menu</mat-icon>
     </button>
     <span class="spacer"></span>
     <span><a class="white-text" [routerLink]="['/']">GameNationX</a></span>
     <span class="spacer"></span>
     <div>
-      <mat-slide-toggle (change)="toggleTheme()">
+      <mat-slide-toggle aria-label="Brightness switch" (change)="toggleTheme()">
         <mat-icon>brightness_2</mat-icon>
       </mat-slide-toggle>
     </div>

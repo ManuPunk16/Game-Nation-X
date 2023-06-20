@@ -47,7 +47,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 
 import localePy from '@angular/common/locales/es';
 // import { LOCALE_ID } from '@angular/core';
-import { registerLocaleData } from '@angular/common';
+import { registerLocaleData, NgOptimizedImage } from '@angular/common';
 registerLocaleData(localePy, 'es');
 
 import { CarouselModule } from 'ngx-bootstrap/carousel';
@@ -167,7 +167,8 @@ import { SiteMapComponent } from './components/info-panel/site-map/site-map.comp
     MatAutocompleteModule,
     MatSidenavModule,
     HttpClientModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgOptimizedImage
   ],
   providers: [
     AuthServiceTsService,
