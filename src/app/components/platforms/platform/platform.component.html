@@ -9,7 +9,7 @@
     <div fxLayout="row wrap">
       <div
         [fxFlex]="(100/gridColumns) + '%'"
-        fxFlex.xs="100%"
+        fxFlex.xs="33%"
         fxFlex.sm="33%"
         *ngFor="let game of games | paginate: { itemsPerPage: pageSize, currentPage: currentPage }"
         class="card-wrapper"
@@ -30,7 +30,7 @@
             </a>
           </picture>
           <div style="padding: 5px;">
-            <mat-card-title> {{ game.name }} </mat-card-title>
+            <!-- <mat-card-title> {{ game.name }} </mat-card-title> -->
             <mat-card-subtitle> {{ game.publication_date.toDate() | date }} </mat-card-subtitle>
           </div>
         </mat-card>
