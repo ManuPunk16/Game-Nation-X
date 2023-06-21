@@ -3,7 +3,7 @@ import { Title, Meta } from '@angular/platform-browser';
 import { GamesService } from 'src/app/services/games.service';
 import { Games } from 'src/app/models/games.model';
 import { ActivatedRoute } from '@angular/router';
-import { map } from 'rxjs';
+import { map, take } from 'rxjs';
 
 
 @Component({
@@ -36,6 +36,7 @@ export class PlatformComponent implements OnInit{
     this._route.params.subscribe(params => {
       let name = params['name'];
       this._gamesService.getPlatformsByName(name).snapshotChanges().pipe(
+        take(1),
         map(changes =>
           changes.map(c =>
             ({ id: c.payload.doc.id, ...c.payload.doc.data() }

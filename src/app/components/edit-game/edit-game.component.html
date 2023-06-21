@@ -67,24 +67,6 @@
               </mat-form-field>
             </div>
 
-            <!-- <div
-              fxLayout="row"
-              fxLayout.xs="column"
-              fxLayoutWrap
-              fxLayoutAlign="center"
-              layout-margin
-            >
-              <mat-form-field appearance="fill" fxFlex="100%">
-                <mat-label>Sobre el Juego</mat-label>
-                <textarea matInput
-                  formControlName="about"
-                  cdkTextareaAutosize
-                  cdkAutosizeMinRows="1"
-                  cdkAutosizeMaxRows="10"
-                ></textarea>
-              </mat-form-field>
-            </div> -->
-
             <div
               fxLayout="row"
               fxLayout.xs="column"
@@ -489,14 +471,6 @@
               <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
               <ngx-editor [editor]="editor" formControlName="about" [(ngModel)]="html" [placeholder]="'Type here...'"></ngx-editor>
             </div>
-            <!-- <div>
-              <button (click)="boton()">Aver</button>
-            </div> -->
-
-            <!-- <div>
-              <h3>Vista previa en tiempo real:</h3>
-              <div [innerHTML]="html"></div>
-            </div> -->
 
             <div>
               <div class="row">

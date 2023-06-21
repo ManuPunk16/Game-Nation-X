@@ -314,6 +314,7 @@ export class EditGameComponent implements OnInit, OnDestroy {
 
   getAllCategories(): void {
     this._categoryService.getAllCategories().snapshotChanges().pipe(
+      take(1),
       map(changes =>
         changes.map(c =>
           ({ id: c.payload.doc.id, ...c.payload.doc.data() })
@@ -327,6 +328,7 @@ export class EditGameComponent implements OnInit, OnDestroy {
 
   getAllPlatforms(): void {
     this._platformService.getAllPlatforms().snapshotChanges().pipe(
+      take(1),
       map(changes =>
         changes.map(c =>
           ({ id: c.payload.doc.id, ...c.payload.doc.data ()})
@@ -340,6 +342,7 @@ export class EditGameComponent implements OnInit, OnDestroy {
 
   getAllDevelopers(): void {
     this._devs.getAllDevelopers().snapshotChanges().pipe(
+      take(1),
       map(changes =>
         changes.map(c =>
           ({ dev: c.payload.doc.id, ...c.payload.doc.data ()})
@@ -353,6 +356,7 @@ export class EditGameComponent implements OnInit, OnDestroy {
 
   getAllEditors(): void {
     this._devs.getAllEditors().snapshotChanges().pipe(
+      take(1),
       map(changes =>
         changes.map(c =>
           ({ edit: c.payload.doc.id, ...c.payload.doc.data ()})
@@ -366,6 +370,7 @@ export class EditGameComponent implements OnInit, OnDestroy {
 
   getAllFranchises(): void {
     this._devs.getAllFranchises().snapshotChanges().pipe(
+      take(1),
       map(changes =>
         changes.map(c =>
           ({ fran: c.payload.doc.id, ...c.payload.doc.data ()})

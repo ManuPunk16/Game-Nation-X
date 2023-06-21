@@ -3,7 +3,7 @@ import { CategoriesService } from 'src/app/services/categories.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { Category } from 'src/app/models/games.model';
-import { map } from 'rxjs';
+import { map, take } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateCategoryComponent } from '../../add-game/create-category/create-category.component';
@@ -39,6 +39,7 @@ export class CategoriesTableComponent implements OnInit {
 
   getAllCategories(): void {
     this._categoryService.getAllCategories().snapshotChanges().pipe(
+      take(1),
       map(changes =>
         changes.map(c =>
           ({ id: c.payload.doc.id, ...c.payload.doc.data() })

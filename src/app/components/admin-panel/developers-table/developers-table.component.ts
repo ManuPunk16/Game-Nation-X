@@ -3,7 +3,7 @@ import { DevelopersEditorsService } from 'src/app/services/developers-editors.se
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Developers } from 'src/app/models/games.model';
-import { map } from 'rxjs';
+import { map, take } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { EditDevelopersComponent } from './edit-developers/edit-developers.component';
@@ -40,6 +40,7 @@ export class DevelopersTableComponent implements OnInit {
 
   getAllDevelopers(): void {
     this._devs.getAllDevelopers().snapshotChanges().pipe(
+      take(1),
       map(changes =>
         changes.map(c =>
           ({ ...c.payload.doc.data(), id: c.payload.doc.id })

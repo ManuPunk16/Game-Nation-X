@@ -1,28 +1,25 @@
-<br>
 <button mat-raised-button color="primary" (click)="onFranchiseDialogCreate()">Crear</button>
-<div>
-  <mat-table [dataSource]="dataSourceFranchises">
-    <ng-container matColumnDef="actions">
-      <mat-header-cell *matHeaderCellDef class="action"> Acciones </mat-header-cell>
-      <mat-cell *matCellDef="let row" data-label="actions">
-        <button mat-flat-button color="primary" (click)="onFranchiseDialogEdit(row)">
-          <mat-icon> remove_red_eye </mat-icon>
-        </button>
-      </mat-cell>
-    </ng-container>
+<mat-table [dataSource]="dataSourceFranchises">
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef class="action"> Acciones </mat-header-cell>
+    <mat-cell *matCellDef="let row" data-label="actions">
+      <button mat-flat-button color="primary" (click)="onFranchiseDialogEdit(row)">
+        <mat-icon> remove_red_eye </mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
 
-    <!-- Categorias -->
-    <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Franquicia </mat-header-cell>
-      <mat-cell *matCellDef="let item" data-label="name"> {{item.name}} </mat-cell>
-    </ng-container>
+  <!-- Categorias -->
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Franquicia </mat-header-cell>
+    <mat-cell *matCellDef="let item" data-label="name"> {{item.name}} </mat-cell>
+  </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumnFranchises"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumnFranchises;" ></mat-row>
-  </mat-table>
-  <mat-paginator [pageSizeOptions]="[5, 15, 30]"
-                showFirstLastButtons
-                aria-label="Select page"
-                >
-  </mat-paginator>
-</div>
+  <mat-header-row *matHeaderRowDef="displayedColumnFranchises"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumnFranchises;" ></mat-row>
+</mat-table>
+<mat-paginator [pageSizeOptions]="[5, 15, 30]"
+              showFirstLastButtons
+              aria-label="Select page"
+              >
+</mat-paginator>

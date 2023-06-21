@@ -3,7 +3,7 @@ import { PlatformsService } from 'src/app/services/platforms.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Platform } from 'src/app/models/games.model';
-import { map } from 'rxjs';
+import { map, take } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { EditPlatformComponent } from '../../add-game/edit-platform/edit-platform.component';
@@ -39,6 +39,7 @@ export class PlatformsTableComponent implements OnInit {
 
   getAllPlatforms(): void {
     this._platformService.getAllPlatforms().snapshotChanges().pipe(
+      take(1),
       map(changes =>
         changes.map(c =>
           ({ id: c.payload.doc.id, ...c.payload.doc.data ()})

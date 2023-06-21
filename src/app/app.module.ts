@@ -63,9 +63,6 @@ import { EditCategoryComponent } from './components/add-game/edit-category/edit-
 import { EditPlatformComponent } from './components/add-game/edit-platform/edit-platform.component';
 import { PlatformComponent } from './components/platforms/platform/platform.component';
 import { EditGameComponent } from './components/edit-game/edit-game.component';
-import { UploadFormComponent } from './components/admin-panel/upload-form/upload-form.component';
-import { UploadListComponent } from './components/admin-panel/upload-list/upload-list.component';
-import { UploadDetailsComponent } from './components/admin-panel/upload-details/upload-details.component';
 import { CategoriesTableComponent } from './components/admin-panel/categories-table/categories-table.component';
 import { PlatformsTableComponent } from './components/admin-panel/platforms-table/platforms-table.component';
 import { DevelopersTableComponent } from './components/admin-panel/developers-table/developers-table.component';
@@ -108,9 +105,6 @@ import { SiteMapComponent } from './components/info-panel/site-map/site-map.comp
     EditPlatformComponent,
     PlatformComponent,
     EditGameComponent,
-    UploadFormComponent,
-    UploadListComponent,
-    UploadDetailsComponent,
     CategoriesTableComponent,
     PlatformsTableComponent,
     DevelopersTableComponent,

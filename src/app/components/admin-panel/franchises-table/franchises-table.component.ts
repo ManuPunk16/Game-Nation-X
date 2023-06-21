@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { DevelopersEditorsService } from 'src/app/services/developers-editors.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { Developers, Editors, Franchise } from 'src/app/models/games.model';
-import { map } from 'rxjs';
+import { Franchise } from 'src/app/models/games.model';
+import { map, take } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateFranchiseComponent } from './create-franchise/create-franchise.component';
@@ -40,6 +40,7 @@ export class FranchisesTableComponent implements OnInit {
 
   getAllFranchises(): void {
     this._devs.getAllFranchises().snapshotChanges().pipe(
+      take(1),
       map(changes =>
         changes.map(c =>
           ({ ...c.payload.doc.data(), id: c.payload.doc.id })

@@ -1,21 +1,11 @@
-<!-- <div class="my-3">
-  <app-upload-form></app-upload-form>
-</div>
-
-<div class="my-2">
-  <app-upload-list></app-upload-list>
-</div>
-<br> -->
-
-<mat-card>
-  <mat-card-content>
-    <div>
-      <button mat-raised-button color="primary" (click)="newGame()">
-        Nuevo Registro
-      </button>
-    </div>
-    <br>
-    <mat-divider></mat-divider>
+<mat-card class="game-card">
+  <mat-card-header class="game-card-header">
+    <button mat-raised-button color="accent" (click)="newGame()">
+      Nuevo Registro
+    </button>
+  </mat-card-header>
+  <mat-divider class="game-card-divider"></mat-divider>
+  <mat-card-content class="game-card-content">
     <table mat-table #table [dataSource]="dataSourceGames" matSort>
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef > Acciones </th>
@@ -80,31 +70,33 @@
 </mat-card>
 
 <br>
-<mat-divider></mat-divider>
+<mat-divider class="game-card-divider"></mat-divider>
 <br>
 
 <div fxLayout="row wrap" fxLayoutGap="16px grid">
   <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title>
+    <mat-card class="game-card">
+      <mat-card-header class="game-card-header">
+        <mat-card-title class="game-card-title">
           Categorias
         </mat-card-title>
       </mat-card-header>
-      <mat-card-content>
+      <mat-divider class="game-card-divider"></mat-divider>
+      <mat-card-content class="game-card-content">
         <app-categories-table></app-categories-table>
       </mat-card-content>
     </mat-card>
   </div>
 
   <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title>
+    <mat-card class="game-card">
+      <mat-card-header class="game-card-header">
+        <mat-card-title class="game-card-title">
           Plataformas
         </mat-card-title>
       </mat-card-header>
-      <mat-card-content>
+      <mat-divider class="game-card-divider"></mat-divider>
+      <mat-card-content class="game-card-content">
         <app-platforms-table></app-platforms-table>
       </mat-card-content>
     </mat-card>
@@ -117,26 +109,28 @@
 
 <div fxLayout="row wrap" fxLayoutGap="16px grid">
   <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title>
+    <mat-card class="game-card">
+      <mat-card-header class="game-card-header">
+        <mat-card-title class="game-card-title">
           Desarrolladores
         </mat-card-title>
       </mat-card-header>
-      <mat-card-content>
+      <mat-divider class="game-card-divider"></mat-divider>
+      <mat-card-content class="game-card-content">
         <app-developers-table></app-developers-table>
       </mat-card-content>
     </mat-card>
   </div>
 
   <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title>
+    <mat-card class="game-card">
+      <mat-card-header class="game-card-header">
+        <mat-card-title class="game-card-title">
           Editores
         </mat-card-title>
       </mat-card-header>
-      <mat-card-content>
+      <mat-divider class="game-card-divider"></mat-divider>
+      <mat-card-content class="game-card-content">
         <app-editors-table></app-editors-table>
       </mat-card-content>
     </mat-card>
@@ -149,13 +143,14 @@
 
 <div fxLayout="row wrap" fxLayoutGap="16px grid">
   <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title>
-          Franquicias
+    <mat-card class="game-card">
+      <mat-card-header class="game-card-header">
+        <mat-card-title class="game-card-title">
+          Editores
         </mat-card-title>
       </mat-card-header>
-      <mat-card-content>
+      <mat-divider class="game-card-divider"></mat-divider>
+      <mat-card-content class="game-card-content">
         <app-franchises-table></app-franchises-table>
       </mat-card-content>
     </mat-card>

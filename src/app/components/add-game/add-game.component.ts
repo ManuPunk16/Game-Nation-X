@@ -15,7 +15,7 @@ import {
   Developers, Editors, Franchise } from 'src/app/models/games.model';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { PlatformsService } from 'src/app/services/platforms.service';
-import { map } from 'rxjs';
+import { map, take } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { Editor, Toolbar } from 'ngx-editor';
 import { DevelopersEditorsService } from 'src/app/services/developers-editors.service';
@@ -24,8 +24,6 @@ import { CreatePlatformComponent } from './create-platform/create-platform.compo
 import { CreateEditorsComponent } from '../admin-panel/editors-table/create-editors/create-editors.component';
 import { CreateDevelopersComponent } from '../admin-panel/developers-table/create-developers/create-developers.component';
 import { CreateFranchiseComponent } from '../admin-panel/franchises-table/create-franchise/create-franchise.component';
-// import { FileUploadService } from 'src/app/services/file-upload.service';
-// import { FileUpload } from 'src/app/models/file-upload.model';
 
 @Component({
   selector: 'app-add-game',
@@ -65,11 +63,6 @@ export class AddGameComponent implements OnInit, OnDestroy {
   public displayedColumnPlatforms: string[] = ['actions', 'name'];
   gameForm: FormGroup;
   submitted = false;
-  // percentage = 0;
-  // selectedFiles?: FileList;
-  // currentFileUpload?: FileUpload;
-  // urls: FileUpload[] = [];
-  // fileUploads?: any[];
 
   constructor(
     private _gamesService: GamesService,
@@ -166,44 +159,6 @@ export class AddGameComponent implements OnInit, OnDestroy {
     this.getAllFranchises();
   }
 
-  // onSubmit() {
-  //   // console.log(this.gameForm.value);
-  //   if (this.gameForm.valid) {
-  //     this._gamesService.createGame(this.gameForm.value).then(() => {
-  //       this.submitted = true;
-  //     });
-  //   } else {
-  //     console.log("No es valido");
-  //   }
-  // }
-
-  // selectFile(event: any) {
-  //   this.selectedFiles = event.target.files;
-  // }
-
-  // upload(event: Event) {
-  //   if (this.selectedFiles) {
-  //     const fileUploads: FileUpload[] = [];
-
-  //     for (let i = 0; i < this.selectedFiles.length; i++) {
-  //       const file = this.selectedFiles.item(i);
-  //       if (file) {
-  //         const fileUpload: FileUpload = {
-  //           file: file,
-  //           url: '',
-  //           name: '',
-  //           key: ''
-  //         };
-  //         fileUploads.push(fileUpload);
-  //       }
-  //     }
-  //     this.uploadService.pushFilesToStorage(fileUploads).subscribe((percentage) => {
-  //       this.percentage = Math.round(percentage ? percentage : 0);
-  //       console.log(`Progreso de carga: ${percentage}%`);
-  //     });
-  //   }
-  // }
-
   onSubmit() {
     // console.log(this.gameForm.value);
     if (this.gameForm.valid) {
@@ -236,6 +191,7 @@ export class AddGameComponent implements OnInit, OnDestroy {
 
   getAllCategories(): void {
     this._categoryService.getAllCategories().snapshotChanges().pipe(
+      take(1),
       map(changes =>
         changes.map(c =>
           ({ id: c.payload.doc.id, ...c.payload.doc.data() })
@@ -250,6 +206,7 @@ export class AddGameComponent implements OnInit, OnDestroy {
 
   getAllPlatforms(): void {
     this._platformService.getAllPlatforms().snapshotChanges().pipe(
+      take(1),
       map(changes =>
         changes.map(c =>
           ({ id: c.payload.doc.id, ...c.payload.doc.data ()})
@@ -264,6 +221,7 @@ export class AddGameComponent implements OnInit, OnDestroy {
 
   getAllDevelopers(): void {
     this._devs.getAllDevelopers().snapshotChanges().pipe(
+      take(1),
       map(changes =>
         changes.map(c =>
           ({ dev: c.payload.doc.id, ...c.payload.doc.data ()})
@@ -277,6 +235,7 @@ export class AddGameComponent implements OnInit, OnDestroy {
 
   getAllEditors(): void {
     this._devs.getAllEditors().snapshotChanges().pipe(
+      take(1),
       map(changes =>
         changes.map(c =>
           ({ edit: c.payload.doc.id, ...c.payload.doc.data ()})
@@ -290,6 +249,7 @@ export class AddGameComponent implements OnInit, OnDestroy {
 
   getAllFranchises(): void {
     this._devs.getAllFranchises().snapshotChanges().pipe(
+      take(1),
       map(changes =>
         changes.map(c =>
           ({ fran: c.payload.doc.id, ...c.payload.doc.data ()})

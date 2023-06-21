@@ -3,7 +3,7 @@ import { PlatformsService } from 'src/app/services/platforms.service';
 import { GamesService } from 'src/app/services/games.service';
 import { Platform } from 'src/app/models/games.model';
 import { Router } from '@angular/router';
-import { map } from 'rxjs';
+import { map, take } from 'rxjs';
 
 @Component({
   selector: 'app-platforms',
@@ -29,6 +29,7 @@ export class PlatformsComponent implements OnInit {
 
   getGamesWithPlatformsCount() {
     this._platformService.getAllPlatforms().snapshotChanges().pipe(
+      take(1),
       map(changes =>
         changes.map(c =>
           ({ id: c.payload.doc.id, ...c.payload.doc.data() })
