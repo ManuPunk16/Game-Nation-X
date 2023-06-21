@@ -34,10 +34,14 @@
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.min.js"
-            ]
+            ],
+            "allowedCommonJsDependencies": [
+              "lodash"
+           ]
           },
           "configurations": {
             "production": {
+              "aot": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -114,8 +118,7 @@
               "optimization": false,
               "sourceMap": true,
               "extractLicenses": false,
-              "vendorChunk": true,
-              "buildOptimizer": false
+              "vendorChunk": true
             }
           },
           "defaultConfiguration": "production"
