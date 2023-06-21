@@ -25,7 +25,7 @@ export class GamesService {
     return this.db.collection('games', ref => ref
       .where('published', '==', true)
       .orderBy('createdAt', 'desc')
-      .limit(10)
+      .limit(15)
     );
   }
 
@@ -33,7 +33,7 @@ export class GamesService {
     return this.db.collection('games', ref => ref
       .where('published', '==', true)
       .orderBy('updatedAt', 'desc')
-      .limit(10)
+      .limit(15)
     );
   }
 
