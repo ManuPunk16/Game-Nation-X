@@ -25,7 +25,8 @@
               "src/assets",
               "src/environments/ESRB svg",
               "src/environments/PNG",
-              "src/robots.txt"
+              "src/robots.txt",
+              "src/sitemap.xml"
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",

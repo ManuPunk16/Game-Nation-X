@@ -12,11 +12,13 @@ import { EditGameComponent } from '../edit-game/edit-game.component';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-admin-panel',
   templateUrl: './admin-panel.component.html',
   styleUrls: ['./admin-panel.component.css'],
+  providers: [DatePipe]
 })
 export class AdminPanelComponent implements OnInit {
 
@@ -38,7 +40,8 @@ export class AdminPanelComponent implements OnInit {
     private _gamesService: GamesService,
     private _platformService: PlatformsService,
     public _dialog: MatDialog,
-    private _liveAnnouncer: LiveAnnouncer
+    private _liveAnnouncer: LiveAnnouncer,
+    public datepipe: DatePipe
   ) {
 
   }
@@ -144,5 +147,41 @@ export class AdminPanelComponent implements OnInit {
     editGame.afterClosed().subscribe( res => {
 
     });
+  }
+
+  generateSitemap() {
+    const xmlString = this.buildXmlString(this.games);
+    this.saveFile(xmlString, 'sitemap.xml', 'application/xml');
+  }
+
+  buildXmlString(games: any[]): string {
+    const xmlHeader = '<?xml version="1.0" encoding="UTF-8"?>\n';
+    const urlsetStart = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
+    const urlsetEnd = '</urlset>';
+    let xmlBody = '';
+
+    games.forEach(game => {
+      const gameUrl = `https://gamenax.com/game-details/${game.id}`;
+      const lastMod = this.datepipe.transform(game.updatedAt.toDate(), 'yyyy-MM-dd');
+      const urlXml = `<url>\n<loc>${gameUrl}</loc>\n<lastmod>${lastMod}</lastmod>\n</url>\n`;
+      xmlBody += urlXml;
+    });
+
+    return xmlHeader + urlsetStart + xmlBody + urlsetEnd;
+  }
+
+  saveFile(data: string, filename: string, type: string) {
+    const blob = new Blob([data], { type: type });
+    const url = URL.createObjectURL(blob);
+
+    const anchor = document.createElement('a');
+    anchor.href = url;
+    anchor.download = filename;
+    anchor.style.display = 'none';
+
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
+    URL.revokeObjectURL(url);
   }
 }

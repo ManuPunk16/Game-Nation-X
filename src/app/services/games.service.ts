@@ -17,6 +17,13 @@ export class GamesService {
     this.items = this.gamesRef.valueChanges();
   }
 
+  getGamesSitemap(): AngularFirestoreCollection<Games> {
+    return this.db.collection<Games>('games', ref => ref
+      .where('published', '==', true)
+      .orderBy('updatedAt', 'asc')
+    );
+  }
+
   getAllGames(): AngularFirestoreCollection<Games> {
     return this.gamesRef;
   }

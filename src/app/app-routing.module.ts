@@ -21,6 +21,7 @@ import { SiteMapComponent } from './components/info-panel/site-map/site-map.comp
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full'},
+  { path: 'sitemap.xml', redirectTo: '/sitemap.xml', pathMatch: 'full' },
   { path: 'about', component: AboutComponent},
   { path: 'contact', component: ContactComponent },
   { path: 'terms-conditions', component: TermsConditionsComponent },
