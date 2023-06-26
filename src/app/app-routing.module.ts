@@ -28,7 +28,7 @@ const routes: Routes = [
   { path: 'desclimer', component: DesclimerComponent },
   { path: 'privacy-policy', component: PrivacyPolicyComponent },
   { path: 'site-map', component: SiteMapComponent },
-  { path: 'game-datails/:id', component: GameDetailComponent },
+  { path: 'game-details/:id', component: GameDetailComponent },
   { path: 'category/:name', component: CategoryComponent },
   { path: 'platform/:name', component: PlatformComponent },
   { path: 'latest-updates', component: LatestUpdatesComponent },
