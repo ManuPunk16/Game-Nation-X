@@ -26,7 +26,8 @@
               "src/environments/ESRB svg",
               "src/environments/PNG",
               "src/robots.txt",
-              "src/sitemap.xml"
+              "src/sitemap.xml",
+              "src/manifest.webmanifest"
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
@@ -38,10 +39,16 @@
             ],
             "allowedCommonJsDependencies": [
               "lodash"
-           ]
+          ],
+          "serviceWorker": true,
+          "ngswConfigPath": "ngsw-config.json"
           },
           "configurations": {
             "production": {
+              "optimization": true,
+              "buildOptimizer": true,
+              "vendorChunk": false,
+              "extractLicenses": true,
               "aot": true,
               "budgets": [
                 {
@@ -95,7 +102,8 @@
             "tsConfig": "tsconfig.spec.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/manifest.webmanifest"
             ],
             "styles": [
               "@angular/material/prebuilt-themes/deeppurple-amber.css",
