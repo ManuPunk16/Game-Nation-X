@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { GamesService } from 'src/app/services/games.service';
 import { Games } from 'src/app/models/games.model';
-import { map, take } from 'rxjs';
+import { map } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this._gamesService.getAllGames().snapshotChanges().pipe(
-      take(1),
+
       map(changes =>
         changes.map(c =>
           ({ id: c.payload.doc.id, ...c.payload.doc.data() })

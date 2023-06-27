@@ -1,0 +1,45 @@
+<mat-card *ngIf="userDataEdit && authService.isLoggedIn">
+  <form [formGroup]="editRatingForm" novalidate>
+    <div class="alert alert-warning" role="alert" *ngIf="editRatingForm.disabled">
+      No puedes crear otra reseña, correo duplicado.
+    </div>
+    <mat-card-content>
+      <div class="image-textarea-container">
+        <div class="container">
+          <img class="align-self-start mr-5 img-thumbnail rounded-circle" *ngIf="userDataEdit"
+                  src="{{(userDataEdit.photoURL) ? userDataEdit.photoURL : '/assets/dummy-user.png'}}"
+                  alt="{{userDataEdit.displayName}}">
+            <mat-form-field class="textarea-field">
+              <mat-label>Escribe tu reseña</mat-label>
+              <div class="textarea-container">
+                <textarea matInput rows="7" class="textarea" formControlName="comment"></textarea>
+              </div>
+            </mat-form-field>
+          <div class="row">
+            <div class="col">
+              <mat-form-field>
+                <mat-label>Puntuación actual</mat-label>
+                <mat-select formControlName="rating">
+                  <mat-option *ngFor="let value of values" [value]="value">
+                    {{ value }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <span class="flex-spacer"></span>
+      <button mat-raised-button type="submit" (click)="onUpdate()" [disabled]="editRatingForm.disabled">
+        Publicar cambios
+      </button>
+      <button mat-raised-button color="primary" *ngIf="authService.isLoggedIn" (click)="authService.logout()">
+        Cerrar sesion
+      </button>
+    </mat-card-actions>
+  </form>
+</mat-card>

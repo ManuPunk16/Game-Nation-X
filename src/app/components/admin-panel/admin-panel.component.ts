@@ -3,7 +3,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { GamesService } from '../../services/games.service';
 import { Games, Platform } from '../../models/games.model';
 import { PlatformsService } from 'src/app/services/platforms.service';
-import { map, take } from 'rxjs';
+import { map } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { CreatePlatformComponent } from '../add-game/create-platform/create-platform.component';
 import { EditPlatformComponent } from '../add-game/edit-platform/edit-platform.component';
@@ -54,7 +54,7 @@ export class AdminPanelComponent implements OnInit {
 
   getAllGames() {
     this._gamesService.getAllGames().snapshotChanges().pipe(
-      take(1),
+
       map(changes =>
         changes.map(c =>
           ({ id: c.payload.doc.id, ...c.payload.doc.data() })
@@ -93,7 +93,7 @@ export class AdminPanelComponent implements OnInit {
 
   getAllPlatforms(): void {
     this._platformService.getAllPlatforms().snapshotChanges().pipe(
-      take(1),
+
       map(changes =>
         changes.map(c =>
           ({ id: c.payload.doc.id, ...c.payload.doc.data ()})
