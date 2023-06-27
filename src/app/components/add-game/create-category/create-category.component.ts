@@ -28,7 +28,7 @@ export class CreateCategoryComponent implements OnInit {
   }
 
   submitForm(){
-    console.log(this.categoryForm.value);
+    // console.log(this.categoryForm.value);
     if (this.categoryForm.valid) {
       this._categoryService.createCategory(this.categoryForm.value).then(() => {
         this.submitted = true;

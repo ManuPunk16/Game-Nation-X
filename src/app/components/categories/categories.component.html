@@ -9,7 +9,7 @@
 </div> -->
 
 <div style="display: flex; flex-wrap: wrap;">
-  <ng-container *ngFor="let item of categories;">
+  <ng-container *ngFor="let item of categories | slice:0:20">
     <div style="flex-basis: 20%; flex-grow: 1; padding: 10px;" *ngIf="item.total !== 0 && item.name">
       <!-- <div (click)="onClicked(item)">
         {{ item.name }}<br>({{ item.total }})
