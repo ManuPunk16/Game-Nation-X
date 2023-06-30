@@ -1,13 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DevelopersEditorsService } from 'src/app/services/developers-editors.service';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { Editors } from 'src/app/models/games.model';
 import { map } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { EditEditorsComponent } from './edit-editors/edit-editors.component';
 import { CreateEditorsComponent } from './create-editors/create-editors.component';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 @Component({
   selector: 'app-editors-table',
@@ -29,7 +30,8 @@ export class EditorsTableComponent implements OnInit {
 
   constructor(
     private _devs: DevelopersEditorsService,
-    public _dialog: MatDialog
+    public _dialog: MatDialog,
+    private _liveAnnouncer: LiveAnnouncer
   ) {
 
   }
@@ -52,6 +54,14 @@ export class EditorsTableComponent implements OnInit {
       this.dataSourceEditors.paginator = this.paginator;
       // console.log(this.editors);
     });
+  }
+
+  announceSortChange(sortState: Sort) {
+    if (sortState.direction) {
+      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+    } else {
+      this._liveAnnouncer.announce('Sorting cleared');
+    }
   }
 
   onEditorsformDialogCreate(): void {

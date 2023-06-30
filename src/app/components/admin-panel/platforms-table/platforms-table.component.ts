@@ -1,13 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { PlatformsService } from 'src/app/services/platforms.service';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { Platform } from 'src/app/models/games.model';
 import { map } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { EditPlatformComponent } from '../../add-game/edit-platform/edit-platform.component';
 import { CreatePlatformComponent } from '../../add-game/create-platform/create-platform.component';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 @Component({
   selector: 'app-platforms-table',
@@ -28,7 +29,8 @@ export class PlatformsTableComponent implements OnInit {
 
   constructor(
     public _dialog: MatDialog,
-    private _platformService: PlatformsService
+    private _platformService: PlatformsService,
+    private _liveAnnouncer: LiveAnnouncer
   ) {
 
   }
@@ -52,6 +54,14 @@ export class PlatformsTableComponent implements OnInit {
       this.dataSourcePlatform.sort = this.sort;
       // console.log(this.platforms);
     });
+  }
+
+  announceSortChange(sortState: Sort) {
+    if (sortState.direction) {
+      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+    } else {
+      this._liveAnnouncer.announce('Sorting cleared');
+    }
   }
 
   onPlatformDialogCreate(): void {

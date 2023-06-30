@@ -24,6 +24,7 @@ import { CreatePlatformComponent } from './create-platform/create-platform.compo
 import { CreateEditorsComponent } from '../admin-panel/editors-table/create-editors/create-editors.component';
 import { CreateDevelopersComponent } from '../admin-panel/developers-table/create-developers/create-developers.component';
 import { CreateFranchiseComponent } from '../admin-panel/franchises-table/create-franchise/create-franchise.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-game',
@@ -70,7 +71,8 @@ export class AddGameComponent implements OnInit, OnDestroy {
     private _platformService: PlatformsService,
     public _dialog: MatDialog,
     // private uploadService: FileUploadService
-    private _devs: DevelopersEditorsService
+    private _devs: DevelopersEditorsService,
+    private _snackBar: MatSnackBar
   ) {
     this.gameForm = new FormGroup({
       name: new FormControl('', Validators.required),
@@ -160,14 +162,30 @@ export class AddGameComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    // console.log(this.gameForm.value);
     if (this.gameForm.valid) {
-      this._gamesService.createGame(this.gameForm.value).then(() => {
-        this.submitted = true;
+      const name = this.gameForm.value.name;
+      // Verificar si el nombre ya existe
+      this._gamesService.checkDuplicateName(name).then((isDuplicate) => {
+        if (isDuplicate) {
+          this.openSnackBar();
+        } else {
+          // Si no hay un nombre repetido, crear el juego
+          this._gamesService.createGame(this.gameForm.value).then(() => {
+            this.submitted = true;
+          });
+        }
       });
     } else {
-      console.log("Formulario no valido.");
+      this._snackBar.open('Formulario no válido.', "X", {
+        duration: 3000
+      });
     }
+  }
+
+  openSnackBar() {
+    this._snackBar.open("Nombre de juego duplicado", "X", {
+      duration: 3000
+    });
   }
 
   onEditorContentChange(content: string | object) {
@@ -178,10 +196,6 @@ export class AddGameComponent implements OnInit, OnDestroy {
       const textContent = paragraphs.map((paragraph: any) => paragraph.content.map((text: any) => text.text).join('')).join('');
       this.html = textContent;
     }
-  }
-
-  boton() {
-    console.log("Contenido: ", this.html);
   }
 
   newGame(): void {

@@ -9,60 +9,53 @@
   </mat-card-header>
   <mat-divider class="game-card-divider"></mat-divider>
   <mat-card-content class="game-card-content">
-    <table mat-table #table [dataSource]="dataSourceGames" matSort>
+    <mat-table #table [dataSource]="dataSourceGames" matSort (matSortChange)="announceSortChange($event)">
       <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef > Acciones </th>
-        <td mat-cell *matCellDef="let row" data-label="actions">
+        <mat-header-cell *matHeaderCellDef > Acciones </mat-header-cell>
+        <mat-cell *matCellDef="let row" data-label="actions">
           <button mat-flat-button color="primary" (click)="onGameEdit(row)">
             <mat-icon> remove_red_eye </mat-icon>
           </button>
-        </td>
+        </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="published">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Publicado </th>
-        <td mat-cell *matCellDef="let item" data-label="published">
+        <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Published"> Publicado </mat-header-cell>
+        <mat-cell *matCellDef="let item" data-label="published">
           <mat-slide-toggle [checked]="item.published" (change)="updatePublished(item, $event)"></mat-slide-toggle>
-        </td>
+        </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number"> Juego </th>
-        <td mat-cell *matCellDef="let item" data-label="name"> {{item.name}} </td>
+        <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number"> Juego </mat-header-cell>
+        <mat-cell *matCellDef="let item" data-label="name"> {{item.name}} </mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="franchise">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Franquicia </th>
-        <td mat-cell *matCellDef="let item" data-label="franchise"> {{item.franchise}} </td>
+      <ng-container matColumnDef="publication_date">
+        <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Publication Date"> Fecha Lanzamiento </mat-header-cell>
+        <mat-cell *matCellDef="let item" data-label="publication_date"> {{item.publication_date.toDate() | date }} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="categories">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Categorias </th>
-        <td mat-cell *matCellDef="let item" data-label="categories">
+        <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Categories"> Categorias </mat-header-cell>
+        <mat-cell *matCellDef="let item" data-label="categories">
           {{ item.categories ? item.categories.join(', ') : '' }}
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="platforms">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Plataformas </th>
-        <td mat-cell *matCellDef="let item" data-label="platforms">
-          {{ item.platforms ? item.platforms.join(', ') : '' }}
-        </td>
+        </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="createdAt">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Creacion </th>
-        <td mat-cell *matCellDef="let item" data-label="createdAt"> {{item.createdAt.toDate() | date }} </td>
+        <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by CreatedAt"> Creacion </mat-header-cell>
+        <mat-cell *matCellDef="let item" data-label="createdAt"> {{item.createdAt.toDate() | date }} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="updatedAt">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Ultima Actualizacion </th>
-        <td mat-cell *matCellDef="let item" data-label="updatedAt"> {{item.updatedAt.toDate() | date }} </td>
+        <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by UpdatedAt"> Ultima Actualizacion </mat-header-cell>
+        <mat-cell *matCellDef="let item" data-label="updatedAt"> {{item.updatedAt.toDate() | date }} </mat-cell>
       </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayeColumnGames"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayeColumnGames;" ></tr>
-    </table>
+      <mat-header-row *matHeaderRowDef="displayeColumnGames"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayeColumnGames;" ></mat-row>
+    </mat-table>
 
     <mat-paginator [pageSizeOptions]="[10, 30, 50]"
                      showFirstLastButtons

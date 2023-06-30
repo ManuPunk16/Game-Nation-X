@@ -10,7 +10,7 @@
     <div *ngIf="!submitted">
       <mat-stepper #stepper linear>
         <mat-step [stepControl]="gameForm" label="Informacion Basica">
-          <form [formGroup]="gameForm" novalidate>
+          <form [formGroup]="gameForm" (ngSubmit)="onSubmit()" novalidate>
             <div
               fxLayout="row"
               fxLayout.xs="column"
@@ -181,6 +181,7 @@
 
             <div>
               <button mat-raised-button color="accent" matStepperNext>Siguiente</button>
+              <button mat-raised-button color="primary" type="submit">Guardar</button>
             </div>
           </form>
         </mat-step>

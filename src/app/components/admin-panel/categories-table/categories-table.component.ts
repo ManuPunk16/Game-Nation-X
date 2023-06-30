@@ -1,13 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { Category } from 'src/app/models/games.model';
 import { map } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateCategoryComponent } from '../../add-game/create-category/create-category.component';
 import { EditCategoryComponent } from '../../add-game/edit-category/edit-category.component';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 @Component({
   selector: 'app-categories-table',
@@ -28,7 +29,8 @@ export class CategoriesTableComponent implements OnInit {
 
   constructor(
     private _categoryService: CategoriesService,
-    public _dialog: MatDialog
+    public _dialog: MatDialog,
+    private _liveAnnouncer: LiveAnnouncer
   ) {
 
   }
@@ -52,6 +54,14 @@ export class CategoriesTableComponent implements OnInit {
       this.dataSourceCategories.sort = this.sort;
       // console.log(this.categories);
     });
+  }
+
+  announceSortChange(sortState: Sort) {
+    if (sortState.direction) {
+      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+    } else {
+      this._liveAnnouncer.announce('Sorting cleared');
+    }
   }
 
   onCategoryDialogCreate(): void {

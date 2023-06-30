@@ -30,7 +30,7 @@ export class AdminPanelComponent implements OnInit {
 
   public games: Games[] = [];
   public dataSourceGames!: MatTableDataSource<Games>;
-  public displayeColumnGames: string[] = ['actions', 'published', 'name', 'franchise', 'categories', 'platforms', 'createdAt', 'updatedAt'];
+  public displayeColumnGames: string[] = ['actions', 'published', 'name', 'publication_date', 'categories', 'createdAt', 'updatedAt'];
 
   public platforms: Platform[] = [];
   public dataSourcePlatform!: MatTableDataSource<Platform>;

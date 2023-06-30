@@ -86,6 +86,15 @@ export class GamesService {
     return this.gamesRef.add({ ...games});
   }
 
+  checkDuplicateName(name: string): Promise<boolean> {
+    return this.gamesRef
+      .ref.where('name', '==', name)
+      .get()
+      .then((querySnapshot) => {
+        return !querySnapshot.empty; // Si el resultado no está vacío, significa que existe un nombre repetido
+      });
+  }
+
   updateGame(id: string, data: any): Promise<void> {
     return this.gamesRef.doc(id).update(data);
   }
