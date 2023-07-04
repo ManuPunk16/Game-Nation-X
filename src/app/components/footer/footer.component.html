@@ -1,29 +1,49 @@
-<footer class="footer">
-  <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start start" fxLayoutGap="20px">
-    <div fxFlex="30%">
-      <p>Tu apoyo cuenta mucho</p>
-      <div class="fa fa-heart"></div>
-      <div id="donate-button-container">
-        <div id="donate-button"></div>
+<footer class="site-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-md-6">
+        <h6>Sobre Game Nation X</h6>
+        <p class="text-justify">Bienvenido a Game Nation X, tu fuente de información y recursos sobre videojuegos. Nos apasiona proporcionar contenido informativo y técnico relacionado con los videojuegos, incluyendo reseñas detalladas, información técnica, clasificaciones ESRB y valoraciones de usuarios.</p>
+        <p class="text-justify">Nos esforzamos por mantenerte actualizado sobre los últimos lanzamientos, noticias relevantes y tendencias emergentes en la industria de los videojuegos. Queremos ofrecerte una experiencia enriquecedora y entretenida mientras exploras el vasto universo de los videojuegos.</p>
       </div>
-    </div>
 
-    <div fxFlex="40%">
-      <div class="footer-social-icons">
-        <h4 class="_14">Redes sociales</h4>
-        <ul class="social-icons">
-          <li><a href="" aria-label="Facebook" class="social-icon"> <i class="fa fa-facebook"></i></a></li>
-          <li><a href="" aria-label="Twitter" class="social-icon"> <i class="fa fa-twitter"></i></a></li>
-          <li><a href="" aria-label="YouTube" class="social-icon"> <i class="fa fa-youtube"></i></a></li>
-          <li><a href="https://instagram.com/game_nationx?igshid=MzNlNGNkZWQ4Mg==" aria-label="Instagram" class="social-icon"> <i class="fa fa-instagram"></i></a></li>
+      <div class="col-xs-6 col-md-3">
+        <h6>Donacion a Paypal</h6>
+        <div id="donate-button-container">
+          <div id="donate-button"></div>
+        </div>
+      </div>
+
+      <div class="col-xs-6 col-md-3">
+        <h6>Enlaces rapidos</h6>
+        <ul class="footer-links">
+          <li><a [routerLink]="['about']">Sobre nosotros</a></li>
+          <li><a [routerLink]="['contact']">Contactanos</a></li>
+          <li><a [routerLink]="['terms-conditions']">Terminos y Condiciones</a></li>
+          <li><a [routerLink]="['desclimer']">Descargo de Responsabilidad</a></li>
+          <li><a [routerLink]="['privacy-policy']">Politicas de Privacidad</a></li>
+          <li><a href="https://gamenax.com/sitemap.xml" target="_blank" rel="noopener noreferrer">Mapa del Sitio</a></li>
         </ul>
       </div>
     </div>
+    <hr>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-sm-6 col-xs-12">
+        <p class="copyright-text">Copyright &copy; 2023 All Rights Reserved by
+          <a href="#">GameNationX</a>.
+        </p>
+      </div>
 
-    <div fxFlex="30%">
-      Construido por jugadores, hecho para jugadores.
-      <br>
-      Si te gusta el contenido, apoyanos con un gesto de corazon.
+      <div class="col-md-4 col-sm-6 col-xs-12">
+        <ul class="social-icons">
+          <li><a class="facebook" target="_blank" rel="noopener noreferrer" href="#"><i class="fa fa-facebook"></i></a></li>
+          <li><a class="twitter" target="_blank" rel="noopener noreferrer" href="#"><i class="fa fa-twitter"></i></a></li>
+          <li><a class="instagram" target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/game_nationx/?igshid=MzNlNGNkZWQ4Mg%3D%3D"><i class="fa fa-instagram"></i></a></li>
+          <li><a class="youtube" target="_blank" rel="noopener noreferrer" href="#"><i class="fa fa-youtube"></i></a></li>
+        </ul>
+      </div>
     </div>
   </div>
 </footer>
