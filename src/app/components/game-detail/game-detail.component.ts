@@ -107,7 +107,9 @@ export class GameDetailComponent implements OnInit, OnDestroy {
           ]);
         }
         // console.log(this.games?.profile_image);
-        this.clasificationData();
+        if (this.games?.classification) {
+          this.clasificationData();
+        }
         this.matchImageWithNameGameMode();
         this.combineDataToTable();
 
