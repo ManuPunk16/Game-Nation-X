@@ -32,7 +32,7 @@ export class LatestUpdatesComponent implements OnInit {
     ).subscribe(data => {
       this.games = data;
 
-      this.games.forEach(game => {
+      this.games.slice(0, 15).forEach(game => {
         this.meta.addTags([
           { name: 'description', content: game.about },
           { property: 'og:title', content: game.name }
