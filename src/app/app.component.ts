@@ -12,7 +12,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
 
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
@@ -23,7 +23,7 @@ export class AppComponent implements OnInit{
 
   title = 'game-nation-x';
   keyword!: string;
-  searchResults!: Observable<any[]> | null;
+  searchResults!: Observable<Games[]> | null;
   public games: Games[] = [];
   isDarkTheme = false;
   private themeSubscription!: Subscription;
