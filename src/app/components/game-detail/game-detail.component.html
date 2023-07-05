@@ -278,7 +278,7 @@
               <div>
                 <img [src]="esrb" decoding="async" width="60" height="90">
               </div>
-              <div>
+              <div *ngIf="classificationDescriptors">
                 <p>
                   {{ classificationDescriptors }}
                 </p>

@@ -86,6 +86,7 @@ import { DesclimerComponent } from './components/info-panel/desclimer/desclimer.
 import { PrivacyPolicyComponent } from './components/info-panel/privacy-policy/privacy-policy.component';
 import { SiteMapComponent } from './components/info-panel/site-map/site-map.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { UpcomingComponent } from './components/upcoming/upcoming.component';
 
 @NgModule({
   declarations: [
@@ -127,7 +128,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     TermsConditionsComponent,
     DesclimerComponent,
     PrivacyPolicyComponent,
-    SiteMapComponent
+    SiteMapComponent,
+    UpcomingComponent
   ],
   imports: [
     BrowserModule,

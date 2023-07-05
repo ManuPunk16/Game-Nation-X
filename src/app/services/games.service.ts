@@ -28,6 +28,16 @@ export class GamesService {
     return this.gamesRef;
   }
 
+  getUpcomingGames(): AngularFirestoreCollection<Games> {
+    const currentDate = new Date();
+    return this.db.collection('games', ref => ref
+      .where('published', '==', true)
+      .where('publication_date', '>', currentDate)
+      .orderBy('publication_date')
+      .limit(15)
+    );
+  }
+
   getAllGamesByLatestUpload(): AngularFirestoreCollection<Games> {
     return this.db.collection('games', ref => ref
       .where('published', '==', true)
