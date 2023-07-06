@@ -1,26 +1,21 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
 import * as moment from 'moment';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { GamesService } from '../../services/games.service';
 import {
   Games,
-  Category,
-  Platform,
+  Categories,
+  Platforms,
   GameModes,
   Classification,
   ClassificationDescriptors,
   Languages,
   OperativeSystem,
   Developers, Editors, Franchise } from 'src/app/models/games.model';
-import { CategoriesService } from 'src/app/services/categories.service';
-import { PlatformsService } from 'src/app/services/platforms.service';
 import { map, take } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { Editor, Toolbar } from 'ngx-editor';
 import { DevelopersEditorsService } from 'src/app/services/developers-editors.service';
-import { CreateCategoryComponent } from './create-category/create-category.component';
-import { CreatePlatformComponent } from './create-platform/create-platform.component';
 import { CreateEditorsComponent } from '../admin-panel/editors-table/create-editors/create-editors.component';
 import { CreateDevelopersComponent } from '../admin-panel/developers-table/create-developers/create-developers.component';
 import { CreateFranchiseComponent } from '../admin-panel/franchises-table/create-franchise/create-franchise.component';
@@ -47,8 +42,8 @@ export class AddGameComponent implements OnInit, OnDestroy {
   ];
 
   public games: Games = new Games();
-  public categories: Category[] = [];
-  public platforms: Platform[] = [];
+  public _categories = Categories.categories;
+  public _platforms = Platforms.platforms;
   public developers: Developers[] = [];
   public editors: Editors[] = [];
   public franchises: Franchise[] = [];
@@ -57,9 +52,6 @@ export class AddGameComponent implements OnInit, OnDestroy {
   public classification = Classification.classification;
   public classificationDescriptors = ClassificationDescriptors.classification_descriptors;
   public gameMode = GameModes.game_modes;
-
-  public dataSourcePlatform!: MatTableDataSource<Platform>;
-  public dataSourceCategories!: MatTableDataSource<Category>;
   public displayedColumnCategories: string[] = ['actions', 'name'];
   public displayedColumnPlatforms: string[] = ['actions', 'name'];
   gameForm: FormGroup;
@@ -67,10 +59,7 @@ export class AddGameComponent implements OnInit, OnDestroy {
 
   constructor(
     private _gamesService: GamesService,
-    private _categoryService: CategoriesService,
-    private _platformService: PlatformsService,
     public _dialog: MatDialog,
-    // private uploadService: FileUploadService
     private _devs: DevelopersEditorsService,
     private _snackBar: MatSnackBar
   ) {
@@ -152,8 +141,8 @@ export class AddGameComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.editor = new Editor();
-    this.getAllCategories();
-    this.getAllPlatforms();
+    this._categories.sort((a, b) => a.cat.localeCompare(b.cat));
+    this._platforms.sort((a, b) => a.plat.localeCompare(b.plat));
 
     this.languages.sort((a, b) => a.language.localeCompare(b.language));
     this.getAllDevelopers();
@@ -203,36 +192,6 @@ export class AddGameComponent implements OnInit, OnDestroy {
     this.games = new Games();
   }
 
-  getAllCategories(): void {
-    this._categoryService.getAllCategories().snapshotChanges().pipe(
-
-      map(changes =>
-        changes.map(c =>
-          ({ id: c.payload.doc.id, ...c.payload.doc.data() })
-        )
-      )
-    ).subscribe(data => {
-      this.categories = data;
-      this.dataSourceCategories = new MatTableDataSource(this.categories);
-      // console.log(this.categories);
-    });
-  }
-
-  getAllPlatforms(): void {
-    this._platformService.getAllPlatforms().snapshotChanges().pipe(
-
-      map(changes =>
-        changes.map(c =>
-          ({ id: c.payload.doc.id, ...c.payload.doc.data ()})
-        )
-      )
-    ).subscribe(data => {
-      this.platforms = data;
-      this.dataSourcePlatform = new MatTableDataSource(this.platforms);
-      // console.log(this.platforms);
-    });
-  }
-
   getAllDevelopers(): void {
     this._devs.getAllDevelopers().snapshotChanges().pipe(
 
@@ -272,26 +231,6 @@ export class AddGameComponent implements OnInit, OnDestroy {
     ).subscribe(data => {
       this.franchises = data;
       // console.log(this.franchises);
-    });
-  }
-
-  onCategoryDialogCreate(): void {
-    const categoryDialog = this._dialog.open(CreateCategoryComponent, {
-      width: '50%'
-    });
-
-    categoryDialog.afterClosed().subscribe(res => {
-
-    });
-  }
-
-  onPlatformDialogCreate(): void {
-    const platformDialog = this._dialog.open(CreatePlatformComponent, {
-      width: '50%'
-    });
-
-    platformDialog.afterClosed().subscribe(res => {
-
     });
   }
 

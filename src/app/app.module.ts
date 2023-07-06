@@ -59,14 +59,8 @@ import { LatestUploadsComponent } from './components/latest-uploads/latest-uploa
 import { PlatformsComponent } from './components/platforms/platforms.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { CategoryComponent } from './components/categories/category/category.component';
-import { CreatePlatformComponent } from './components/add-game/create-platform/create-platform.component';
-import { CreateCategoryComponent } from './components/add-game/create-category/create-category.component';
-import { EditCategoryComponent } from './components/add-game/edit-category/edit-category.component';
-import { EditPlatformComponent } from './components/add-game/edit-platform/edit-platform.component';
 import { PlatformComponent } from './components/platforms/platform/platform.component';
 import { EditGameComponent } from './components/edit-game/edit-game.component';
-import { CategoriesTableComponent } from './components/admin-panel/categories-table/categories-table.component';
-import { PlatformsTableComponent } from './components/admin-panel/platforms-table/platforms-table.component';
 import { DevelopersTableComponent } from './components/admin-panel/developers-table/developers-table.component';
 import { EditorsTableComponent } from './components/admin-panel/editors-table/editors-table.component';
 import { FranchisesTableComponent } from './components/admin-panel/franchises-table/franchises-table.component';
@@ -103,14 +97,8 @@ import { UpcomingComponent } from './components/upcoming/upcoming.component';
     CategoriesComponent,
     ChunkPipe,
     CategoryComponent,
-    CreatePlatformComponent,
-    CreateCategoryComponent,
-    EditCategoryComponent,
-    EditPlatformComponent,
     PlatformComponent,
     EditGameComponent,
-    CategoriesTableComponent,
-    PlatformsTableComponent,
     DevelopersTableComponent,
     EditorsTableComponent,
     FranchisesTableComponent,

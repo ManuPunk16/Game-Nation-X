@@ -1,12 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatTableDataSource } from '@angular/material/table';
 import { GamesService } from '../../services/games.service';
-import { Games, Platform } from '../../models/games.model';
-import { PlatformsService } from 'src/app/services/platforms.service';
+import { Games } from '../../models/games.model';
 import { map } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { CreatePlatformComponent } from '../add-game/create-platform/create-platform.component';
-import { EditPlatformComponent } from '../add-game/edit-platform/edit-platform.component';
 import { AddGameComponent } from '../add-game/add-game.component';
 import { EditGameComponent } from '../edit-game/edit-game.component';
 import { MatPaginator } from '@angular/material/paginator';
@@ -32,13 +29,8 @@ export class AdminPanelComponent implements OnInit {
   public dataSourceGames!: MatTableDataSource<Games>;
   public displayeColumnGames: string[] = ['actions', 'published', 'name', 'publication_date', 'categories', 'createdAt', 'updatedAt'];
 
-  public platforms: Platform[] = [];
-  public dataSourcePlatform!: MatTableDataSource<Platform>;
-  public displayedColumnPlatforms: string[] = ['actions', 'name'];
-
   constructor (
     private _gamesService: GamesService,
-    private _platformService: PlatformsService,
     public _dialog: MatDialog,
     private _liveAnnouncer: LiveAnnouncer,
     public datepipe: DatePipe
@@ -48,8 +40,6 @@ export class AdminPanelComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllGames();
-    this.getAllPlatforms();
-    // this.newGame();
   }
 
   getAllGames() {
@@ -89,42 +79,6 @@ export class AdminPanelComponent implements OnInit {
       })
       .catch(err => console.log(err));
     }
-  }
-
-  getAllPlatforms(): void {
-    this._platformService.getAllPlatforms().snapshotChanges().pipe(
-
-      map(changes =>
-        changes.map(c =>
-          ({ id: c.payload.doc.id, ...c.payload.doc.data ()})
-        )
-      )
-    ).subscribe(data => {
-      this.platforms = data;
-      this.dataSourcePlatform = new MatTableDataSource(this.platforms);
-      // console.log(this.platforms);
-    });
-  }
-
-  onPlatformDialogCreate(): void {
-    const platformDialog = this._dialog.open(CreatePlatformComponent, {
-      width: '50%'
-    });
-
-    platformDialog.afterClosed().subscribe(res => {
-
-    });
-  }
-
-  onPlatformDialogEdit(row: any): void {
-    const platformDialog = this._dialog.open(EditPlatformComponent, {
-      width: '50%',
-      data: row
-    });
-
-    platformDialog.afterClosed().subscribe(res => {
-
-    });
   }
 
   newGame() {

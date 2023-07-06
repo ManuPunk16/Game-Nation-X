@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoriesService } from 'src/app/services/categories.service';
-import { Category } from 'src/app/models/games.model';
-import { map, take } from 'rxjs';
+import { Categories } from 'src/app/models/games.model';
 import { GamesService } from 'src/app/services/games.service';
 
 @Component({
@@ -12,40 +10,24 @@ import { GamesService } from 'src/app/services/games.service';
 
 export class CategoriesComponent implements OnInit{
 
-  public categories: Category[] = [];
-  categoryCountMap = new Map<String, Number>();
+  public _categories = Categories.categories;
 
   constructor (
-    private _categoryService: CategoriesService,
     private _gamesService: GamesService
-  ) {
-
-  }
+  ) {}
 
   ngOnInit(): void {
     this.getGamesWithCategoriesCount();
   }
 
   getGamesWithCategoriesCount() {
-    this._categoryService.getAllCategories().snapshotChanges().pipe(
-      take(1),
-      map(changes =>
-        changes.map(c =>
-          ({ id: c.payload.doc.id, ...c.payload.doc.data() })
-        )
-      )
-    ).subscribe(data => {
-      this.categories = data;
-      // console.log(this.categories);
-      this.categories.forEach( cat => {
-        if (cat?.name) {
-          this._gamesService.getCategoriesCountByName(cat.name).subscribe(data => {
-            cat.total = data;
-            this.categories.sort((a, b) => b.total - a.total).filter(cat => cat?.total <= 0);
-          });
-        }
-      });
-      // console.log(this.categories);
+    const categories = Categories.categories;
+    categories.forEach(category => {
+      this._gamesService.getCategoriesCountByName(category.cat)
+        .subscribe(count => {
+          category.total = count;
+          this._categories.sort((a, b) => b.total - a.total).filter(cat => cat.total <= 0);
+        });
     });
   }
 }

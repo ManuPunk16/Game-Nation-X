@@ -2,13 +2,11 @@ import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { GamesService } from 'src/app/services/games.service';
-import { CategoriesService } from 'src/app/services/categories.service';
-import { PlatformsService } from 'src/app/services/platforms.service';
 import { DevelopersEditorsService } from 'src/app/services/developers-editors.service';
 import {
   Games,
-  Category,
-  Platform,
+  Categories,
+  Platforms,
   GameModes,
   Classification,
   ClassificationDescriptors,
@@ -47,8 +45,8 @@ export class EditGameComponent implements OnInit, OnDestroy {
   submitted = false;
   gameForm: FormGroup;
   public game?: Games;
-  public categories: Category[] = [];
-  public platforms: Platform[] = [];
+  public _categories = Categories.categories;
+  public _platforms = Platforms.platforms;
   public developers: Developers[] = [];
   public editors: Editors[] = [];
   public franchises: Franchise[] = [];
@@ -65,8 +63,6 @@ export class EditGameComponent implements OnInit, OnDestroy {
   constructor (
     @Inject(MAT_DIALOG_DATA) public data: any,
     private _gameService: GamesService,
-    private _categoryService: CategoriesService,
-    private _platformService: PlatformsService,
     private _devs: DevelopersEditorsService,
     private imageUploadService: FileUploadService,
     private dialog: MatDialog,
@@ -150,8 +146,8 @@ export class EditGameComponent implements OnInit, OnDestroy {
     this.getGameById();
     this.editor = new Editor();
     this.message = '';
-    this.getAllCategories();
-    this.getAllPlatforms();
+    this._categories.sort((a, b) => a.cat.localeCompare(b.cat));
+    this._platforms.sort((a, b) => a.plat.localeCompare(b.plat));
     this.getAllDevelopers();
     this.getAllEditors();
     this.getAllFranchises();
@@ -309,34 +305,6 @@ export class EditGameComponent implements OnInit, OnDestroy {
           linux_req_rec_storage: game?.linux_req_rec_storage
         });
       }
-    });
-  }
-
-  getAllCategories(): void {
-    this._categoryService.getAllCategories().snapshotChanges().pipe(
-      take(1),
-      map(changes =>
-        changes.map(c =>
-          ({ id: c.payload.doc.id, ...c.payload.doc.data() })
-        )
-      )
-    ).subscribe(data => {
-      this.categories = data;
-      // console.log(this.categories);
-    });
-  }
-
-  getAllPlatforms(): void {
-    this._platformService.getAllPlatforms().snapshotChanges().pipe(
-      take(1),
-      map(changes =>
-        changes.map(c =>
-          ({ id: c.payload.doc.id, ...c.payload.doc.data ()})
-        )
-      )
-    ).subscribe(data => {
-      this.platforms = data;
-      // console.log(this.platforms);
     });
   }
 

@@ -75,24 +75,6 @@
               </mat-form-field>
             </div>
 
-            <!-- <div
-              fxLayout="row"
-              fxLayout.xs="column"
-              fxLayoutWrap
-              fxLayoutAlign="center"
-              layout-margin
-            >
-              <mat-form-field appearance="fill" fxFlex="100%">
-                <mat-label>Sobre el Juego</mat-label>
-                <textarea matInput
-                  formControlName="about"
-                  cdkTextareaAutosize
-                  cdkAutosizeMinRows="1"
-                  cdkAutosizeMaxRows="10"
-                ></textarea>
-              </mat-form-field>
-            </div> -->
-
             <div
               fxLayout="row"
               fxLayout.xs="column"
@@ -103,20 +85,14 @@
               <mat-form-field appearance="fill" color="accent" fxFlex="33.3%">
                 <mat-label>Categorias</mat-label>
                 <mat-select formControlName="categories" multiple>
-                  <button matSuffix mat-icon-button (click)="onCategoryDialogCreate()">
-                    <mat-icon>backup</mat-icon>
-                  </button>
-                  <mat-option *ngFor="let cat of categories" [value]="cat.name">{{cat.name}}</mat-option>
+                  <mat-option *ngFor="let cat of _categories" [value]="cat.cat">{{cat.cat}}</mat-option>
                 </mat-select>
               </mat-form-field>
 
               <mat-form-field appearance="fill" color="accent" fxFlex="33.3%">
                 <mat-label>Plataformas</mat-label>
                 <mat-select formControlName="platforms" multiple>
-                  <button matSuffix mat-icon-button (click)="onPlatformDialogCreate()">
-                    <mat-icon>backup</mat-icon>
-                  </button>
-                  <mat-option *ngFor="let platform of platforms" [value]="platform.name">{{platform.name}}</mat-option>
+                  <mat-option *ngFor="let platform of _platforms" [value]="platform.plat">{{platform.plat}}</mat-option>
                 </mat-select>
               </mat-form-field>
 

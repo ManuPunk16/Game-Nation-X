@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
-import { Games, Category } from '../models/games.model';
+import { Games } from '../models/games.model';
 import { Observable, map } from 'rxjs';
 import * as _ from 'lodash';
 

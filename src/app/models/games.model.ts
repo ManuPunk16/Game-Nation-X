@@ -13,8 +13,8 @@ export class Games {
   game_modes!: GameModes[];
   release_date!: any;
   publication_date!: any;
-  categories!: Category[];
-  platforms!: Platform[];
+  categories!: Categories[];
+  platforms!: Platforms[];
   operative_systems!: string[];
 
   lang_interface?: Languages[];
@@ -74,24 +74,80 @@ export class Games {
   updatedAt?: Date;
 }
 
-export class Category {
-  id?: string;
-  name: string;
-  total: number;
-
-  constructor(
-    name: string,
-    total: number
-  ) {
-    this.name = name;
-    this.total = total
-  }
+export class Categories {
+  public static categories = [
+    { cat: 'AVENTURA', total: 0 },
+    { cat: 'CARRERAS', total: 0 },
+    { cat: 'MMORPG', total: 0 },
+    { cat: 'ESTRATEGIA', total: 0 },
+    { cat: 'SUPERVIVENCIA', total: 0 },
+    { cat: 'SANDBOX', total: 0 },
+    { cat: 'ACCIÓN', total: 0 },
+    { cat: 'MULTIJUGADOR MASIVO', total: 0 },
+    { cat: 'DEPORTES', total: 0 },
+    { cat: 'RPG', total: 0 },
+    { cat: 'TERROR', total: 0 },
+    { cat: 'INDIE', total: 0 },
+    { cat: 'SIMULACIÓN', total: 0 },
+    { cat: 'SIGILO', total: 0 },
+    { cat: 'ROL', total: 0 },
+  ];
 }
 
-export class Platform {
-  id?: string;
-  name?: string;
-  total?: number;
+export class Platforms {
+  public static platforms = [
+    { plat: 'STEAM', total: 0 },
+    { plat: 'Epic Games', total: 0 },
+    { plat: 'Ubisoft', total: 0 },
+    { plat: 'IOS', total: 0 },
+    { plat: 'MS-DOS', total: 0 },
+    { plat: 'Mac OS', total: 0 },
+    { plat: 'Project xCloud', total: 0 },
+    { plat: 'Google Stadia', total: 0 },
+    { plat: 'GOG', total: 0 },
+    { plat: 'Dreamcast', total: 0 },
+    { plat: 'Windows Mobile', total: 0 },
+    { plat: 'GNU/Linux', total: 0 },
+    { plat: 'Amazon Luna', total: 0 },
+    { plat: 'Atari 2600', total: 0 },
+    { plat: 'Android', total: 0 },
+    { plat: 'Game Boy', total: 0 },
+    { plat: 'Game Boy Color', total: 0 },
+    { plat: 'Game Boy Advance', total: 0 },
+    { plat: 'GameCube', total: 0 },
+    { plat: 'Mac OS Classic', total: 0 },
+    { plat: 'Microsoft Windows', total: 0 },
+    { plat: 'N-Gage', total: 0 },
+    { plat: 'Nintendo Nes', total: 0 },
+    { plat: 'Super Nintendo', total: 0 },
+    { plat: 'Nintendo Virtual Boy', total: 0 },
+    { plat: 'New Nintendo 3DS', total: 0 },
+    { plat: 'Nintendo DS', total: 0 },
+    { plat: 'Nintendo 64', total: 0 },
+    { plat: 'Nintendo Switch', total: 0 },
+    { plat: 'Neo-Geo', total: 0 },
+    { plat: 'PC', total: 0 },
+    { plat: 'PSP', total: 0 },
+    { plat: 'PlayStation', total: 0 },
+    { plat: 'PlayStation 2', total: 0 },
+    { plat: 'PlayStation 3', total: 0 },
+    { plat: 'PlayStation 4', total: 0 },
+    { plat: 'PlayStation 5', total: 0 },
+    { plat: 'PlayStation Vita', total: 0 },
+    { plat: 'PocketStation', total: 0 },
+    { plat: 'Raspberry PI', total: 0 },
+    { plat: 'Sega Saturn', total: 0 },
+    { plat: 'Sega Master System', total: 0 },
+    { plat: 'Sega Genesis', total: 0 },
+    { plat: 'Sega Mega Drive', total: 0 },
+    { plat: 'Sega Mega CD', total: 0 },
+    { plat: 'Wii', total: 0 },
+    { plat: 'Wii U', total: 0 },
+    { plat: 'Xbox', total: 0 },
+    { plat: 'XBOX 360', total: 0 },
+    { plat: 'Xbox One', total: 0 },
+    { plat: 'Xbox Series X|S', total: 0 }
+  ];
 }
 
 export class Classification {
