@@ -36,7 +36,6 @@ export class PlatformComponent implements OnInit{
     this._route.params.subscribe(params => {
       let name = params['name'];
       this._gamesService.getPlatformsByName(name).snapshotChanges().pipe(
-
         map(changes =>
           changes.map(c =>
             ({ id: c.payload.doc.id, ...c.payload.doc.data() }

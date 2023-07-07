@@ -35,7 +35,6 @@ export class CategoryComponent implements OnInit{
     this._route.params.subscribe(params => {
       let name = params['name'];
       this._gamesService.getCategoriesByName(name).snapshotChanges().pipe(
-        take(1),
         map(changes =>
           changes.map(c =>
             ({ id: c.payload.doc.id, ...c.payload.doc.data() }

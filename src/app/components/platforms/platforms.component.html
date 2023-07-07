@@ -1,7 +1,7 @@
 <div style="display: flex; flex-wrap: wrap;">
   <ng-container *ngFor="let item of _platforms | slice:0:20">
     <div style="flex-basis: 20%; flex-grow: 1; padding: 10px;">
-      <a [routerLink]="['category/', item.plat]">{{ item.plat }}<br>({{ item.total }})</a>
+      <a [routerLink]="['platform/', item.plat]">{{ item.plat }}<br>({{ item.total }})</a>
     </div>
   </ng-container>
 </div>
