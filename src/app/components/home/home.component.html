@@ -1,4 +1,39 @@
-<mat-card class="game-card" #latestUpdates>
+<mat-card class="game-card">
+  <mat-divider class="game-card-divider"></mat-divider>
+  <mat-card-content class="intro">
+    <div class="container text-center">
+      <div class="row">
+        <div class="col">
+          <h1>Bienvenidos a GameNationX</h1>
+        </div>
+      </div>
+      <hr style="border-top: dashed 8px;" />
+      <div class="row">
+        <div class="col">
+          <p class="start">
+            Tu fuente confiable de información sobre videojuegos. Reseñas detalladas y contenido técnico. Explora y toma decisiones informadas en el vasto mundo de los videojuegos. ¡Bienvenido!
+          </p>
+          <hr style="border-top: dashed 4px;" />
+          <h3>Navega entre nuestros enlaces</h3>
+          <br>
+          <p class="end">
+            <span>></span> <a class="link-intro" [routerLink]="['/']" fragment="nextReleases"> Próximos lanzamientos</a><br><br>
+            <span>></span> <a class="link-intro" [routerLink]="['/']" fragment="latestUpdates"> Últimas actualizaciones</a><br><br>
+            <span>></span> <a class="link-intro" [routerLink]="['/']" fragment="categories"> Juegos por categorías</a><br><br>
+            <span>></span> <a class="link-intro" [routerLink]="['/']" fragment="platforms"> Juegos por plataformas</a> <br><br>
+            <span>></span> <a class="link-intro" [routerLink]="['/']" fragment="latestUploads"> Últimos subidos</a> <br>
+          </p>
+        </div>
+        <!-- <div class="col-8">
+
+        </div> -->
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+<br>
+
+<mat-card class="game-card" id="nextReleases">
   <mat-card-header class="game-card-header">
     <mat-card-title class="game-card-title">Proximos Lanzamientos</mat-card-title>
   </mat-card-header>
@@ -7,8 +42,9 @@
     <app-upcoming></app-upcoming>
   </mat-card-content>
 </mat-card>
+<br>
 
-<mat-card class="game-card" #latestUpdates>
+<mat-card class="game-card" #latestUpdates id="latestUpdates">
   <mat-card-header class="game-card-header">
     <mat-card-title class="game-card-title">Últimas Actualizaciones</mat-card-title>
   </mat-card-header>
@@ -19,7 +55,7 @@
 </mat-card>
 <br>
 
-<mat-card class="game-card" #categories>
+<mat-card class="game-card" #categories id="categories">
   <mat-card-header class="game-card-header">
     <mat-card-title class="game-card-title">Juegos por Categorías</mat-card-title>
   </mat-card-header>
@@ -30,7 +66,7 @@
 </mat-card>
 <br>
 
-<mat-card class="game-card" #platforms>
+<mat-card class="game-card" #platforms id="platforms">
   <mat-card-header class="game-card-header">
     <mat-card-title class="game-card-title">Juegos por Plataformas</mat-card-title>
   </mat-card-header>
@@ -41,7 +77,7 @@
 </mat-card>
 <br>
 
-<mat-card class="game-card" #latestUploads>
+<mat-card class="game-card" #latestUploads id="latestUploads">
   <mat-card-header class="game-card-header">
     <mat-card-title class="game-card-title">Últimos Subidos</mat-card-title>
   </mat-card-header>

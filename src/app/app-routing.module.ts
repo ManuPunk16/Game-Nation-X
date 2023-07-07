@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { ErrorComponent } from './components/error/error.component';
 import { AddGameComponent } from './components/add-game/add-game.component';
@@ -21,6 +21,7 @@ import { SiteMapComponent } from './components/info-panel/site-map/site-map.comp
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full'},
+  // { path: 'add', component: AddGameComponent},
   { path: 'sitemap.xml', redirectTo: '/sitemap.xml', pathMatch: 'full' },
   { path: 'about', component: AboutComponent},
   { path: 'contact', component: ContactComponent },
@@ -40,10 +41,15 @@ const routes: Routes = [
   { path: '**', component: ErrorComponent }
 ];
 
+const routerOptions: ExtraOptions = {
+  useHash: false,
+  anchorScrolling: 'enabled',
+  initialNavigation: 'enabledBlocking'
+  // ...any other options you'd like to use
+};
+
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
-    initialNavigation: 'enabledBlocking'
-})],
+  imports: [RouterModule.forRoot(routes, routerOptions)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+.intro {
+  color: rgba(255, 255, 255, 0.8);
+  background-color: rgb(0, 0, 0);
+  padding: 15px;
+  font-family: 'Press Start 2P';
+}
+
+.intro h1 {
+  font-weight: 700;
+  font-style: normal;
+  font-size: 38px;
+  line-height: 1.15;
+  letter-spacing: -.02em;
+}
+
+.start {
+  text-align: center;
+  line-height: 30px;
+}
+
+.end {
+  text-align: start;
+  line-height: 30px;
+}
+
+.link-intro {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+}

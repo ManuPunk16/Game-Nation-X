@@ -6,6 +6,7 @@ import { Observable, Subscription, map, shareReplay } from 'rxjs';
 import { Games } from './models/games.model';
 import { ThemeService } from './services/theme.service';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -34,12 +35,20 @@ export class AppComponent implements OnInit {
     public authService: AuthServiceTsService,
     private _gameService: GamesService,
     private themeService: ThemeService,
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
+    private router: Router
   ){
 
   }
 
   ngOnInit(): void {
+    this.router.events.subscribe((evt) => {
+      if (!(evt instanceof NavigationEnd)) {
+          return;
+      }
+      window.scrollTo(0, 0)
+    });
+
     this.themeSubscription = this.themeService.isDarkTheme$.subscribe(isDarkTheme => {
       this.isDarkTheme = isDarkTheme;
     });
