@@ -81,6 +81,7 @@ import { PrivacyPolicyComponent } from './components/info-panel/privacy-policy/p
 import { SiteMapComponent } from './components/info-panel/site-map/site-map.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { UpcomingComponent } from './components/upcoming/upcoming.component';
+import { UpcomingNodateComponent } from './components/upcoming-nodate/upcoming-nodate.component';
 
 @NgModule({
   declarations: [
@@ -117,7 +118,8 @@ import { UpcomingComponent } from './components/upcoming/upcoming.component';
     DesclimerComponent,
     PrivacyPolicyComponent,
     SiteMapComponent,
-    UpcomingComponent
+    UpcomingComponent,
+    UpcomingNodateComponent
   ],
   imports: [
     BrowserModule,

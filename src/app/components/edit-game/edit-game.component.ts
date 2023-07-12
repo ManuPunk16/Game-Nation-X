@@ -70,7 +70,7 @@ export class EditGameComponent implements OnInit, OnDestroy {
   ) {
     this.gameForm = new FormGroup({
       name: new FormControl('', Validators.required),
-      release_date: new FormControl(''),
+      soon: new FormControl(''),
       profile_image: new FormControl(''),
       publication_date: new FormControl('', Validators.required),
       about: new FormControl(''),
@@ -169,7 +169,7 @@ export class EditGameComponent implements OnInit, OnDestroy {
 
         this.gameForm.patchValue({
           name: game?.name,
-          release_date: game?.release_date,
+          soon: game?.soon,
           publication_date: date,
           about: game?.about,
           classification: game?.classification,
@@ -238,7 +238,7 @@ export class EditGameComponent implements OnInit, OnDestroy {
       } else {
         this.gameForm.patchValue({
           name: game?.name,
-          release_date: game?.release_date,
+          soon: game?.soon,
           publication_date: game?.publication_date,
           about: game?.about,
           classification: game?.classification,

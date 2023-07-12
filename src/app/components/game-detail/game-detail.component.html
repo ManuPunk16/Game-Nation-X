@@ -306,8 +306,11 @@
             <div *ngIf="games?.franchise">
               FRANQUICIA: {{ games?.franchise }}
             </div>
-            <div *ngIf="games?.publication_date">
+            <div *ngIf="games?.publication_date && !games?.soon">
               FECHA DE LANZAMIENTO: {{ games?.publication_date.toDate() | date }}
+            </div>
+            <div *ngIf="games?.soon">
+              FECHA DE LANZAMIENTO: {{ games?.soon }}
             </div>
           </mat-card-content>
         </mat-card>

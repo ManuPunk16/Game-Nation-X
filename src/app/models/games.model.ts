@@ -11,7 +11,7 @@ export class Games {
   editors!: Editors[];
   franchise!: Franchise;
   game_modes!: GameModes[];
-  release_date!: any;
+  soon!: any;
   publication_date!: any;
   categories!: Categories[];
   platforms!: Platforms[];
@@ -105,6 +105,7 @@ export class Categories {
     { key: 27, cat: 'FANTASÍA', total: 0 },
     { key: 28, cat: 'MMO', total: 0 },
     { key: 29, cat: 'EXPLORACIÓN', total: 0 },
+    { key: 30, cat: 'PELEA', total: 0 },
   ];
 }
 
