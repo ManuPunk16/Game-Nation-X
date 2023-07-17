@@ -5,7 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ChunkPipe } from './pipes/chunk.pipe';
 import { NgxEditorModule } from 'ngx-editor';
-import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthServiceTsService } from './services/auth.service.ts.service';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -25,7 +24,6 @@ import { FooterComponent } from './components/footer/footer.component';
 import { AddGameComponent } from './components/add-game/add-game.component';
 import { GameDetailComponent } from './components/game-detail/game-detail.component';
 
-import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -52,7 +50,6 @@ import localePy from '@angular/common/locales/es';
 import { registerLocaleData, NgOptimizedImage } from '@angular/common';
 registerLocaleData(localePy, 'es');
 
-import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
 import { LatestUpdatesComponent } from './components/latest-updates/latest-updates.component';
 import { LatestUploadsComponent } from './components/latest-uploads/latest-uploads.component';
@@ -140,8 +137,6 @@ import { UpcomingNodateComponent } from './components/upcoming-nodate/upcoming-n
     MatListModule,
     MatInputModule,
     MatDatepickerModule,
-    MatNativeDateModule,
-    CarouselModule,
     MatDialogModule,
     MatSelectModule,
     MatBadgeModule,
@@ -152,7 +147,6 @@ import { UpcomingNodateComponent } from './components/upcoming-nodate/upcoming-n
     MatStepperModule,
     MatTabsModule,
     NgxEditorModule,
-    MaterialFileInputModule,
     MatAutocompleteModule,
     MatSidenavModule,
     HttpClientModule,
@@ -168,8 +162,7 @@ import { UpcomingNodateComponent } from './components/upcoming-nodate/upcoming-n
     MatSortModule
   ],
   providers: [
-    AuthServiceTsService,
-    {provide: MAT_DATE_LOCALE, useValue: 'es-MX'},
+    AuthServiceTsService
   ],
   bootstrap: [AppComponent]
 })
