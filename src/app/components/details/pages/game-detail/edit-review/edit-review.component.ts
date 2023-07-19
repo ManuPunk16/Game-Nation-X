@@ -3,7 +3,7 @@ import { Rating } from 'src/app/models/rating.model';
 import { RatingService } from 'src/app/services/rating.service';
 import { AuthServiceTsService } from 'src/app/services/auth.service.ts.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import * as dayjs from 'dayjs';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 

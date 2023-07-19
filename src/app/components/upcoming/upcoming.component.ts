@@ -3,7 +3,7 @@ import { GamesService } from 'src/app/services/games.service';
 import { Games } from 'src/app/models/games.model';
 import { map } from 'rxjs';
 import { Meta } from '@angular/platform-browser';
-import { DocumentChangeAction } from '@angular/fire/firestore';
+import { DocumentChangeAction } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-upcoming',

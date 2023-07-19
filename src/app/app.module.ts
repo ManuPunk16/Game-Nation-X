@@ -8,11 +8,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthServiceTsService } from './services/auth.service.ts.service';
 import { NgxPaginationModule } from 'ngx-pagination';
 
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireAuthModule } from "@angular/fire/auth";
-import { AngularFireDatabaseModule } from '@angular/fire/database';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from "@angular/fire/compat/auth";
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { environment } from '../environments/enviroment';
 
 import { AppRoutingModule } from './app-routing.module';
