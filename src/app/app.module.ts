@@ -44,6 +44,7 @@ import { PlatformComponent } from './components/platforms/platform/platform.comp
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { UpcomingComponent } from './components/upcoming/upcoming.component';
 import { UpcomingNodateComponent } from './components/upcoming-nodate/upcoming-nodate.component';
+import { LoginComponent } from './components/details/pages/login/login.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { UpcomingNodateComponent } from './components/upcoming-nodate/upcoming-n
     CategoryComponent,
     PlatformComponent,
     UpcomingComponent,
-    UpcomingNodateComponent
+    UpcomingNodateComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

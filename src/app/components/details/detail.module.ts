@@ -14,13 +14,13 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { GameDetailComponent } from './pages/game-detail/game-detail.component';
 import { EditReviewComponent } from './pages/game-detail/edit-review/edit-review.component';
-import { LoginComponent } from './pages/login/login.component';
+// import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   declarations: [
     GameDetailComponent,
     EditReviewComponent,
-    LoginComponent
+    // LoginComponent
   ],
   imports: [
     CommonModule,
