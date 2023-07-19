@@ -13,7 +13,7 @@ import {
   Languages,
   OperativeSystem,
   Developers, Editors, Franchise } from 'src/app/models/games.model';
-import * as moment from 'moment';
+import * as dayjs from 'dayjs';
 import { map, take } from 'rxjs';
 import { Editor, Toolbar } from 'ngx-editor';
 import { FileUploadService } from 'src/app/services/file-upload.service';
@@ -87,7 +87,7 @@ export class EditGameComponent implements OnInit, OnDestroy {
       lang_subtitles: new FormControl(''),
       lang_voices: new FormControl(''),
       published: new FormControl(false),
-      updatedAt: new FormControl(moment().toDate()),
+      updatedAt: new FormControl(dayjs().toDate()),
 
       windows_req_min_so: new FormControl(''),
       windows_req_min_processor: new FormControl(''),
@@ -310,7 +310,6 @@ export class EditGameComponent implements OnInit, OnDestroy {
 
   getAllDevelopers(): void {
     this._devs.getAllDevelopers().snapshotChanges().pipe(
-      take(1),
       map(changes =>
         changes.map(c =>
           ({ dev: c.payload.doc.id, ...c.payload.doc.data ()})
@@ -324,7 +323,6 @@ export class EditGameComponent implements OnInit, OnDestroy {
 
   getAllEditors(): void {
     this._devs.getAllEditors().snapshotChanges().pipe(
-      take(1),
       map(changes =>
         changes.map(c =>
           ({ edit: c.payload.doc.id, ...c.payload.doc.data ()})
@@ -338,7 +336,6 @@ export class EditGameComponent implements OnInit, OnDestroy {
 
   getAllFranchises(): void {
     this._devs.getAllFranchises().snapshotChanges().pipe(
-      take(1),
       map(changes =>
         changes.map(c =>
           ({ fran: c.payload.doc.id, ...c.payload.doc.data ()})
@@ -356,7 +353,7 @@ export class EditGameComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     let id = this.data;
-    this.gameForm.value.updatedAt = moment().toDate();
+    this.gameForm.value.updatedAt = dayjs().toDate();
     let data = this.gameForm.value;
 
     if (!data.profile_image) {
@@ -403,7 +400,7 @@ export class EditGameComponent implements OnInit, OnDestroy {
         this.gameForm.patchValue({ profile_image: this.imageUrl });
 
         let id = this.data;
-        this.gameForm.value.updatedAt = moment().toDate();
+        this.gameForm.value.updatedAt = dayjs().toDate();
         let data = this.gameForm.value;
         // console.log(data.profile_image);
 

@@ -1,10 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
-
-import { Observable, combineLatest } from 'rxjs';
-import { finalize, map } from 'rxjs/operators';
-import { FileUpload } from '../models/file-upload.model';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { finalize } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +8,7 @@ import { FileUpload } from '../models/file-upload.model';
 export class FileUploadService {
   private basePath = '/uploads';
 
-  constructor(private db: AngularFireDatabase, private storage: AngularFireStorage) { }
+  constructor(private storage: AngularFireStorage) { }
 
   uploadImage(file: File): Promise<string> {
     const filePath = `images/${file.name}`;

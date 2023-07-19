@@ -1,9 +1,7 @@
 import { Injectable, NgZone } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
-import firebase from 'firebase/compat/app';
+import { AngularFireAuth } from '@angular/fire/auth';
+import firebase from 'firebase/app';
 import { Router } from '@angular/router';
-import { User } from './user';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +13,6 @@ export class AuthServiceTsService {
 
   constructor(
     private afAuth: AngularFireAuth,
-    private afs: AngularFirestore,
     public router: Router,
     public ngZone: NgZone
   ) {
@@ -42,9 +39,8 @@ export class AuthServiceTsService {
     // Verificar si el usuario autenticado tiene el correo electrónico permitido
     if (userCredential) {
       if (userCredential.user?.email === 'luisadrianhdzsoto@gmail.com') {
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/notch/dashboard']);
       }
-      // console.log(userCredential.user);
       this.isLoggedIn = true;
       // Guardar sesión en cache con vencimiento en tres horas
       const expirationDate = new Date().getTime() + (3 * 60 * 60 * 1000);
@@ -57,26 +53,6 @@ export class AuthServiceTsService {
       alert('Acceso denegado. Por favor inicie sesión con una cuenta autorizada.');
     }
   }
-
-  /* Setting up user data when sign in with username/password,
-  sign up with username/password and sign in with social auth
-  provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
-  // SetUserData(user: any) {
-  //   const userRef: AngularFirestoreDocument<any> = this.afs.doc(
-  //     `users/${user.uid}`
-  //   );
-  //   const userData: User = {
-  //     uid: user.uid,
-  //     email: user.email,
-  //     displayName: user.displayName,
-  //     photoURL: user.photoURL,
-  //     emailVerified: user.emailVerified,
-  //     role: user.role
-  //   };
-  //   return userRef.set(userData, {
-  //     merge: true,
-  //   });
-  // }
 
   async logout() {
     await this.afAuth.signOut();

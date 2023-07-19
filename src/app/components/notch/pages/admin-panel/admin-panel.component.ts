@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { GamesService } from '../../services/games.service';
-import { Games } from '../../models/games.model';
+import { GamesService } from 'src/app/services/games.service';
+import { Games } from 'src/app/models/games.model';
 import { map } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { AddGameComponent } from '../add-game/add-game.component';

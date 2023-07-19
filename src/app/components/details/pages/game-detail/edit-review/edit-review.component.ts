@@ -3,8 +3,8 @@ import { Rating } from 'src/app/models/rating.model';
 import { RatingService } from 'src/app/services/rating.service';
 import { AuthServiceTsService } from 'src/app/services/auth.service.ts.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import * as moment from 'moment';
+import { AngularFireAuth } from '@angular/fire/auth';
+import * as dayjs from 'dayjs';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
@@ -38,7 +38,7 @@ export class EditReviewComponent implements OnInit {
           photoURL: new FormControl(this.userDataEdit.photoURL, Validators.required),
           rating: new FormControl('', Validators.required),
           comment: new FormControl(''),
-          updatedAt: new FormControl(moment().toDate())
+          updatedAt: new FormControl(dayjs().toDate())
         });
         localStorage.setItem('user', JSON.stringify(this.userDataEdit));
         JSON.parse(localStorage.getItem('user')!);
@@ -51,7 +51,7 @@ export class EditReviewComponent implements OnInit {
 
   ngOnInit(): void {
     let ratingId = this.data;
-    this.ratingService.getRatingById(ratingId).valueChanges().subscribe(data => {
+    this.ratingService.getRatingById(ratingId).valueChanges().subscribe((data: Rating | undefined) => {
       this.ratingData = data;
       // console.log(this.ratingData);
 

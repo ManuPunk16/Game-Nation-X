@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, DocumentReference } from '@angular/fire/compat/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, DocumentReference } from '@angular/fire/firestore';
 import { Rating } from '../models/rating.model';
 import { Observable, map } from 'rxjs';
 
@@ -24,14 +24,6 @@ export class RatingService {
   updateComment(id: string, data: any): Promise<void> {
     return this.firestore.collection('reviews').doc(id).update(data);
   }
-
-  // getCommentsByGameId(gameId: string): Observable<Rating[]> {
-  //   const gameIdRef = this.firestore.doc(gameId).ref;
-
-  //   return this.firestore.collection<Rating>('reviews', ref =>
-  //     ref.where('gameId', '==', gameIdRef).where('comment', '!=', '')
-  //   ).valueChanges();
-  // }
 
   getCommentsByGameId(gameId: string): Observable<Rating[]> {
     const gameIdRef = this.firestore.doc(gameId).ref;

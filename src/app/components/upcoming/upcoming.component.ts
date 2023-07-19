@@ -1,8 +1,9 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { GamesService } from 'src/app/services/games.service';
 import { Games } from 'src/app/models/games.model';
 import { map } from 'rxjs';
 import { Meta } from '@angular/platform-browser';
+import { DocumentChangeAction } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-upcoming',
@@ -27,13 +28,12 @@ export class UpcomingComponent implements OnInit {
 
   upcomingGames(): void {
     this._gamesService.getUpcomingGames().snapshotChanges().pipe(
-
-      map(changes =>
+      map((changes: DocumentChangeAction<Games>[]) =>
         changes.map(c =>
           ({ id: c.payload.doc.id, ...c.payload.doc.data() })
         ).filter(game => !game.soon)
       )
-    ).subscribe(data => {
+    ).subscribe((data: Games[]) => {
       this.games = data;
 
       this.games.slice(0, 15).forEach(game => {
@@ -44,5 +44,4 @@ export class UpcomingComponent implements OnInit {
       });
     });
   }
-
 }

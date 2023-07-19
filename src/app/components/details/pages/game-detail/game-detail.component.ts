@@ -10,9 +10,9 @@ import { ThemeService } from 'src/app/services/theme.service';
 import { RatingService } from 'src/app/services/rating.service';
 import { Rating } from 'src/app/models/rating.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import * as moment from 'moment';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
+import * as dayjs from 'dayjs';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { User } from 'src/app/services/user';
 import { AuthServiceTsService } from 'src/app/services/auth.service.ts.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -72,7 +72,7 @@ export class GameDetailComponent implements OnInit, OnDestroy {
           photoURL: new FormControl(this.userData.photoURL, Validators.required),
           rating: new FormControl('', Validators.required),
           comment: new FormControl(''),
-          updatedAt: new FormControl(moment().toDate())
+          updatedAt: new FormControl(dayjs().toDate())
         });
         localStorage.setItem('user', JSON.stringify(this.userData));
         JSON.parse(localStorage.getItem('user')!);
@@ -95,7 +95,7 @@ export class GameDetailComponent implements OnInit, OnDestroy {
   getAndValidData(): void {
     this._route.params.subscribe(params => {
       let id = params['id'];
-      this._gameService.getGameById(id).valueChanges().subscribe(game => {
+      this._gameService.getGameById(id).valueChanges().subscribe((game: Games | undefined) => {
         this.games = game;
 
         if (this.games) {

@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import * as moment from 'moment';
+import * as dayjs from 'dayjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { GamesService } from '../../services/games.service';
+import { GamesService } from '../../../../services/games.service';
 import {
   Games,
   Categories,
@@ -12,7 +12,7 @@ import {
   Languages,
   OperativeSystem,
   Developers, Editors, Franchise } from 'src/app/models/games.model';
-import { map, take } from 'rxjs';
+import { map } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { Editor, Toolbar } from 'ngx-editor';
 import { DevelopersEditorsService } from 'src/app/services/developers-editors.service';
@@ -84,8 +84,8 @@ export class AddGameComponent implements OnInit, OnDestroy {
       lang_subtitles: new FormControl(''),
       lang_voices: new FormControl(''),
       published: new FormControl(false),
-      createdAt: new FormControl(moment().toDate()),
-      updatedAt: new FormControl(moment().toDate()),
+      createdAt: new FormControl(dayjs().toDate()),
+      updatedAt: new FormControl(dayjs().toDate()),
 
       windows_req_min_so: new FormControl(''),
       windows_req_min_processor: new FormControl(''),
