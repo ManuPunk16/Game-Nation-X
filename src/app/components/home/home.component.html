@@ -17,7 +17,6 @@
           <h3>Navega entre nuestros enlaces</h3>
           <br>
           <p class="end">
-            <span>></span> <a class="link-intro" [routerLink]="['/']" fragment="nextReleases"> Próximos lanzamientos</a><br><br>
             <span>></span> <a class="link-intro" [routerLink]="['/']" fragment="latestUpdates"> Últimas actualizaciones</a><br><br>
             <span>></span> <a class="link-intro" [routerLink]="['/']" fragment="categories"> Juegos por categorías</a><br><br>
             <span>></span> <a class="link-intro" [routerLink]="['/']" fragment="platforms"> Juegos por plataformas</a> <br><br>
@@ -29,28 +28,6 @@
         </div> -->
       </div>
     </div>
-  </mat-card-content>
-</mat-card>
-<br>
-
-<mat-card class="game-card" id="nextReleases">
-  <mat-card-header class="game-card-header">
-    <mat-card-title class="game-card-title">Proximos Lanzamientos sin fecha establecida</mat-card-title>
-  </mat-card-header>
-  <mat-divider class="game-card-divider"></mat-divider>
-  <mat-card-content class="game-card-content">
-    <app-upcoming-nodate></app-upcoming-nodate>
-  </mat-card-content>
-</mat-card>
-<br>
-
-<mat-card class="game-card" id="nextReleases">
-  <mat-card-header class="game-card-header">
-    <mat-card-title class="game-card-title">Proximos Lanzamientos con fecha establecida</mat-card-title>
-  </mat-card-header>
-  <mat-divider class="game-card-divider"></mat-divider>
-  <mat-card-content class="game-card-content">
-    <app-upcoming></app-upcoming>
   </mat-card-content>
 </mat-card>
 <br>

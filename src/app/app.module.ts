@@ -42,8 +42,6 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { CategoryComponent } from './components/categories/category/category.component';
 import { PlatformComponent } from './components/platforms/platform/platform.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { UpcomingComponent } from './components/upcoming/upcoming.component';
-import { UpcomingNodateComponent } from './components/upcoming-nodate/upcoming-nodate.component';
 import { LoginComponent } from './components/details/pages/login/login.component';
 
 @NgModule({
@@ -59,8 +57,6 @@ import { LoginComponent } from './components/details/pages/login/login.component
     ChunkPipe,
     CategoryComponent,
     PlatformComponent,
-    UpcomingComponent,
-    UpcomingNodateComponent,
     LoginComponent
   ],
   imports: [

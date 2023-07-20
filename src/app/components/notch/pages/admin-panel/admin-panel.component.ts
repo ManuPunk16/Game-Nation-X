@@ -115,7 +115,7 @@ export class AdminPanelComponent implements OnInit {
     let xmlBody = '';
 
     games.forEach(game => {
-      const gameUrl = `https://gamenax.com/game-details/${game.id}`;
+      const gameUrl = `https://gamenax.com/details/game-details/${game.id}`;
       const lastMod = this.datepipe.transform(game.updatedAt.toDate(), 'yyyy-MM-dd');
       const urlXml = `<url>\n<loc>${gameUrl}</loc>\n<lastmod>${lastMod}</lastmod>\n</url>\n`;
       xmlBody += urlXml;

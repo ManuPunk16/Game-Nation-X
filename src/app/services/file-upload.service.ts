@@ -6,7 +6,6 @@ import { finalize } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class FileUploadService {
-  private basePath = '/uploads';
 
   constructor(private storage: AngularFireStorage) { }
 

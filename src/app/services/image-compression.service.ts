@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ImageCompressionService {
 
-  constructor(private http: HttpClient) {}
+  constructor() {}
 
   compressImage(file: File): Promise<Blob> {
     return new Promise((resolve, reject) => {
@@ -19,8 +18,8 @@ export class ImageCompressionService {
 
           if (ctx) {
             // Redimensionar la imagen si es necesario
-            const MAX_WIDTH = 720;
-            const MAX_HEIGHT = 960;
+            const MAX_WIDTH = 360;
+            const MAX_HEIGHT = 480;
             let width = img.width;
             let height = img.height;
 
