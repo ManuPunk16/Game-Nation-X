@@ -19,7 +19,6 @@ import { Editor, Toolbar } from 'ngx-editor';
 import { FileUploadService } from 'src/app/services/file-upload.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
-import { ImageCompressionService } from 'src/app/services/image-compression.service';
 
 @Component({
   selector: 'app-edit-game',
@@ -65,8 +64,7 @@ export class EditGameComponent implements OnInit, OnDestroy {
     private _gameService: GamesService,
     private _devs: DevelopersEditorsService,
     private imageUploadService: FileUploadService,
-    private dialog: MatDialog,
-    private imageCompressionService: ImageCompressionService
+    private dialog: MatDialog
   ) {
     this.gameForm = new FormGroup({
       name: new FormControl('', Validators.required),
@@ -386,15 +384,9 @@ export class EditGameComponent implements OnInit, OnDestroy {
   async upload() {
     if (this.selectedFiles) {
       try {
-        const compressedImage = await this.imageCompressionService.compressImage(
-          this.selectedFiles
-        );
-        const compressedFile = new File([compressedImage], this.gameForm.value.name, {
-          type: 'image/webp'
-        });
 
         const imageUrl = await this.imageUploadService.uploadImage(
-          compressedFile
+          this.selectedFiles
         );
         this.imageUrl = this.extractFileName(imageUrl);
         this.gameForm.patchValue({ profile_image: this.imageUrl });
