@@ -133,8 +133,8 @@ export class Platforms {
     { key: 20, plat: 'Mac OS Classic', total: 0 },
     { key: 21, plat: 'Microsoft Windows', total: 0 },
     { key: 22, plat: 'N-Gage', total: 0 },
-    { key: 23, plat: 'Nintendo Nes', total: 0 },
-    { key: 24, plat: 'Super Nintendo', total: 0 },
+    { key: 23, plat: 'Nintendo (NES)', total: 0 },
+    { key: 24, plat: 'Super Nintendo (SNES)', total: 0 },
     { key: 25, plat: 'Nintendo Virtual Boy', total: 0 },
     { key: 26, plat: 'New Nintendo 3DS', total: 0 },
     { key: 27, plat: 'Nintendo DS', total: 0 },
@@ -162,7 +162,12 @@ export class Platforms {
     { key: 49, plat: 'XBOX 360', total: 0 },
     { key: 50, plat: 'Xbox One', total: 0 },
     { key: 51, plat: 'Xbox Series X|S', total: 0 },
-    { key: 52, plat: 'GeForce Now', total: 0 }
+    { key: 52, plat: 'GeForce Now', total: 0 },
+    { key: 53, plat: 'Pokémon Mini', total: 0 },
+    { key: 54, plat: 'Satellaview', total: 0 },
+    { key: 55, plat: 'Famicom Disk System', total: 0 },
+    { key: 56, plat: 'Game & Watch', total: 0 },
+    { key: 57, plat: 'Color TV Game', total: 0 }
   ];
 }
 
