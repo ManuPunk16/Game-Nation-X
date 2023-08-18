@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Meta } from '@angular/platform-browser';
+import { Meta, Title } from '@angular/platform-browser';
 import { GamesService } from 'src/app/services/games.service';
 import { Classification, Games, Languages, GameModes } from 'src/app/models/games.model';
 import { ActivatedRoute } from '@angular/router';
@@ -57,7 +57,8 @@ export class GameDetailComponent implements OnInit, OnDestroy {
     private firestore: AngularFirestore,
     public authService: AuthServiceTsService,
     public _dialog: MatDialog,
-    private meta: Meta
+    private meta: Meta,
+    private title: Title
   ) {
     this.ratingForm = new FormGroup({
       comment: new FormControl('')
@@ -101,10 +102,30 @@ export class GameDetailComponent implements OnInit, OnDestroy {
         if (this.games) {
           this.safeAbout = this.games?.about ? this.sanitizer.bypassSecurityTrustHtml(this.games.about) : '';
 
-          this.meta.addTags([
-            { name: 'description', content: this.games.about },
-            { property: 'og:title', content: this.games.name }
-          ]);
+          const updatedAt = this.games.updatedAt;
+
+          if (updatedAt instanceof Date) {
+            const updatedAtFormatted = updatedAt.toISOString().split('T')[0];
+
+            this.meta.addTags([
+              { name: 'description', content: this.games.about }, //ajustar keywords
+              { name: 'robots', content: 'index, follow' },
+              { name: 'author', content: 'Luis Hernandez' },
+              { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+              { name: 'date', content: updatedAtFormatted, scheme: 'YYYY-MM-DD' },
+              { charset: 'UTF-8' }
+            ]);
+          } else {
+            this.meta.addTags([
+              { name: 'description', content: this.games.about }, //ajustar keywords
+              { name: 'robots', content: 'index, follow' },
+              { name: 'author', content: 'Luis Hernandez' },
+              { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+              { charset: 'UTF-8' }
+            ]);
+          }
+
+          this.title.setTitle(this.games.name);
         }
         // console.log(this.games?.profile_image);
         if (this.games?.classification) {

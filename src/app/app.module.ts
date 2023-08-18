@@ -1,5 +1,5 @@
 import { NgModule, isDevMode } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -92,7 +92,7 @@ import { LoginComponent } from './components/details/pages/login/login.component
     MatButtonModule
   ],
   providers: [
-    AuthServiceTsService
+    AuthServiceTsService, provideClientHydration()
   ],
   bootstrap: [AppComponent]
 })
