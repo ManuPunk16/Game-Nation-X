@@ -100,7 +100,8 @@ export class GameDetailComponent implements OnInit, OnDestroy {
         this.games = game;
 
         if (this.games) {
-          this.safeAbout = this.games?.about ? this.sanitizer.bypassSecurityTrustHtml(this.games.about) : '';
+          // this.safeAbout = this.games?.about ? this.sanitizer.bypassSecurityTrustHtml(this.games.about) : '';
+          this.safeAbout = this.games?.about;
 
           const updatedAt = this.games.updatedAt;
 

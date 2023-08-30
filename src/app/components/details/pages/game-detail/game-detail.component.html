@@ -16,12 +16,17 @@
         <div [style.margin-right]="'20px'">
           <mat-card>
             <img mat-card-image *ngIf="games?.profile_image" [src]="games?.profile_image" [alt]="games?.name" style="max-width: 240px; max-height: 320px;">
+            <title>{{ games?.name }}</title>
             <mat-card-content>
               <div class="categories-container" *ngIf="games?.categories">
-                <div class="category-badge" *ngFor="let category of games?.categories">{{ category }}</div>
+                <div class="category-badge" *ngFor="let category of games?.categories">
+                  <a [routerLink]="['/category/', category]">{{ category }}</a>
+                </div>
               </div>
               <div class="platforms-container" *ngIf="games?.platforms">
-                <div class="platform-badge" *ngFor="let platform of games?.platforms">{{ platform }}</div>
+                <div class="platform-badge" *ngFor="let platform of games?.platforms">
+                  <a [routerLink]="['/platform/', platform]">{{ platform }}</a>
+                </div>
               </div>
               <br>
               <mat-divider></mat-divider>
