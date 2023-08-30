@@ -11,7 +11,10 @@ import { LoginComponent } from './components/details/pages/login/login.component
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full'},
+  { path: 'sitemap_index.xml', redirectTo: '/sitemap_index.xml', pathMatch: 'full' },
   { path: 'sitemap.xml', redirectTo: '/sitemap.xml', pathMatch: 'full' },
+  { path: 'sitemap1.xml', redirectTo: '/sitemap1.xml', pathMatch: 'full' },
+  { path: 'sitemap2.xml', redirectTo: '/sitemap2.xml', pathMatch: 'full' },
   {
     path: 'info',
     loadChildren: () => import('./components/info-panel/info.module').then( m => m.InfoModule )
