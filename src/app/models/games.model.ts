@@ -166,7 +166,7 @@ export class Platforms {
     { key: 53, plat: 'Pokémon Mini', total: 0 },
     { key: 54, plat: 'Satellaview', total: 0 },
     { key: 55, plat: 'Famicom Disk System', total: 0 },
-    { key: 56, plat: 'Game & Watch', total: 0 },
+    { key: 56, plat: 'Game and Watch', total: 0 },
     { key: 57, plat: 'Color TV Game', total: 0 }
   ];
 }
