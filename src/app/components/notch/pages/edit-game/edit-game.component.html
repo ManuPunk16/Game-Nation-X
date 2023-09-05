@@ -1,513 +1,667 @@
-<mat-card color="accent">
-  <mat-card-header>
-    <mat-card-title>
-      Edicion del juego
-    </mat-card-title>
-  </mat-card-header>
-  <br>
-  <mat-divider></mat-divider>
-  <br>
-  <mat-card-content>
-    <div *ngIf="!submitted">
-      <mat-stepper #stepper linear>
-        <mat-step [stepControl]="gameForm" label="Informacion Basica">
-          <form [formGroup]="gameForm" novalidate>
-            <div
-              fxLayout="row"
-              fxLayout.xs="column"
-              fxLayoutWrap
-              fxLayoutAlign="center"
-              layout-margin
-            >
-              <mat-form-field appearance="fill" color="accent" fxFlex="33.3%">
-                <mat-label>Nombre</mat-label>
-                <input matInput formControlName="name">
-              </mat-form-field>
+<h2 mat-dialog-title> Editar Juego </h2>
 
-              <mat-form-field appearance="fill" color="accent" fxFlex="33.3%">
-                <mat-label>Nuevo lanzamiento</mat-label>
-                <input matInput formControlName="soon">
-              </mat-form-field>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+  <!-- <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button> -->
+</mat-dialog-actions>
 
-              <mat-form-field appearance="fill" color="accent" fxFlex="33.3%">
-                <mat-label>Fecha de Publicacion</mat-label>
-                <input matInput [matDatepicker]="picker1" formControlName="publication_date">
-                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                <mat-datepicker #picker1></mat-datepicker>
-              </mat-form-field>
-            </div>
+<mat-dialog-content>
+  <div *ngIf="!submitted">
+    <mat-stepper #stepper linear>
+      <mat-step [stepControl]="gameForm" label="Informacion Basica">
+        <form [formGroup]="gameForm" novalidate>
+          <div
+            fxLayout="row"
+            fxLayout.xs="column"
+            fxLayoutWrap
+            fxLayoutAlign="center"
+            layout-margin
+          >
+            <mat-form-field appearance="fill" color="accent" fxFlex="33.3%">
+              <mat-label>Nombre</mat-label>
+              <input matInput formControlName="name">
+            </mat-form-field>
 
-            <div
-              fxLayout="row"
-              fxLayout.xs="column"
-              fxLayoutWrap
-              fxLayoutAlign="center"
-              layout-margin>
-              <mat-form-field appearance="fill" color="accent" fxFlex="33.3%">
-                <mat-label>Franquicia</mat-label>
-                <mat-select formControlName="franchise" multiple>
-                  <mat-option *ngFor="let fran of franchises" [value]="fran.name">{{fran.name}}</mat-option>
-                </mat-select>
-              </mat-form-field>
+            <mat-form-field appearance="fill" color="accent" fxFlex="33.3%">
+              <mat-label>Nuevo lanzamiento</mat-label>
+              <input matInput formControlName="soon">
+            </mat-form-field>
 
-              <mat-form-field appearance="fill" color="accent" fxFlex="33.3%">
-                <mat-label>Desarrolladores</mat-label>
-                <mat-select formControlName="developers" multiple>
-                  <mat-option *ngFor="let dev of developers" [value]="dev.name">{{dev.name}}</mat-option>
-                </mat-select>
-              </mat-form-field>
+            <mat-form-field appearance="fill" color="accent" fxFlex="33.3%">
+              <mat-label>Fecha de Publicacion</mat-label>
+              <input matInput [matDatepicker]="picker1" formControlName="publication_date">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+          </div>
 
-              <mat-form-field appearance="fill" color="accent" fxFlex="33.3%">
-                <mat-label>Editores</mat-label>
-                <mat-select formControlName="editors" multiple>
-                  <mat-option *ngFor="let edit of editors" [value]="edit.name">{{edit.name}}</mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
+          <div
+            fxLayout="row"
+            fxLayout.xs="column"
+            fxLayoutWrap
+            fxLayoutAlign="center"
+            layout-margin>
+            <mat-form-field appearance="fill" color="accent" fxFlex="33.3%">
+              <mat-label>Franquicia</mat-label>
+              <mat-select formControlName="franchise" multiple>
+                <mat-option *ngFor="let fran of franchises" [value]="fran.name">{{fran.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
 
-            <div
-              fxLayout="row"
-              fxLayout.xs="column"
-              fxLayoutWrap
-              fxLayoutAlign="center"
-              layout-margin
-            >
-              <mat-form-field appearance="fill" color="accent" fxFlex="33.3%">
-                <mat-label>Categorias</mat-label>
-                <mat-select formControlName="categories" multiple>
-                  <mat-option *ngFor="let cat of _categories" [value]="cat.cat">{{cat.cat}}</mat-option>
-                </mat-select>
-              </mat-form-field>
+            <mat-form-field appearance="fill" color="accent" fxFlex="33.3%">
+              <mat-label>Desarrolladores</mat-label>
+              <mat-select formControlName="developers" multiple>
+                <mat-option *ngFor="let dev of developers" [value]="dev.name">{{dev.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
 
-              <mat-form-field appearance="fill" color="accent" fxFlex="33.3%">
-                <mat-label>Plataformas</mat-label>
-                <mat-select formControlName="platforms" multiple>
-                  <mat-option *ngFor="let platform of _platforms" [value]="platform.plat">{{platform.plat}}</mat-option>
-                </mat-select>
-              </mat-form-field>
+            <mat-form-field appearance="fill" color="accent" fxFlex="33.3%">
+              <mat-label>Editores</mat-label>
+              <mat-select formControlName="editors" multiple>
+                <mat-option *ngFor="let edit of editors" [value]="edit.name">{{edit.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
 
-              <mat-form-field appearance="fill" color="accent" fxFlex="33.3%">
-                <mat-label>Modos de Juego</mat-label>
-                <mat-select formControlName="game_modes" multiple>
-                  <mat-option *ngFor="let mode of gameMode" [value]="mode.name">{{mode.name}}</mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
+          <div
+            fxLayout="row"
+            fxLayout.xs="column"
+            fxLayoutWrap
+            fxLayoutAlign="center"
+            layout-margin
+          >
+            <mat-form-field appearance="fill" color="accent" fxFlex="33.3%">
+              <mat-label>Categorias</mat-label>
+              <mat-select formControlName="categories" multiple>
+                <mat-option *ngFor="let cat of _categories" [value]="cat.cat">{{cat.cat}}</mat-option>
+              </mat-select>
+            </mat-form-field>
 
-            <div
-              fxLayout="row"
-              fxLayout.xs="column"
-              fxLayoutWrap
-              fxLayoutAlign="center"
-              layout-margin
-            >
-              <mat-form-field appearance="fill" color="accent" fxFlex="35%">
-                <mat-label>Clasificacion</mat-label>
-                <mat-select formControlName="classification">
-                  <mat-option *ngFor="let clas of classification" [value]="clas.title"> {{ clas.title }} </mat-option>
-                </mat-select>
-              </mat-form-field>
+            <mat-form-field appearance="fill" color="accent" fxFlex="33.3%">
+              <mat-label>Plataformas</mat-label>
+              <mat-select formControlName="platforms" multiple>
+                <mat-option *ngFor="let platform of _platforms" [value]="platform.plat">{{platform.plat}}</mat-option>
+              </mat-select>
+            </mat-form-field>
 
-              <mat-form-field appearance="fill" color="accent" fxFlex="65%">
-                <mat-label>Contenido Descriptivo</mat-label>
-                <mat-select formControlName="classification_descriptors" multiple>
-                  <mat-option *ngFor="let description of classificationDescriptors" [value]="description.content"> {{ description.content }} </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
+            <mat-form-field appearance="fill" color="accent" fxFlex="33.3%">
+              <mat-label>Modos de Juego</mat-label>
+              <mat-select formControlName="game_modes" multiple>
+                <mat-option *ngFor="let mode of gameMode" [value]="mode.name">{{mode.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
 
-            <div
-              fxLayout="row"
-              fxLayout.xs="column"
-              fxLayoutWrap
-              fxLayoutAlign="center"
-              layout-margin
-            >
-              <mat-form-field appearance="fill" color="accent" fxFlex="33.3%">
-                <mat-label>Idioma de Interface</mat-label>
-                <mat-select formControlName="lang_interface" multiple>
-                  <mat-option *ngFor="let interface of languages" [value]="interface.language"> {{ interface.language }} </mat-option>
-                </mat-select>
-              </mat-form-field>
+          <div
+            fxLayout="row"
+            fxLayout.xs="column"
+            fxLayoutWrap
+            fxLayoutAlign="center"
+            layout-margin
+          >
+            <mat-form-field appearance="fill" color="accent" fxFlex="35%">
+              <mat-label>Clasificacion</mat-label>
+              <mat-select formControlName="classification">
+                <mat-option *ngFor="let clas of classification" [value]="clas.title"> {{ clas.title }} </mat-option>
+              </mat-select>
+            </mat-form-field>
 
-              <mat-form-field appearance="fill" color="accent" fxFlex="33.3%">
-                <mat-label>Idioma de Subtitulos</mat-label>
-                <mat-select formControlName="lang_subtitles" multiple>
-                  <mat-option *ngFor="let subtitle of languages" [value]="subtitle.language"> {{ subtitle.language }} </mat-option>
-                </mat-select>
-              </mat-form-field>
+            <mat-form-field appearance="fill" color="accent" fxFlex="65%">
+              <mat-label>Contenido Descriptivo</mat-label>
+              <mat-select formControlName="classification_descriptors" multiple>
+                <mat-option *ngFor="let description of classificationDescriptors" [value]="description.content"> {{ description.content }} </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
 
-              <mat-form-field appearance="fill" color="accent" fxFlex="33.3%">
-                <mat-label>Idioma de Voces</mat-label>
-                <mat-select formControlName="lang_voices" multiple>
-                  <mat-option *ngFor="let voice of languages" [value]="voice.language"> {{ voice.language }} </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
+          <div
+            fxLayout="row"
+            fxLayout.xs="column"
+            fxLayoutWrap
+            fxLayoutAlign="center"
+            layout-margin
+          >
+            <mat-form-field appearance="fill" color="accent" fxFlex="33.3%">
+              <mat-label>Idioma de Interface</mat-label>
+              <mat-select formControlName="lang_interface" multiple>
+                <mat-option *ngFor="let interface of languages" [value]="interface.language"> {{ interface.language }} </mat-option>
+              </mat-select>
+            </mat-form-field>
 
-            <div>
-              <div class="row">
-                <div class="col-8">
-                  <label>
-                    <input
-                      type="file"
-                      class="text-nowrap text-truncate"
-                      (change)="selectFile($event)"
-                    />
-                  </label>
-                </div>
+            <mat-form-field appearance="fill" color="accent" fxFlex="33.3%">
+              <mat-label>Idioma de Subtitulos</mat-label>
+              <mat-select formControlName="lang_subtitles" multiple>
+                <mat-option *ngFor="let subtitle of languages" [value]="subtitle.language"> {{ subtitle.language }} </mat-option>
+              </mat-select>
+            </mat-form-field>
 
-                <div class="col-4">
-                  <button
-                    class="btn btn-success btn-sm"
-                    [disabled]="!selectedFiles"
-                    (click)="upload()"
-                  >
-                    Upload
-                  </button>
-                </div>
+            <mat-form-field appearance="fill" color="accent" fxFlex="33.3%">
+              <mat-label>Idioma de Voces</mat-label>
+              <mat-select formControlName="lang_voices" multiple>
+                <mat-option *ngFor="let voice of languages" [value]="voice.language"> {{ voice.language }} </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div>
+            <div class="row">
+              <div class="col-8">
+                <label>
+                  <input
+                    type="file"
+                    class="text-nowrap text-truncate"
+                    (change)="selectFile($event)"
+                  />
+                </label>
+              </div>
+
+              <div class="col-4">
+                <button
+                  class="btn btn-success btn-sm"
+                  [disabled]="!selectedFiles"
+                  (click)="upload()"
+                >
+                  Upload
+                </button>
               </div>
             </div>
-            <br>
-            <div>
-              <!-- <button mat-raised-button color="warn" (click)="deleteGame()">
-                <mat-icon>delete</mat-icon>
-              </button> -->
-              <button mat-raised-button color="accent" matStepperNext>Siguiente</button>
-            </div>
-          </form>
-        </mat-step>
-        <mat-step label="Requisitos">
-          <form [formGroup]="gameForm">
-            <div
-              fxLayout="row"
-              fxLayout.xs="column"
-              fxLayoutWrap
-              fxLayoutAlign="center"
-              layout-margin
+          </div>
+
+          <div>
+            <label>
+              <input
+                type="file"
+                class="text-nowrap text-truncate"
+                multiple="multiple"
+                (change)="selectFiles($event)"
+              />
+            </label>
+            <button
+              class="btn btn-success btn-sm"
+              [disabled]="!contentFiles"
+              (click)="uploadMultipleImages()"
             >
-              <mat-form-field appearance="fill" color="accent" fxFLex="50%">
-                <mat-label>Sistema Operativo</mat-label>
-                <mat-select formControlName="operative_systems" multiple>
-                  <mat-option *ngFor="let os of operativeSystem" [value]="os.name"> {{ os.name }} </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
+              Upload
+            </button>
+          </div>
+          <br>
+          <div>
+            <!-- <button mat-raised-button color="warn" (click)="deleteGame()">
+              <mat-icon>delete</mat-icon>
+            </button> -->
+            <button mat-raised-button color="accent" matStepperNext>Siguiente</button>
+          </div>
+        </form>
+      </mat-step>
 
-            <div *ngIf="gameForm.controls['operative_systems'].value?.includes('WINDOWS')">
-              <mat-card>
-                <mat-card-header>
-                  <mat-card-title>WINDOWS</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                  <div
-                    fxLayout="row"
-                    fxLayout.xs="column"
-                    fxLayoutWrap
-                    fxLayoutAlign="center"
-                    layout-margin
-                  >
-                    <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
-                      <mat-label>SO Minimo</mat-label>
-                      <input matInput formControlName="windows_req_min_so">
-                    </mat-form-field>
+      <mat-step label="Enlaces del Juego">
+        <form [formGroup]="gameForm">
 
-                    <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
-                      <mat-label>Procesador Minimo</mat-label>
-                      <input matInput formControlName="windows_req_min_processor">
-                    </mat-form-field>
+          <div
+            fxLayout="row"
+            fxLayout.xs="column"
+            fxLayoutWrap
+            fxLayoutAlign="center"
+            layout-margin
+          >
+            <mat-form-field appearance="fill" color="accent" fxFlex="50%">
+              <mat-label>YouTube Id</mat-label>
+              <input matInput formControlName="youtube_id">
+            </mat-form-field>
 
-                    <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
-                      <mat-label>DirectX Minimo</mat-label>
-                      <input matInput formControlName="windows_req_min_directx">
-                    </mat-form-field>
+            <mat-form-field appearance="fill" color="accent" fxFlex="50%">
+              <mat-label>Sitio Oficial</mat-label>
+              <input matInput formControlName="official_website">
+            </mat-form-field>
+          </div>
 
-                    <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
-                      <mat-label>Tarjeta Grafica Minima</mat-label>
-                      <input matInput formControlName="windows_req_min_graphic_card">
-                    </mat-form-field>
+          <div
+            fxLayout="row"
+            fxLayout.xs="column"
+            fxLayoutWrap
+            fxLayoutAlign="center"
+            layout-margin
+          >
+            <mat-form-field appearance="fill" color="accent" fxFlex="20%">
+              <mat-label>Twitch</mat-label>
+              <input matInput formControlName="twitch">
+            </mat-form-field>
 
-                    <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
-                      <mat-label>Internet Minimo</mat-label>
-                      <input matInput formControlName="windows_req_min_network">
-                    </mat-form-field>
+            <mat-form-field appearance="fill" color="accent" fxFlex="20%">
+              <mat-label>Kick</mat-label>
+              <input matInput formControlName="kick">
+            </mat-form-field>
 
-                    <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
-                      <mat-label>Ram Minima</mat-label>
-                      <input matInput formControlName="windows_req_min_ram">
-                    </mat-form-field>
+            <mat-form-field appearance="fill" color="accent" fxFlex="20%">
+              <mat-label>YouTube</mat-label>
+              <input matInput formControlName="youtube">
+            </mat-form-field>
 
-                    <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
-                      <mat-label>Almacenamiento Minima</mat-label>
-                      <input matInput formControlName="windows_req_min_storage">
-                    </mat-form-field>
-                  </div>
+            <mat-form-field appearance="fill" color="accent" fxFlex="20%">
+              <mat-label>Google</mat-label>
+              <input matInput formControlName="google">
+            </mat-form-field>
 
-                  <div
-                    fxLayout="row"
-                    fxLayout.xs="column"
-                    fxLayoutWrap
-                    fxLayoutAlign="center"
-                    layout-margin
-                  >
-                    <mat-form-field appearance="fill" color="accent" fxFlex="20%">
-                      <mat-label>SO Recomendado</mat-label>
-                      <input matInput formControlName="windows_req_rec_so">
-                    </mat-form-field>
+            <mat-form-field appearance="fill" color="accent" fxFlex="20%">
+              <mat-label>Steam</mat-label>
+              <input matInput formControlName="steam">
+            </mat-form-field>
+          </div>
 
-                    <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
-                      <mat-label>Procesador Recomendado</mat-label>
-                      <input matInput formControlName="windows_req_rec_processor">
-                    </mat-form-field>
+          <div
+            fxLayout="row"
+            fxLayout.xs="column"
+            fxLayoutWrap
+            fxLayoutAlign="center"
+            layout-margin
+          >
+            <mat-form-field appearance="fill" color="accent" fxFlex="20%">
+              <mat-label>EpicGames</mat-label>
+              <input matInput formControlName="epicgames">
+            </mat-form-field>
 
-                    <mat-form-field appearance="fill" color="accent" fxFlex="20%">
-                      <mat-label>DirectX Recomendado</mat-label>
-                      <input matInput formControlName="windows_req_rec_directx">
-                    </mat-form-field>
+            <mat-form-field appearance="fill" color="accent" fxFlex="20%">
+              <mat-label>Nintendo eShop</mat-label>
+              <input matInput formControlName="nintendo_eshop">
+            </mat-form-field>
 
-                    <mat-form-field appearance="fill" color="accent" fxFlex="20%">
-                      <mat-label>Tarjeta Grafica Recomendada</mat-label>
-                      <input matInput formControlName="windows_req_rec_graphic_card">
-                    </mat-form-field>
+            <mat-form-field appearance="fill" color="accent" fxFlex="20%">
+              <mat-label>Playstore</mat-label>
+              <input matInput formControlName="android">
+            </mat-form-field>
 
-                    <mat-form-field appearance="fill" color="accent" fxFlex="20%">
-                      <mat-label>Internet Recomendado</mat-label>
-                      <input matInput formControlName="windows_req_rec_network">
-                    </mat-form-field>
+            <mat-form-field appearance="fill" color="accent" fxFlex="20%">
+              <mat-label>Apple Store</mat-label>
+              <input matInput formControlName="ios">
+            </mat-form-field>
 
-                    <mat-form-field appearance="fill" color="accent" fxFlex="20%">
-                      <mat-label>Ram Recomendada</mat-label>
-                      <input matInput formControlName="windows_req_rec_ram">
-                    </mat-form-field>
+            <mat-form-field appearance="fill" color="accent" fxFlex="20%">
+              <mat-label>Amazon</mat-label>
+              <input matInput formControlName="amazon">
+            </mat-form-field>
+          </div>
 
-                    <mat-form-field appearance="fill" color="accent" fxFlex="20%">
-                      <mat-label>Almacenamiento Recomendado</mat-label>
-                      <input matInput formControlName="windows_req_rec_storage">
-                    </mat-form-field>
-                  </div>
-                </mat-card-content>
-              </mat-card>
-            </div>
+          <div
+            fxLayout="row"
+            fxLayout.xs="column"
+            fxLayoutWrap
+            fxLayoutAlign="center"
+            layout-margin
+          >
+            <mat-form-field appearance="fill" color="accent" fxFlex="20%">
+              <mat-label>Mercado Libre</mat-label>
+              <input matInput formControlName="mercado_libre">
+            </mat-form-field>
 
-            <div *ngIf="gameForm.controls['operative_systems'].value?.includes('MAC')">
-              <mat-card>
-                <mat-card-header>
-                  <mat-card-title>MAC</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                  <div
-                    fxLayout="row"
-                    fxLayout.xs="column"
-                    fxLayoutWrap
-                    fxLayoutAlign="center"
-                    layout-margin
-                  >
-                    <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
-                      <mat-label>SO Minimo</mat-label>
-                      <input matInput formControlName="mac_req_min_so">
-                    </mat-form-field>
+            <mat-form-field appearance="fill" color="accent" fxFlex="20%">
+              <mat-label>Liverpool</mat-label>
+              <input matInput formControlName="liverpool">
+            </mat-form-field>
 
-                    <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
-                      <mat-label>Procesador Minimo</mat-label>
-                      <input matInput formControlName="mac_req_min_processor">
-                    </mat-form-field>
+            <mat-form-field appearance="fill" color="accent" fxFlex="20%">
+              <mat-label>Coppel</mat-label>
+              <input matInput formControlName="coppel">
+            </mat-form-field>
 
-                    <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
-                      <mat-label>DirectX Minimo</mat-label>
-                      <input matInput formControlName="mac_req_min_directx">
-                    </mat-form-field>
+            <mat-form-field appearance="fill" color="accent" fxFlex="20%">
+              <mat-label>Origin</mat-label>
+              <input matInput formControlName="origin">
+            </mat-form-field>
 
-                    <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
-                      <mat-label>Tarjeta Grafica Minima</mat-label>
-                      <input matInput formControlName="mac_req_min_graphic_card">
-                    </mat-form-field>
+            <mat-form-field appearance="fill" color="accent" fxFlex="20%">
+              <mat-label>Xbox Store</mat-label>
+              <input matInput formControlName="xbox_store">
+            </mat-form-field>
+          </div>
 
-                    <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
-                      <mat-label>Internet Minimo</mat-label>
-                      <input matInput formControlName="mac_req_min_network">
-                    </mat-form-field>
+          <div
+            fxLayout="row"
+            fxLayout.xs="column"
+            fxLayoutWrap
+            fxLayoutAlign="center"
+            layout-margin
+          >
+            <mat-form-field appearance="fill" color="accent" fxFlex="20%">
+              <mat-label>Playstation Store</mat-label>
+              <input matInput formControlName="playstation_store">
+            </mat-form-field>
+          </div>
 
-                    <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
-                      <mat-label>Ram Minima</mat-label>
-                      <input matInput formControlName="mac_req_min_ram">
-                    </mat-form-field>
+          <div>
+            <button mat-raised-button color="accent" matStepperPrevious>Atrás</button>
+            <button mat-raised-button color="accent" matStepperNext>Siguiente</button>
+          </div>
+        </form>
+      </mat-step>
 
-                    <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
-                      <mat-label>Almacenamiento Minima</mat-label>
-                      <input matInput formControlName="mac_req_min_storage">
-                    </mat-form-field>
-                  </div>
+      <mat-step label="Requisitos">
+        <form [formGroup]="gameForm">
+          <div
+            fxLayout="row"
+            fxLayout.xs="column"
+            fxLayoutWrap
+            fxLayoutAlign="center"
+            layout-margin
+          >
+            <mat-form-field appearance="fill" color="accent" fxFLex="50%">
+              <mat-label>Sistema Operativo</mat-label>
+              <mat-select formControlName="operative_systems" multiple>
+                <mat-option *ngFor="let os of operativeSystem" [value]="os.name"> {{ os.name }} </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
 
-                  <div
-                    fxLayout="row"
-                    fxLayout.xs="column"
-                    fxLayoutWrap
-                    fxLayoutAlign="center"
-                    layout-margin
-                  >
-                    <mat-form-field appearance="fill" color="accent" fxFlex="20%">
-                      <mat-label>SO Recomendado</mat-label>
-                      <input matInput formControlName="mac_req_rec_so">
-                    </mat-form-field>
+          <div *ngIf="gameForm.controls['operative_systems'].value?.includes('WINDOWS')">
+            <mat-card>
+              <mat-card-header>
+                <mat-card-title>WINDOWS</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <div
+                  fxLayout="row"
+                  fxLayout.xs="column"
+                  fxLayoutWrap
+                  fxLayoutAlign="center"
+                  layout-margin
+                >
+                  <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
+                    <mat-label>SO Minimo</mat-label>
+                    <input matInput formControlName="windows_req_min_so">
+                  </mat-form-field>
 
-                    <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
-                      <mat-label>Procesador Recomendado</mat-label>
-                      <input matInput formControlName="mac_req_rec_processor">
-                    </mat-form-field>
+                  <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
+                    <mat-label>Procesador Minimo</mat-label>
+                    <input matInput formControlName="windows_req_min_processor">
+                  </mat-form-field>
 
-                    <mat-form-field appearance="fill" color="accent" fxFlex="20%">
-                      <mat-label>DirectX Recomendado</mat-label>
-                      <input matInput formControlName="mac_req_rec_directx">
-                    </mat-form-field>
+                  <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
+                    <mat-label>DirectX Minimo</mat-label>
+                    <input matInput formControlName="windows_req_min_directx">
+                  </mat-form-field>
 
-                    <mat-form-field appearance="fill" color="accent" fxFlex="20%">
-                      <mat-label>Tarjeta Grafica Recomendada</mat-label>
-                      <input matInput formControlName="mac_req_rec_graphic_card">
-                    </mat-form-field>
+                  <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
+                    <mat-label>Tarjeta Grafica Minima</mat-label>
+                    <input matInput formControlName="windows_req_min_graphic_card">
+                  </mat-form-field>
 
-                    <mat-form-field appearance="fill" color="accent" fxFlex="20%">
-                      <mat-label>Internet Recomendado</mat-label>
-                      <input matInput formControlName="mac_req_rec_network">
-                    </mat-form-field>
+                  <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
+                    <mat-label>Internet Minimo</mat-label>
+                    <input matInput formControlName="windows_req_min_network">
+                  </mat-form-field>
 
-                    <mat-form-field appearance="fill" color="accent" fxFlex="20%">
-                      <mat-label>Ram Recomendada</mat-label>
-                      <input matInput formControlName="mac_req_rec_ram">
-                    </mat-form-field>
+                  <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
+                    <mat-label>Ram Minima</mat-label>
+                    <input matInput formControlName="windows_req_min_ram">
+                  </mat-form-field>
 
-                    <mat-form-field appearance="fill" color="accent" fxFlex="20%">
-                      <mat-label>Almacenamiento Recomendado</mat-label>
-                      <input matInput formControlName="mac_req_rec_storage">
-                    </mat-form-field>
-                  </div>
-                </mat-card-content>
-              </mat-card>
-            </div>
+                  <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
+                    <mat-label>Almacenamiento Minima</mat-label>
+                    <input matInput formControlName="windows_req_min_storage">
+                  </mat-form-field>
+                </div>
 
-            <div *ngIf="gameForm.controls['operative_systems'].value?.includes('LINUX')">
-              <mat-card>
-                <mat-card-header>
-                  <mat-card-title>LINUX</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                  <div
-                    fxLayout="row"
-                    fxLayout.xs="column"
-                    fxLayoutWrap
-                    fxLayoutAlign="center"
-                    layout-margin
-                  >
-                    <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
-                      <mat-label>SO Minimo</mat-label>
-                      <input matInput formControlName="linux_req_min_so">
-                    </mat-form-field>
+                <div
+                  fxLayout="row"
+                  fxLayout.xs="column"
+                  fxLayoutWrap
+                  fxLayoutAlign="center"
+                  layout-margin
+                >
+                  <mat-form-field appearance="fill" color="accent" fxFlex="20%">
+                    <mat-label>SO Recomendado</mat-label>
+                    <input matInput formControlName="windows_req_rec_so">
+                  </mat-form-field>
 
-                    <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
-                      <mat-label>Procesador Minimo</mat-label>
-                      <input matInput formControlName="linux_req_min_processor">
-                    </mat-form-field>
+                  <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
+                    <mat-label>Procesador Recomendado</mat-label>
+                    <input matInput formControlName="windows_req_rec_processor">
+                  </mat-form-field>
 
-                    <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
-                      <mat-label>DirectX Minimo</mat-label>
-                      <input matInput formControlName="linux_req_min_directx">
-                    </mat-form-field>
+                  <mat-form-field appearance="fill" color="accent" fxFlex="20%">
+                    <mat-label>DirectX Recomendado</mat-label>
+                    <input matInput formControlName="windows_req_rec_directx">
+                  </mat-form-field>
 
-                    <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
-                      <mat-label>Tarjeta Grafica Minima</mat-label>
-                      <input matInput formControlName="linux_req_min_graphic_card">
-                    </mat-form-field>
+                  <mat-form-field appearance="fill" color="accent" fxFlex="20%">
+                    <mat-label>Tarjeta Grafica Recomendada</mat-label>
+                    <input matInput formControlName="windows_req_rec_graphic_card">
+                  </mat-form-field>
 
-                    <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
-                      <mat-label>Internet Minimo</mat-label>
-                      <input matInput formControlName="linux_req_min_network">
-                    </mat-form-field>
+                  <mat-form-field appearance="fill" color="accent" fxFlex="20%">
+                    <mat-label>Internet Recomendado</mat-label>
+                    <input matInput formControlName="windows_req_rec_network">
+                  </mat-form-field>
 
-                    <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
-                      <mat-label>Ram Minima</mat-label>
-                      <input matInput formControlName="linux_req_min_ram">
-                    </mat-form-field>
+                  <mat-form-field appearance="fill" color="accent" fxFlex="20%">
+                    <mat-label>Ram Recomendada</mat-label>
+                    <input matInput formControlName="windows_req_rec_ram">
+                  </mat-form-field>
 
-                    <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
-                      <mat-label>Almacenamiento Minima</mat-label>
-                      <input matInput formControlName="linux_req_min_storage">
-                    </mat-form-field>
-                  </div>
+                  <mat-form-field appearance="fill" color="accent" fxFlex="20%">
+                    <mat-label>Almacenamiento Recomendado</mat-label>
+                    <input matInput formControlName="windows_req_rec_storage">
+                  </mat-form-field>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
 
-                  <div
-                    fxLayout="row"
-                    fxLayout.xs="column"
-                    fxLayoutWrap
-                    fxLayoutAlign="center"
-                    layout-margin
-                  >
-                    <mat-form-field appearance="fill" color="accent" fxFlex="20%">
-                      <mat-label>SO Recomendado</mat-label>
-                      <input matInput formControlName="linux_req_rec_so">
-                    </mat-form-field>
+          <div *ngIf="gameForm.controls['operative_systems'].value?.includes('MAC')">
+            <mat-card>
+              <mat-card-header>
+                <mat-card-title>MAC</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <div
+                  fxLayout="row"
+                  fxLayout.xs="column"
+                  fxLayoutWrap
+                  fxLayoutAlign="center"
+                  layout-margin
+                >
+                  <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
+                    <mat-label>SO Minimo</mat-label>
+                    <input matInput formControlName="mac_req_min_so">
+                  </mat-form-field>
 
-                    <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
-                      <mat-label>Procesador Recomendado</mat-label>
-                      <input matInput formControlName="linux_req_rec_processor">
-                    </mat-form-field>
+                  <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
+                    <mat-label>Procesador Minimo</mat-label>
+                    <input matInput formControlName="mac_req_min_processor">
+                  </mat-form-field>
 
-                    <mat-form-field appearance="fill" color="accent" fxFlex="20%">
-                      <mat-label>DirectX Recomendado</mat-label>
-                      <input matInput formControlName="linux_req_rec_directx">
-                    </mat-form-field>
+                  <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
+                    <mat-label>DirectX Minimo</mat-label>
+                    <input matInput formControlName="mac_req_min_directx">
+                  </mat-form-field>
 
-                    <mat-form-field appearance="fill" color="accent" fxFlex="20%">
-                      <mat-label>Tarjeta Grafica Recomendada</mat-label>
-                      <input matInput formControlName="linux_req_rec_graphic_card">
-                    </mat-form-field>
+                  <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
+                    <mat-label>Tarjeta Grafica Minima</mat-label>
+                    <input matInput formControlName="mac_req_min_graphic_card">
+                  </mat-form-field>
 
-                    <mat-form-field appearance="fill" color="accent" fxFlex="20%">
-                      <mat-label>Internet Recomendado</mat-label>
-                      <input matInput formControlName="linux_req_rec_network">
-                    </mat-form-field>
+                  <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
+                    <mat-label>Internet Minimo</mat-label>
+                    <input matInput formControlName="mac_req_min_network">
+                  </mat-form-field>
 
-                    <mat-form-field appearance="fill" color="accent" fxFlex="20%">
-                      <mat-label>Ram Recomendada</mat-label>
-                      <input matInput formControlName="linux_req_rec_ram">
-                    </mat-form-field>
+                  <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
+                    <mat-label>Ram Minima</mat-label>
+                    <input matInput formControlName="mac_req_min_ram">
+                  </mat-form-field>
 
-                    <mat-form-field appearance="fill" color="accent" fxFlex="20%">
-                      <mat-label>Almacenamiento Recomendado</mat-label>
-                      <input matInput formControlName="linux_req_rec_storage">
-                    </mat-form-field>
-                  </div>
-                </mat-card-content>
-              </mat-card>
-            </div>
+                  <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
+                    <mat-label>Almacenamiento Minima</mat-label>
+                    <input matInput formControlName="mac_req_min_storage">
+                  </mat-form-field>
+                </div>
 
-            <div>
-              <button mat-raised-button color="accent" matStepperPrevious>Atrás</button>
-              <button mat-raised-button color="accent" matStepperNext>Siguiente</button>
-            </div>
-          </form>
-        </mat-step>
+                <div
+                  fxLayout="row"
+                  fxLayout.xs="column"
+                  fxLayoutWrap
+                  fxLayoutAlign="center"
+                  layout-margin
+                >
+                  <mat-form-field appearance="fill" color="accent" fxFlex="20%">
+                    <mat-label>SO Recomendado</mat-label>
+                    <input matInput formControlName="mac_req_rec_so">
+                  </mat-form-field>
 
-        <mat-step label="Contenido del Juego">
-          <form [formGroup]="gameForm" (ngSubmit)="onSubmit()" novalidate>
+                  <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
+                    <mat-label>Procesador Recomendado</mat-label>
+                    <input matInput formControlName="mac_req_rec_processor">
+                  </mat-form-field>
 
-            <div class="NgxEditor__Wrapper">
-              <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
-              <ngx-editor [editor]="editor" formControlName="about" [(ngModel)]="html" [placeholder]="'Type here...'"></ngx-editor>
-            </div>
+                  <mat-form-field appearance="fill" color="accent" fxFlex="20%">
+                    <mat-label>DirectX Recomendado</mat-label>
+                    <input matInput formControlName="mac_req_rec_directx">
+                  </mat-form-field>
 
-            <div>
-              <button mat-raised-button color="accent" matStepperPrevious>Atrás</button>
-              <button mat-raised-button color="accent" color="primary" type="submit">Guardar</button>
-            </div>
-          </form>
-        </mat-step>
-      </mat-stepper>
-    </div>
+                  <mat-form-field appearance="fill" color="accent" fxFlex="20%">
+                    <mat-label>Tarjeta Grafica Recomendada</mat-label>
+                    <input matInput formControlName="mac_req_rec_graphic_card">
+                  </mat-form-field>
 
-    <div *ngIf="submitted || deleted">
-      <h4>{{ message }}</h4>
-      <!-- <button class="btn btn-success" (click)="newGame()">Crear otro</button> -->
-    </div>
+                  <mat-form-field appearance="fill" color="accent" fxFlex="20%">
+                    <mat-label>Internet Recomendado</mat-label>
+                    <input matInput formControlName="mac_req_rec_network">
+                  </mat-form-field>
 
-  </mat-card-content>
-</mat-card>
+                  <mat-form-field appearance="fill" color="accent" fxFlex="20%">
+                    <mat-label>Ram Recomendada</mat-label>
+                    <input matInput formControlName="mac_req_rec_ram">
+                  </mat-form-field>
 
+                  <mat-form-field appearance="fill" color="accent" fxFlex="20%">
+                    <mat-label>Almacenamiento Recomendado</mat-label>
+                    <input matInput formControlName="mac_req_rec_storage">
+                  </mat-form-field>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+
+          <div *ngIf="gameForm.controls['operative_systems'].value?.includes('LINUX')">
+            <mat-card>
+              <mat-card-header>
+                <mat-card-title>LINUX</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <div
+                  fxLayout="row"
+                  fxLayout.xs="column"
+                  fxLayoutWrap
+                  fxLayoutAlign="center"
+                  layout-margin
+                >
+                  <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
+                    <mat-label>SO Minimo</mat-label>
+                    <input matInput formControlName="linux_req_min_so">
+                  </mat-form-field>
+
+                  <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
+                    <mat-label>Procesador Minimo</mat-label>
+                    <input matInput formControlName="linux_req_min_processor">
+                  </mat-form-field>
+
+                  <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
+                    <mat-label>DirectX Minimo</mat-label>
+                    <input matInput formControlName="linux_req_min_directx">
+                  </mat-form-field>
+
+                  <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
+                    <mat-label>Tarjeta Grafica Minima</mat-label>
+                    <input matInput formControlName="linux_req_min_graphic_card">
+                  </mat-form-field>
+
+                  <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
+                    <mat-label>Internet Minimo</mat-label>
+                    <input matInput formControlName="linux_req_min_network">
+                  </mat-form-field>
+
+                  <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
+                    <mat-label>Ram Minima</mat-label>
+                    <input matInput formControlName="linux_req_min_ram">
+                  </mat-form-field>
+
+                  <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
+                    <mat-label>Almacenamiento Minima</mat-label>
+                    <input matInput formControlName="linux_req_min_storage">
+                  </mat-form-field>
+                </div>
+
+                <div
+                  fxLayout="row"
+                  fxLayout.xs="column"
+                  fxLayoutWrap
+                  fxLayoutAlign="center"
+                  layout-margin
+                >
+                  <mat-form-field appearance="fill" color="accent" fxFlex="20%">
+                    <mat-label>SO Recomendado</mat-label>
+                    <input matInput formControlName="linux_req_rec_so">
+                  </mat-form-field>
+
+                  <mat-form-field appearance="fill" color="accent" fxFlex="14.2%">
+                    <mat-label>Procesador Recomendado</mat-label>
+                    <input matInput formControlName="linux_req_rec_processor">
+                  </mat-form-field>
+
+                  <mat-form-field appearance="fill" color="accent" fxFlex="20%">
+                    <mat-label>DirectX Recomendado</mat-label>
+                    <input matInput formControlName="linux_req_rec_directx">
+                  </mat-form-field>
+
+                  <mat-form-field appearance="fill" color="accent" fxFlex="20%">
+                    <mat-label>Tarjeta Grafica Recomendada</mat-label>
+                    <input matInput formControlName="linux_req_rec_graphic_card">
+                  </mat-form-field>
+
+                  <mat-form-field appearance="fill" color="accent" fxFlex="20%">
+                    <mat-label>Internet Recomendado</mat-label>
+                    <input matInput formControlName="linux_req_rec_network">
+                  </mat-form-field>
+
+                  <mat-form-field appearance="fill" color="accent" fxFlex="20%">
+                    <mat-label>Ram Recomendada</mat-label>
+                    <input matInput formControlName="linux_req_rec_ram">
+                  </mat-form-field>
+
+                  <mat-form-field appearance="fill" color="accent" fxFlex="20%">
+                    <mat-label>Almacenamiento Recomendado</mat-label>
+                    <input matInput formControlName="linux_req_rec_storage">
+                  </mat-form-field>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+
+          <div>
+            <button mat-raised-button color="accent" matStepperPrevious>Atrás</button>
+            <button mat-raised-button color="accent" matStepperNext>Siguiente</button>
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step label="Contenido del Juego">
+        <form [formGroup]="gameForm" (ngSubmit)="onSubmit()" novalidate>
+
+          <div class="NgxEditor__Wrapper">
+            <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
+            <ngx-editor [editor]="editor" formControlName="about" [(ngModel)]="html" [placeholder]="'Type here...'"></ngx-editor>
+          </div>
+
+          <div>
+            <button mat-raised-button color="accent" matStepperPrevious>Atrás</button>
+            <button mat-raised-button color="accent" color="primary" type="submit">Guardar</button>
+          </div>
+        </form>
+      </mat-step>
+    </mat-stepper>
+  </div>
+
+  <div *ngIf="submitted || deleted">
+    <h4>{{ message }}</h4>
+    <!-- <button class="btn btn-success" (click)="newGame()">Crear otro</button> -->
+  </div>
+</mat-dialog-content>

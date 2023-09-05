@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { GamesService } from 'src/app/services/games.service';
-import { Classification, Games, Languages, GameModes } from 'src/app/models/games.model';
+import { Classification, Games, Languages, GameModes, Images } from 'src/app/models/games.model';
 import { ActivatedRoute } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { Editor } from 'ngx-editor';
@@ -46,6 +46,17 @@ export class GameDetailComponent implements OnInit, OnDestroy {
   displayColumns: string[] = ['lang_interface', 'lang_subtitles', 'lang_voices'];
   isDarkTheme!: boolean;
   public dataLanguage = false;
+  public apiLoaded = false;
+  public images: Images[] = [];
+  // images = [
+  //   'https://gamingbolt.com/wp-content/uploads/2021/06/Metroid-Dread-1.jpg',
+  //   'https://gamingbolt.com/wp-content/uploads/2021/06/Metroid-Dread-1.jpg',
+  //   'https://gamingbolt.com/wp-content/uploads/2021/06/Metroid-Dread-1.jpg',
+  //   'https://gamingbolt.com/wp-content/uploads/2021/06/Metroid-Dread-1.jpg',
+  //   'https://gamingbolt.com/wp-content/uploads/2021/06/Metroid-Dread-1.jpg',
+  //   'https://cdn.vox-cdn.com/thumbor/pS7xklUiwBhNbzmIrqbItLYzXg8=/0x0:2880x1622/1200x675/filters:focal(1210x581:1670x1041)/cdn.vox-cdn.com/uploads/chorus_image/image/69986387/Metroid_Dread_Hanubia_walkthrough.0.jpg',
+  //   'https://via.placeholder.com/720x360'
+  // ];
 
   constructor (
     private _gameService: GamesService,
@@ -91,6 +102,15 @@ export class GameDetailComponent implements OnInit, OnDestroy {
     this.editor = new Editor();
     this.getAndValidData();
     this.darkTheme();
+
+    if (!this.apiLoaded) {
+      // This code loads the IFrame Player API code asynchronously, according to the instructions at
+      // https://developers.google.com/youtube/iframe_api_reference#Getting_Started
+      const tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      document.body.appendChild(tag);
+      this.apiLoaded = true;
+    }
   }
 
   getAndValidData(): void {
@@ -98,11 +118,12 @@ export class GameDetailComponent implements OnInit, OnDestroy {
       let id = params['id'];
       this._gameService.getGameById(id).valueChanges().subscribe((game: Games | undefined) => {
         this.games = game;
-
+        // console.log(this.games);
         if (this.games) {
           // this.safeAbout = this.games?.about ? this.sanitizer.bypassSecurityTrustHtml(this.games.about) : '';
           this.safeAbout = this.games?.about;
-
+          this.images = this.games?.images;
+          // console.log(this.games?.youtube_id);
           const updatedAt = this.games.updatedAt;
 
           if (updatedAt instanceof Date) {

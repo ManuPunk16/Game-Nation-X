@@ -1,9 +1,9 @@
 export class Games {
   id?: string;
   name!: string;
-  images!: string[];
+  images!: Images[];
   profile_image!: string;
-  youtube_links!: string[];
+  youtube_id!: string;
   about!: string;
   classification!: Classification;
   classification_descriptors!: ClassificationDescriptors[];
@@ -69,9 +69,34 @@ export class Games {
   linux_req_rec_ram?: string;
   linux_req_rec_storage?: string;
 
+  official_website!: string;
+  twitch!: string;
+  kick!: string;
+  youtube!: string;
+  google!: string;
+  steam!: string;
+  gog!: string;
+  eneba!: string;
+  epicgames!: string;
+  nintendo_eshop!: string;
+  android!: string;
+  ios!: string;
+  amazon!: string;
+  mercado_libre!: string;
+  liverpool!: string;
+  coppel!: string;
+  origin!: string;
+  xbox_store!: string;
+  playstation_store!: string;
+
   published?: Boolean;
   createdAt?: Date;
   updatedAt?: Date;
+}
+
+export class Images {
+  url!: string;
+  alt!: string;
 }
 
 export class Categories {

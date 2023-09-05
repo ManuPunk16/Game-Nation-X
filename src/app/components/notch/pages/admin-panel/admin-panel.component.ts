@@ -83,7 +83,10 @@ export class AdminPanelComponent implements OnInit {
 
   newGame() {
     const newGame = this._dialog.open(AddGameComponent, {
-      width: '85%'
+      maxWidth: '90vw',
+      maxHeight: '90vh',
+      height: '100%',
+      width: '100%',
     });
 
     newGame.afterClosed().subscribe( res => {
@@ -94,7 +97,10 @@ export class AdminPanelComponent implements OnInit {
   onGameEdit(row: any) {
     // console.log(row);
     const editGame = this._dialog.open(EditGameComponent, {
-      width: '85%',
+      maxWidth: '90vw',
+      maxHeight: '90vh',
+      height: '100%',
+      width: '100%',
       data: row.id
     });
 

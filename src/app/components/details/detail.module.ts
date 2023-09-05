@@ -11,6 +11,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatOptionModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { YouTubePlayerModule } from '@angular/youtube-player';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
 
 import { GameDetailComponent } from './pages/game-detail/game-detail.component';
 import { EditReviewComponent } from './pages/game-detail/edit-review/edit-review.component';
@@ -35,7 +38,10 @@ import { EditReviewComponent } from './pages/game-detail/edit-review/edit-review
     MatTableModule,
     MatOptionModule,
     MatButtonModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    YouTubePlayerModule,
+    MatListModule,
+    MatIconModule
   ]
 })
 export class DetailModule { }

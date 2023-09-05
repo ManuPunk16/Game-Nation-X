@@ -12,7 +12,7 @@ import {
   ClassificationDescriptors,
   Languages,
   OperativeSystem,
-  Developers, Editors, Franchise } from 'src/app/models/games.model';
+  Developers, Editors, Franchise, Images } from 'src/app/models/games.model';
 import * as dayjs from 'dayjs';
 import { map, take } from 'rxjs';
 import { Editor, Toolbar } from 'ngx-editor';
@@ -56,7 +56,10 @@ export class EditGameComponent implements OnInit, OnDestroy {
   public operativeSystem = OperativeSystem.operative_system;
 
   public selectedFiles!: File;
+  public contentFiles: File[] = [];
   imageUrl!: string;
+  images: Images[] = [];
+  gameName: string = '';
   deleted = false;
 
   constructor (
@@ -70,6 +73,8 @@ export class EditGameComponent implements OnInit, OnDestroy {
       name: new FormControl('', Validators.required),
       soon: new FormControl(''),
       profile_image: new FormControl(''),
+      images: new FormControl(''),
+      youtube_id: new FormControl(''),
       publication_date: new FormControl('', Validators.required),
       about: new FormControl(''),
       classification: new FormControl(''),
@@ -134,6 +139,26 @@ export class EditGameComponent implements OnInit, OnDestroy {
       linux_req_rec_network: new FormControl(''),
       linux_req_rec_ram: new FormControl(''),
       linux_req_rec_storage: new FormControl(''),
+
+      official_website: new FormControl(''),
+      twitch: new FormControl(''),
+      kick: new FormControl(''),
+      youtube: new FormControl(''),
+      google: new FormControl(''),
+      steam: new FormControl(''),
+      gog: new FormControl(''),
+      eneba: new FormControl(''),
+      epicgames: new FormControl(''),
+      nintendo_eshop: new FormControl(''),
+      android: new FormControl(''),
+      ios: new FormControl(''),
+      amazon: new FormControl(''),
+      mercado_libre: new FormControl(''),
+      liverpool: new FormControl(''),
+      coppel: new FormControl(''),
+      origin: new FormControl(''),
+      xbox_store: new FormControl(''),
+      playstation_store: new FormControl(''),
     });
   }
   ngOnDestroy(): void {
@@ -167,6 +192,7 @@ export class EditGameComponent implements OnInit, OnDestroy {
 
         this.gameForm.patchValue({
           name: game?.name,
+          youtube_id: game?.youtube_id ?? '',
           soon: game?.soon,
           publication_date: date,
           about: game?.about,
@@ -231,11 +257,32 @@ export class EditGameComponent implements OnInit, OnDestroy {
           linux_req_rec_graphic_card: game?.linux_req_rec_graphic_card,
           linux_req_rec_network: game?.linux_req_rec_network,
           linux_req_rec_ram: game?.linux_req_rec_ram,
-          linux_req_rec_storage: game?.linux_req_rec_storage
+          linux_req_rec_storage: game?.linux_req_rec_storage,
+
+          official_website: game?.official_website ?? '',
+          twitch: game?.twitch ?? '',
+          kick: game?.kick ?? '',
+          youtube: game?.youtube ?? '',
+          google: game?.google ?? '',
+          steam: game?.steam ?? '',
+          gog: game?.gog ?? '',
+          eneba: game?.eneba ?? '',
+          epicgames: game?.epicgames ?? '',
+          nintendo_eshop: game?.nintendo_eshop ?? '',
+          android: game?.android ?? '',
+          ios: game?.ios ?? '',
+          amazon: game?.amazon ?? '',
+          mercado_libre: game?.mercado_libre ?? '',
+          liverpool: game?.liverpool ?? '',
+          coppel: game?.coppel ?? '',
+          origin: game?.origin ?? '',
+          xbox_store: game?.xbox_store ?? '',
+          playstation_store: game?.playstation_store ?? ''
         });
       } else {
         this.gameForm.patchValue({
           name: game?.name,
+          youtube_id: game?.youtube_id ?? '',
           soon: game?.soon,
           publication_date: game?.publication_date,
           about: game?.about,
@@ -300,7 +347,27 @@ export class EditGameComponent implements OnInit, OnDestroy {
           linux_req_rec_graphic_card: game?.linux_req_rec_graphic_card,
           linux_req_rec_network: game?.linux_req_rec_network,
           linux_req_rec_ram: game?.linux_req_rec_ram,
-          linux_req_rec_storage: game?.linux_req_rec_storage
+          linux_req_rec_storage: game?.linux_req_rec_storage,
+
+          official_website: game?.official_website ?? '',
+          twitch: game?.twitch ?? '',
+          kick: game?.kick ?? '',
+          youtube: game?.youtube ?? '',
+          google: game?.google ?? '',
+          steam: game?.steam ?? '',
+          gog: game?.gog ?? '',
+          eneba: game?.eneba ?? '',
+          epicgames: game?.epicgames ?? '',
+          nintendo_eshop: game?.nintendo_eshop ?? '',
+          android: game?.android ?? '',
+          ios: game?.ios ?? '',
+          amazon: game?.amazon ?? '',
+          mercado_libre: game?.mercado_libre ?? '',
+          liverpool: game?.liverpool ?? '',
+          coppel: game?.coppel ?? '',
+          origin: game?.origin ?? '',
+          xbox_store: game?.xbox_store ?? '',
+          playstation_store: game?.playstation_store ?? ''
         });
       }
     });
@@ -349,11 +416,17 @@ export class EditGameComponent implements OnInit, OnDestroy {
     this.selectedFiles = event.target.files[0];
   }
 
+  selectFiles(event: any): void {
+    this.contentFiles = event.target.files;
+    // console.log(this.contentFiles);
+  }
+
+
   onSubmit() {
     let id = this.data;
     this.gameForm.value.updatedAt = dayjs().toDate();
     let data = this.gameForm.value;
-
+    // console.log(data);
     if (!data.profile_image) {
       this._gameService.getGameById(id).valueChanges().pipe(
         take(1)
@@ -362,13 +435,16 @@ export class EditGameComponent implements OnInit, OnDestroy {
           const image = game?.profile_image;
           data.profile_image = image;
 
+          const images = game?.images;
+          data.images = images;
+
           this._gameService.updateGame(id, data)
           .then(() => {
             this.message = 'El juego ha sido actualizado!';
             this.submitted = true;
           })
           .catch(err => console.log(err));
-            }
+        }
       );
 
     } else {
@@ -404,6 +480,39 @@ export class EditGameComponent implements OnInit, OnDestroy {
           .catch(err => console.log(err));
 
         // console.log(this.gameForm.value.profile_image);
+      } catch (error) {
+        console.error('Error uploading image:', error);
+      }
+    }
+  }
+
+  async uploadMultipleImages() {
+    if (this.contentFiles) {
+      // console.log(this.gameForm.value.name);
+      try {
+        const gameName = this.gameForm.value.name;
+        const imageUrl = await this.imageUploadService.uploadMultipleImages(
+          this.contentFiles,
+          gameName
+        );
+        // console.log(imageUrl);
+        // this.images = this.extractFileName(imageUrl);
+        this.gameForm.patchValue({ images: imageUrl });
+
+        let id = this.data;
+        this.gameForm.value.updatedAt = dayjs().toDate();
+        this.gameForm.patchValue({ profile_image: this.game?.profile_image });
+        let data = this.gameForm.value;
+        // console.log(data.profile_image);
+
+        this._gameService.updateGame(id, data)
+          .then(() => {
+            this.message = 'El juego ha sido actualizado!';
+            this.submitted = true;
+          })
+          .catch(err => console.log(err));
+
+        // console.log(this.gameForm.value.images);
       } catch (error) {
         console.error('Error uploading image:', error);
       }
